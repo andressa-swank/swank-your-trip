@@ -1,4 +1,5 @@
 import { useState } from "react";
+import heroPhoto from "@/assets/hero-photo.png.asset.json";
 
 /**
  * Swank Guide — Booking Hub (V2: Editorial & Immersive)
