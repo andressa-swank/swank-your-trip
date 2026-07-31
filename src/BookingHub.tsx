@@ -1,4 +1,5 @@
 import { useState } from "react";
+import heroPhoto from "@/assets/hero-photo.png.asset.json";
 
 /**
  * Swank Guide — Booking Hub (V2: Editorial & Immersive)
@@ -229,8 +230,8 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
     <>
       <section className="relative flex min-h-[80vh] items-end overflow-hidden bg-[#1a1a1a]">
         <img
-          src="/hero-photo.png"
-          alt="Riverside luxury hotel pool at dusk"
+          src={heroPhoto.url}
+          alt="Infinity pool reflecting palm trees at a beachfront resort"
           width={1920}
           height={1080}
           className="absolute inset-0 h-full w-full object-cover opacity-70"
