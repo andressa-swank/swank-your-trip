@@ -205,16 +205,16 @@ function DarkHero({
       <div className="mx-auto max-w-[1200px]">
         {eyebrow &&
           (onBack ? (
-            <button onClick={onBack} className="mb-3 block">
+            <button onClick={onBack} className="mb-4 block sm:mb-5">
               <Eyebrow className="text-[#f0e40c]">{eyebrow}</Eyebrow>
             </button>
           ) : (
-            <Eyebrow className="mb-3 text-[#f0e40c]">{eyebrow}</Eyebrow>
+            <Eyebrow className="mb-4 text-[#f0e40c] sm:mb-5">{eyebrow}</Eyebrow>
           ))}
-        <h1 className="text-[clamp(34px,6vw,64px)] font-light leading-[1.05] tracking-[-0.03em] text-white">
+        <h1 className="text-[clamp(34px,6vw,64px)] font-light leading-[1.12] tracking-[-0.03em] text-white">
           {title}
         </h1>
-        {sub && <p className="mt-3 text-[15px] text-white/60">{sub}</p>}
+        {sub && <p className="mt-4 text-[15px] leading-relaxed text-white/60 sm:mt-5">{sub}</p>}
       </div>
     </div>
   );
@@ -237,13 +237,13 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1a1a1a] via-[#1a1a1a]/50 to-transparent" />
         <div className="relative mx-auto w-full max-w-[1200px] px-5 pb-28 sm:px-8 sm:pb-32">
-          <Eyebrow className="mb-7 text-[#f0e40c]">Booking Hub</Eyebrow>
-          <h1 className="max-w-[14ch] text-[clamp(42px,8vw,92px)] font-light leading-[1.12] tracking-[-0.04em] text-white">
+          <Eyebrow className="mb-6 text-[#f0e40c] sm:mb-8">Booking Hub</Eyebrow>
+          <h1 className="max-w-[14ch] text-[clamp(42px,8vw,92px)] font-light leading-[1.15] tracking-[-0.04em] text-white">
             Pick your
             <br />
             path.
           </h1>
-          <p className="mt-8 max-w-[46ch] text-[16.5px] leading-relaxed text-white/70">
+          <p className="mt-7 max-w-[46ch] text-[16.5px] leading-relaxed text-white/70 sm:mt-10">
             Two ways to book with us. However much help you want, we've got a lane for it.
           </p>
         </div>
