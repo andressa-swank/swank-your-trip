@@ -247,9 +247,10 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
             Two ways to book with us. However much help you want, we've got a lane for it.
           </p>
         </div>
-        <div className="absolute bottom-7 right-6 flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-white/50">
-          Scroll <span>↓</span>
+        <div className="absolute bottom-7 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-[0.18em] text-white/50">
+          Scroll
         </div>
+
 
       </section>
 
