@@ -205,16 +205,16 @@ function DarkHero({
       <div className="mx-auto max-w-[1200px]">
         {eyebrow &&
           (onBack ? (
-            <button onClick={onBack} className="mb-3 block">
+            <button onClick={onBack} className="mb-4 block sm:mb-5">
               <Eyebrow className="text-[#f0e40c]">{eyebrow}</Eyebrow>
             </button>
           ) : (
-            <Eyebrow className="mb-3 text-[#f0e40c]">{eyebrow}</Eyebrow>
+            <Eyebrow className="mb-4 text-[#f0e40c] sm:mb-5">{eyebrow}</Eyebrow>
           ))}
-        <h1 className="text-[clamp(34px,6vw,64px)] font-light leading-[1.05] tracking-[-0.03em] text-white">
+        <h1 className="text-[clamp(34px,6vw,64px)] font-light leading-[1.12] tracking-[-0.03em] text-white">
           {title}
         </h1>
-        {sub && <p className="mt-3 text-[15px] text-white/60">{sub}</p>}
+        {sub && <p className="mt-4 text-[15px] leading-relaxed text-white/60 sm:mt-5">{sub}</p>}
       </div>
     </div>
   );
