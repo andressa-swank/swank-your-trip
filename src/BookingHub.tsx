@@ -256,9 +256,9 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
 
       <section className="mx-auto max-w-[1200px] px-5 py-16 sm:px-8 sm:py-20">
         <div className="mb-10 flex items-baseline gap-4">
-          <span className="text-[13px] font-semibold text-[#c9a600]">01</span>
+          <span className="text-[13px] font-semibold text-[#c9a600]">
+          </span>
           <h2 className="text-[clamp(24px,3.4vw,34px)] font-light tracking-[-0.02em]">
-            Choose how much help you want
           </h2>
         </div>
 
