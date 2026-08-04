@@ -269,7 +269,7 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
           height={1080}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="page-container relative pb-10 md:pb-[72px]">
+        <div className="page-container relative z-10 pb-10 md:pb-[72px]">
           <div className="animate-enter max-w-[680px]">
             <Eyebrow className="text-brand">Booking Hub</Eyebrow>
             <h1 className="display-heading mt-3 text-white">
@@ -282,7 +282,7 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
             </p>
           </div>
         </div>
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-[12px] uppercase tracking-[0.14em] text-white/70">
+        <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 text-[12px] uppercase tracking-[0.14em] text-white/70">
           Scroll
         </div>
       </section>

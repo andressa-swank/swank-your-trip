@@ -418,7 +418,11 @@ textarea.field-control {
   background-repeat: no-repeat;
   overflow: hidden;
 }
+.landing-hero > img {
+  z-index: 0;
+}
 .landing-hero::before {
+  z-index: 1;
   content: "";
   position: absolute;
   inset: 0;
