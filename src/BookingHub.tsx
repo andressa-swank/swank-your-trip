@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import heroPhoto from "@/assets/hero-photo.png.asset.json";
 import amanPoolPhoto from "@/assets/aman-pool.webp";
+import bookDirectHero from "@/assets/book-direct-hero.webp";
 
 /**
  * Swank Guide — Booking Hub (V2: Editorial & Immersive)
@@ -1139,7 +1140,19 @@ function DestinationScreen({
 
   return (
     <>
-      <PageIntro eyebrow="Book Direct" title="Where are you going?" />
+      <section className="book-direct-hero">
+        <img
+          src={bookDirectHero}
+          alt="Historic Italian villa surrounded by gardens and Tuscan hills"
+          width={1200}
+          height={800}
+        />
+        <div className="book-direct-hero__overlay" />
+        <div className="page-container book-direct-hero__content">
+          <Eyebrow className="text-white/80">Book Direct</Eyebrow>
+          <h1 className="display-heading mt-3 max-w-[760px] text-white">Where are you going?</h1>
+        </div>
+      </section>
       <div className="page-container pb-16 pt-12 md:pb-24 md:pt-12">
         <div className="relative mb-12 max-w-[680px]">
           <label className="field-label" htmlFor="destination-search">
