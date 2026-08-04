@@ -1103,6 +1103,22 @@ function ConfirmScreen({ onHome }: { onHome: () => void }) {
   );
 }
 
+
+const MOST_BOOKED_HOTELS = [
+  "The Sarojin",
+  "Pimalai Resort & Spa",
+  "The Surin Phuket",
+  "The Peninsula Bangkok",
+  "Four Seasons Hotel Bangkok at Chao Phraya River",
+  "Amor Arenal Adults Friendly",
+  "Pavillon Faubourg Saint-Germain & Spa",
+  "Virgin Hotels Edinburgh",
+  "Hôtel de Nell",
+  "Be Tulum",
+  "Fort Printers",
+  "Nantipa",
+];
+
 function DestinationScreen({
   onGoHotel,
   onSwitchConcierge,
@@ -1227,6 +1243,41 @@ function DestinationScreen({
             ))}
           </div>
         </div>
+
+        <section className="mt-16 border-t border-hairline pt-12 md:mt-20 md:pt-16" aria-labelledby="most-booked-title">
+          <div className="mb-8 max-w-[720px] md:mb-10">
+            <p className="mb-3 text-[12px] font-medium uppercase tracking-[0.14em] text-ink-muted">
+              Guest favorites
+            </p>
+            <h2 id="most-booked-title" className="section-heading text-ink">
+              Most booked with Swank
+            </h2>
+            <p className="mt-3 text-[16px] leading-7 text-ink-muted">
+              The hotels our travelers ask for and book most often.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {MOST_BOOKED_HOTELS.map((hotel) => (
+              <article
+                key={hotel}
+                className="group flex flex-col overflow-hidden rounded-[8px] border border-hairline bg-background transition-all duration-[180ms] hover:-translate-y-0.5 hover:shadow-[var(--shadow-subtle)]"
+              >
+                <div className="hotel-card__media">
+                  <span className="max-w-[82%] px-4 text-center text-[12px] leading-[18px] text-ink-muted">
+                    [ {hotel} ]
+                  </span>
+                  <span className="badge-pill absolute bottom-3 left-3 bg-brand uppercase tracking-wide text-ink">
+                    Most booked
+                  </span>
+                </div>
+                <div className="flex min-h-[112px] items-start p-5 md:p-6">
+                  <h3 className="text-[22px] leading-[30px] font-normal text-ink">{hotel}</h3>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
       </div>
       <div className="border-t border-hairline py-6 text-center">
         <button onClick={onSwitchConcierge} className="text-link min-h-11 font-medium">
