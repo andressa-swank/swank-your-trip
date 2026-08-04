@@ -328,7 +328,7 @@ function TestimonialsSection() {
               key={item.author}
               className={dotIndex === index ? "is-active" : ""}
               onClick={() => setIndex(dotIndex)}
-              aria-label={\`Show testimonial \${dotIndex + 1}\`}
+              aria-label={`Show testimonial ${dotIndex + 1}`}
               aria-current={dotIndex === index ? "true" : undefined}
             />
           ))}
@@ -361,7 +361,7 @@ function TestedStaysSection() {
   return (
     <section
       ref={sectionRef}
-      className={\`tested-stays-section \${visible ? "is-visible" : ""}\`}
+      className={`tested-stays-section ${visible ? "is-visible" : ""}`}
       aria-labelledby="tested-stays-title"
     >
       <div className="tested-stays-heading">
@@ -386,7 +386,7 @@ function TestedStaysSection() {
             <div
               key={label}
               className="tested-stays-metric"
-              style={{ transitionDelay: \`\${metricIndex * 120}ms\` }}
+              style={{ transitionDelay: `${metricIndex * 120}ms` }}
             >
               <strong>{number}</strong>
               <span>{label}</span>
