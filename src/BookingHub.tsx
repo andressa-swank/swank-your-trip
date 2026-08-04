@@ -275,7 +275,7 @@ function TestimonialsSection() {
     return () => window.clearInterval(timer);
   }, [index, paused]);
 
-  const testimonial = TESTIMONIALS[index];
+  const testimonial = TESTIMONIALS[index] ?? TESTIMONIALS[0]!;
 
   return (
     <section
