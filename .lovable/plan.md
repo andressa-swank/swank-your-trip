@@ -1,4 +1,7 @@
-# Verify and finish the four Booking Hub sections
+# Fix build error, then verify the four Booking Hub sections
+
+**Build is currently broken.** Three lines in `src/BookingHub.tsx` (331, 364, 389) contain escaped backticks (`` \` `` and `\${`) inside template literals, which breaks TypeScript parsing for the whole file. First step is to unescape them so the file compiles again.
+
 
 All four requested changes already exist in `src/BookingHub.tsx` and `src/styles.css` from the previous pass:
 
