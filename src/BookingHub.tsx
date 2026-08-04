@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import heroPhoto from "@/assets/hero-photo.png.asset.json";
+import amanPoolPhoto from "@/assets/aman-pool.webp";
 
 /**
  * Swank Guide — Booking Hub (V2: Editorial & Immersive)
@@ -234,6 +235,168 @@ function PageIntro({
 // Screens
 // ---------------------------------------------------------------------------
 
+
+const TESTIMONIALS = [
+  {
+    quote:
+      "Anyone can plan a trip, but when you want the details to matter, their insights and knowledge turn it into an unforgettable experience.",
+    author: "Trisha, honeymoon in Bali",
+  },
+  {
+    quote: "The Swank team were awesome, great communication, real value, and the right accommodation options.",
+    author: "Rob, family trip in Thailand",
+  },
+  {
+    quote: "Thank you for your videos, expertise, and guidance. This hotel will shape our design aesthetic forever.",
+    author: "Logan, honeymoon in Bangkok",
+  },
+  {
+    quote: "Good communication, promised benefits and upgrades delivered, and we felt safe with them.",
+    author: "Ben",
+  },
+  {
+    quote: "We loved the pre-arrival guide, it made packing easy and helped us know what to expect.",
+    author: "Jordan, couple trip in Costa Rica",
+  },
+];
+
+function TestimonialsSection() {
+  const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+
+  const changeTestimonial = (direction: number) => {
+    setIndex((current) => (current + direction + TESTIMONIALS.length) % TESTIMONIALS.length);
+  };
+
+  useEffect(() => {
+    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => changeTestimonial(1), 6000);
+    return () => window.clearInterval(timer);
+  }, [index, paused]);
+
+  const testimonial = TESTIMONIALS[index];
+
+  return (
+    <section
+      className="testimonials-section"
+      aria-labelledby="testimonials-title"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
+    >
+      <div className="page-container">
+        <h2 id="testimonials-title" className="testimonials-title">
+          What they say
+        </h2>
+
+        <div className="testimonials-carousel">
+          <button
+            type="button"
+            className="testimonial-arrow"
+            onClick={() => changeTestimonial(-1)}
+            aria-label="Previous testimonial"
+          >
+            <span aria-hidden="true">←</span>
+          </button>
+
+          <div className="testimonial-stage">
+            <span className="testimonial-mark" aria-hidden="true">
+              “
+            </span>
+            <blockquote key={index} className="testimonial-copy">
+              <p>“{testimonial.quote}”</p>
+              <footer>{testimonial.author}</footer>
+            </blockquote>
+          </div>
+
+          <button
+            type="button"
+            className="testimonial-arrow"
+            onClick={() => changeTestimonial(1)}
+            aria-label="Next testimonial"
+          >
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+
+        <div className="testimonial-dots" aria-label="Choose a testimonial">
+          {TESTIMONIALS.map((item, dotIndex) => (
+            <button
+              type="button"
+              key={item.author}
+              className={dotIndex === index ? "is-active" : ""}
+              onClick={() => setIndex(dotIndex)}
+              aria-label={\`Show testimonial \${dotIndex + 1}\`}
+              aria-current={dotIndex === index ? "true" : undefined}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestedStaysSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 },
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className={\`tested-stays-section \${visible ? "is-visible" : ""}\`}
+      aria-labelledby="tested-stays-title"
+    >
+      <div className="tested-stays-heading">
+        <h2 id="tested-stays-title">Every stay tested.</h2>
+      </div>
+
+      <div className="tested-stays-photo">
+        <img
+          src={amanPoolPhoto}
+          alt="Infinity pools overlooking the sea at a cliffside resort"
+          width={2048}
+          height={1024}
+          loading="lazy"
+        />
+        <div className="tested-stays-overlay" />
+        <div className="tested-stays-metrics page-container">
+          {[
+            ["60+", "Countries visited"],
+            ["400", "Hotels personally tested"],
+            ["0", "Paid placements"],
+          ].map(([number, label], metricIndex) => (
+            <div
+              key={label}
+              className="tested-stays-metric"
+              style={{ transitionDelay: \`\${metricIndex * 120}ms\` }}
+            >
+              <strong>{number}</strong>
+              <span>{label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
   const cardsRef = useRef<HTMLDivElement>(null);
   const [cardsVisible, setCardsVisible] = useState(false);
@@ -344,6 +507,9 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
           </Btn>
         </div>
       </section>
+
+      <TestimonialsSection />
+      <TestedStaysSection />
     </>
   );
 }
