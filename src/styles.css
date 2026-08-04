@@ -189,8 +189,9 @@
 }
 
 @theme inline {
-  --color-surface-soft: var(--color-surface-soft);
-  --color-border-soft: var(--color-border-soft);
+  --color-soft: var(--color-surface-soft);
+  --color-hairline: var(--color-border-soft);
+  --color-line: var(--color-border);
   --color-ink: var(--color-text);
   --color-ink-muted: var(--color-text-muted);
   --color-brand: var(--color-accent);
