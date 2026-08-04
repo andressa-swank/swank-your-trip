@@ -822,3 +822,54 @@ textarea.field-control {
     font-size: 17px;
   }
 }
+
+
+/* Book Direct hero -------------------------------------------------------- */
+
+.book-direct-hero {
+  position: relative;
+  display: flex;
+  min-height: 500px;
+  align-items: flex-end;
+  overflow: hidden;
+  background: #2d342b;
+}
+
+.book-direct-hero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 48%;
+}
+
+.book-direct-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08) 15%, rgba(0, 0, 0, 0.62) 100%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.2), transparent 65%);
+}
+
+.book-direct-hero__content {
+  position: relative;
+  z-index: 1;
+  padding-bottom: 56px;
+  padding-top: 160px;
+}
+
+@media (max-width: 767px) {
+  .book-direct-hero {
+    min-height: 420px;
+  }
+
+  .book-direct-hero > img {
+    object-position: 54% center;
+  }
+
+  .book-direct-hero__content {
+    padding-bottom: 40px;
+    padding-top: 128px;
+  }
+}
