@@ -469,7 +469,7 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
             </p>
             <div className="mt-8 flex-1" />
             <Btn full variant="accent" onClick={() => onNav("intake")}>
-              Plan my trip →
+              Plan my trip
             </Btn>
           </div>
 
@@ -492,7 +492,7 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
             </div>
             <div className="mt-8 flex-1" />
             <Btn full variant="secondary" onClick={() => onNav("destination")}>
-              Book Now →
+              Book Now
             </Btn>
           </div>
         </div>
@@ -504,7 +504,7 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
             Not sure which fits? Answer three quick questions and we'll point you the right way.
           </p>
           <Btn variant="secondary" onClick={() => onNav("quiz-1")}>
-            Help me decide →
+            Help me decide
           </Btn>
         </div>
       </section>
@@ -610,7 +610,7 @@ function QuizResultScreen({
               : "A bit of guidance will go a long way here, let's get to know your trip."}
           </p>
           <Btn variant="accent" onClick={onContinue}>
-            {isBookNow ? "Continue to booking →" : "Continue to trip planning →"}
+            {isBookNow ? "Continue to booking" : "Continue to trip planning"}
           </Btn>
         </div>
       </div>
@@ -639,7 +639,7 @@ function HowScreen({ onNav }: { onNav: (s: Screen) => void }) {
       >
         <div className="mt-8">
           <Btn variant="accent" onClick={() => onNav("intake")}>
-            Plan my trip →
+            Plan my trip
           </Btn>
         </div>
       </PageIntro>
@@ -914,7 +914,7 @@ function IntakeScreen({
                 </div>
                 <div className="mt-10">
                   <Btn full variant="accent" onClick={() => setStep(2)}>
-                    Next →
+                    Next
                   </Btn>
                 </div>
               </>
@@ -935,7 +935,7 @@ function IntakeScreen({
                 />
                 <div className="mt-10">
                   <Btn full variant="accent" onClick={() => setStep(3)}>
-                    Next →
+                    Next
                   </Btn>
                 </div>
               </>
@@ -963,7 +963,7 @@ function IntakeScreen({
                 </div>
                 <div className="mt-10">
                   <Btn full variant="accent" onClick={() => setStep(4)}>
-                    Next →
+                    Next
                   </Btn>
                 </div>
               </>
@@ -989,7 +989,7 @@ function IntakeScreen({
                 </div>
                 <div className="mt-10">
                   <Btn full variant="accent" onClick={() => setStep(5)}>
-                    Next →
+                    Next
                   </Btn>
                 </div>
               </>
@@ -1012,7 +1012,7 @@ function IntakeScreen({
                 />
                 <div className="mt-10">
                   <Btn full variant="accent" onClick={() => setStep(6)}>
-                    Next →
+                    Next
                   </Btn>
                 </div>
               </>
@@ -1028,7 +1028,7 @@ function IntakeScreen({
                 )}
                 <div className="mt-10">
                   <Btn full variant="accent" onClick={() => setStep(7)}>
-                    Next →
+                    Next
                   </Btn>
                 </div>
               </>
@@ -1047,7 +1047,7 @@ function IntakeScreen({
                 ))}
                 <div className="mt-10">
                   <Btn full variant="accent" disabled={sending} onClick={submit}>
-                    {sending ? "Sending…" : "Submit →"}
+                    {sending ? "Sending…" : "Submit"}
                   </Btn>
                 </div>
               </>
@@ -1060,7 +1060,7 @@ function IntakeScreen({
         <p className="text-[15px] leading-6 text-ink-muted">
           Prefer to book it yourself now?{" "}
           <button onClick={onSwitchToBookDirect} className="text-link font-medium">
-            Switch to Book Direct →
+            Switch to Book Direct
           </button>
         </p>
       </div>
@@ -1096,7 +1096,7 @@ function ConfirmScreen({ onHome }: { onHome: () => void }) {
             Changes, group policies, and refund details will be included in your proposal.
           </p>
           <button onClick={onHome} className="text-link mt-8 inline-flex min-h-11 items-center text-[15px]">
-            ← Back to start
+            Back to start
           </button>
         </div>
       </div>
@@ -1294,7 +1294,7 @@ function DestinationScreen({
       </div>
       <div className="border-t border-hairline py-6 text-center">
         <button onClick={onSwitchConcierge} className="text-link min-h-11 font-medium">
-          Switch to Concierge →
+          Switch to Concierge
         </button>
       </div>
     </>
@@ -1369,7 +1369,7 @@ function HotelBangkokScreen({
   return (
     <>
       <PageIntro
-        eyebrow="← Change destination"
+        eyebrow="Change destination"
         title="Bangkok"
         sub="Book Direct"
         onBack={onChangeDestination}
@@ -1424,7 +1424,7 @@ function HotelBangkokScreen({
 
       <div className="border-t border-hairline py-6 text-center">
         <button onClick={onSwitchConcierge} className="text-link min-h-11 font-medium">
-          Switch to Concierge →
+          Switch to Concierge
         </button>
       </div>
     </>
