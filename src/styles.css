@@ -655,7 +655,7 @@ textarea.field-control {
 .tested-stays-heading {
   display: grid;
   place-items: center;
-  padding: 80px 20px 52px;
+  padding: 120px 20px 52px;
 }
 
 .tested-stays-heading h2 {
@@ -785,7 +785,7 @@ textarea.field-control {
   }
 
   .tested-stays-heading {
-    padding: 64px 20px 40px;
+    padding: 96px 20px 40px;
   }
 
   .tested-stays-heading h2 {
