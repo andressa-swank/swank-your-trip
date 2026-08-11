@@ -1502,6 +1502,13 @@ export default function BookingHub({ initialScreen = "gate" }: { initialScreen?:
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
   }, [screen]);
 
+  useEffect(() => {
+    if (initialScreen === "quiz-result" && !quizResult) {
+      setScreen("quiz-1");
+      void navigate({ to: SCREEN_PATHS["quiz-1"] });
+    }
+  }, [initialScreen, navigate, quizResult]);
+
   function goToScreen(nextScreen: Screen) {
     setScreen(nextScreen);
     void navigate({ to: SCREEN_PATHS[nextScreen] });
