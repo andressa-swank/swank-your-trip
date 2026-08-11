@@ -28,7 +28,7 @@ const SCREEN_PATHS: Record<Screen, string> = {
   "quiz-1": "/find-your-path",
   "quiz-2": "/find-your-path",
   "quiz-3": "/find-your-path",
-  "quiz-result": "/find-your-path",
+  "quiz-result": "/find-your-path/result",
   how: "/concierge",
   intake: "/concierge/start",
   confirm: "/concierge/confirmation",
@@ -733,6 +733,31 @@ const emptyIntake: IntakeData = {
   stage: "",
 };
 
+const INTAKE_DATA_KEY = "swank-concierge-intake";
+const INTAKE_STEP_KEY = "swank-concierge-step";
+const QUIZ_RESULT_KEY = "swank-booking-path-result";
+
+function readSessionValue<T>(key: string, fallback: T): T {
+  if (typeof window === "undefined") return fallback;
+  try {
+    const saved = window.sessionStorage.getItem(key);
+    return saved ? (JSON.parse(saved) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+function writeSessionValue(key: string, value: unknown) {
+  if (typeof window === "undefined") return;
+  window.sessionStorage.setItem(key, JSON.stringify(value));
+}
+
+function clearConciergeDraft() {
+  if (typeof window === "undefined") return;
+  window.sessionStorage.removeItem(INTAKE_DATA_KEY);
+  window.sessionStorage.removeItem(INTAKE_STEP_KEY);
+}
+
 function scrollToRegion(el: HTMLElement | null) {
   if (!el || typeof window === "undefined") return;
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -773,14 +798,19 @@ function IntakeScreen({
   onSubmitted: () => void;
   onSwitchToBookDirect: () => void;
 }) {
-  const [step, setStep] = useState(1);
-  const [data, setData] = useState<IntakeData>(emptyIntake);
+  const [step, setStep] = useState(() => readSessionValue(INTAKE_STEP_KEY, 1));
+  const [data, setData] = useState<IntakeData>(() => readSessionValue(INTAKE_DATA_KEY, emptyIntake));
   const [emailError, setEmailError] = useState(false);
   const [sending, setSending] = useState(false);
   const formTop = useRef<HTMLDivElement>(null);
   const firstRender = useRef(true);
 
   useEffect(() => {
+    writeSessionValue(INTAKE_DATA_KEY, data);
+  }, [data]);
+
+  useEffect(() => {
+    writeSessionValue(INTAKE_STEP_KEY, step);
     if (firstRender.current) {
       firstRender.current = false;
       return;
@@ -815,6 +845,7 @@ function IntakeScreen({
     if (!INTAKE_ENDPOINT) {
       console.log("[Swank intake] would POST:", payload);
       setSending(false);
+      clearConciergeDraft();
       onSubmitted();
       return;
     }
@@ -828,6 +859,7 @@ function IntakeScreen({
       console.error("[Swank intake] submit failed:", err);
     } finally {
       setSending(false);
+      clearConciergeDraft();
       onSubmitted();
     }
   }
@@ -1456,13 +1488,19 @@ function HotelBangkokScreen({
 export default function BookingHub({ initialScreen = "gate" }: { initialScreen?: Screen }) {
   const [screen, setScreen] = useState<Screen>(initialScreen);
   const [quizAnswers, setQuizAnswers] = useState<{ q1?: string; q2?: string; q3?: string }>({});
-  const [quizResult, setQuizResult] = useState<{ path: "book-now" | "concierge" } | null>(null);
+  const [quizResult, setQuizResult] = useState<{ path: "book-now" | "concierge" } | null>(() =>
+    readSessionValue(QUIZ_RESULT_KEY, null),
+  );
 
   const navigate = useNavigate();
 
   useEffect(() => {
     setScreen(initialScreen);
   }, [initialScreen]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [screen]);
 
   function goToScreen(nextScreen: Screen) {
     setScreen(nextScreen);
@@ -1480,7 +1518,9 @@ export default function BookingHub({ initialScreen = "gate" }: { initialScreen?:
       (next.q1 === "recommendations" ? 2 : 0) +
       (next.q2 === "time" ? 1 : 0) +
       (next.q3 === "quality" ? 3 : 0);
-    setQuizResult({ path: score <= 2 ? "book-now" : "concierge" });
+    const result = { path: score <= 2 ? "book-now" : "concierge" } as const;
+    setQuizResult(result);
+    writeSessionValue(QUIZ_RESULT_KEY, result);
     setQuizAnswers({});
     goToScreen("quiz-result");
   }
@@ -1499,7 +1539,10 @@ export default function BookingHub({ initialScreen = "gate" }: { initialScreen?:
         {screen === "quiz-result" && quizResult && (
           <QuizResultScreen
             result={quizResult}
-            onContinue={() => goToScreen(quizResult.path === "book-now" ? "destination" : "intake")}
+            onContinue={() => {
+              window.sessionStorage.removeItem(QUIZ_RESULT_KEY);
+              goToScreen(quizResult.path === "book-now" ? "destination" : "intake");
+            }}
           />
         )}
         {screen === "how" && <HowScreen onNav={goToScreen} />}
