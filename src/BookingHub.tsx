@@ -1,3 +1,4 @@
+import { useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import heroPhoto from "@/assets/hero-photo.png.asset.json";
 import amanPoolPhoto from "@/assets/aman-pool.webp";
@@ -8,7 +9,7 @@ import bookDirectHero from "@/assets/book-direct-hero.webp";
  * Wire INTAKE_ENDPOINT to a real backend; empty means "log + continue".
  */
 
-type Screen =
+export type Screen =
   | "gate"
   | "quiz-1"
   | "quiz-2"
@@ -21,6 +22,19 @@ type Screen =
   | "hotel-bangkok";
 
 const INTAKE_ENDPOINT = "";
+
+const SCREEN_PATHS: Record<Screen, string> = {
+  gate: "/",
+  "quiz-1": "/find-your-path",
+  "quiz-2": "/find-your-path",
+  "quiz-3": "/find-your-path",
+  "quiz-result": "/find-your-path",
+  how: "/concierge",
+  intake: "/concierge/start",
+  confirm: "/concierge/confirmation",
+  destination: "/book-direct",
+  "hotel-bangkok": "/book-direct/bangkok",
+};
 
 const DESTINATIONS = [
   { name: "Bangkok, Thailand", built: true },
@@ -1439,16 +1453,27 @@ function HotelBangkokScreen({
 // Root
 // ---------------------------------------------------------------------------
 
-export default function BookingHub() {
-  const [screen, setScreen] = useState<Screen>("gate");
+export default function BookingHub({ initialScreen = "gate" }: { initialScreen?: Screen }) {
+  const [screen, setScreen] = useState<Screen>(initialScreen);
   const [quizAnswers, setQuizAnswers] = useState<{ q1?: string; q2?: string; q3?: string }>({});
   const [quizResult, setQuizResult] = useState<{ path: "book-now" | "concierge" } | null>(null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setScreen(initialScreen);
+  }, [initialScreen]);
+
+  function goToScreen(nextScreen: Screen) {
+    setScreen(nextScreen);
+    void navigate({ to: SCREEN_PATHS[nextScreen] });
+  }
 
   function handleQuizAnswer(step: 1 | 2 | 3, value: string) {
     const next = { ...quizAnswers, [`q${step}`]: value };
     setQuizAnswers(next);
     if (step < 3) {
-      setScreen(`quiz-${step + 1}` as Screen);
+      goToScreen(`quiz-${step + 1}` as Screen);
       return;
     }
     const score =
@@ -1457,47 +1482,47 @@ export default function BookingHub() {
       (next.q3 === "quality" ? 3 : 0);
     setQuizResult({ path: score <= 2 ? "book-now" : "concierge" });
     setQuizAnswers({});
-    setScreen("quiz-result");
+    goToScreen("quiz-result");
   }
 
   const showFloatingCta = !["gate", "intake", "destination", "hotel-bangkok"].includes(screen);
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-ink antialiased">
-      <Header onNav={setScreen} />
+      <Header onNav={goToScreen} />
 
       <main className="flex-1">
-        {screen === "gate" && <GateScreen onNav={setScreen} />}
+        {screen === "gate" && <GateScreen onNav={goToScreen} />}
         {(screen === "quiz-1" || screen === "quiz-2" || screen === "quiz-3") && (
           <QuizScreen step={Number(screen.split("-")[1]) as 1 | 2 | 3} onAnswer={handleQuizAnswer} />
         )}
         {screen === "quiz-result" && quizResult && (
           <QuizResultScreen
             result={quizResult}
-            onContinue={() => setScreen(quizResult.path === "book-now" ? "destination" : "intake")}
+            onContinue={() => goToScreen(quizResult.path === "book-now" ? "destination" : "intake")}
           />
         )}
-        {screen === "how" && <HowScreen onNav={setScreen} />}
+        {screen === "how" && <HowScreen onNav={goToScreen} />}
         {screen === "intake" && (
-          <IntakeScreen onSubmitted={() => setScreen("confirm")} onSwitchToBookDirect={() => setScreen("destination")} />
+          <IntakeScreen onSubmitted={() => goToScreen("confirm")} onSwitchToBookDirect={() => goToScreen("destination")} />
         )}
-        {screen === "confirm" && <ConfirmScreen onHome={() => setScreen("gate")} />}
+        {screen === "confirm" && <ConfirmScreen onHome={() => goToScreen("gate")} />}
         {screen === "destination" && (
-          <DestinationScreen onGoHotel={() => setScreen("hotel-bangkok")} onSwitchConcierge={() => setScreen("how")} />
+          <DestinationScreen onGoHotel={() => goToScreen("hotel-bangkok")} onSwitchConcierge={() => goToScreen("how")} />
         )}
         {screen === "hotel-bangkok" && (
           <HotelBangkokScreen
-            onChangeDestination={() => setScreen("destination")}
-            onSwitchConcierge={() => setScreen("how")}
+            onChangeDestination={() => goToScreen("destination")}
+            onSwitchConcierge={() => goToScreen("how")}
           />
         )}
       </main>
 
-      <Footer onNav={setScreen} />
+      <Footer onNav={goToScreen} />
 
       {showFloatingCta && (
         <button
-          onClick={() => setScreen("gate")}
+          onClick={() => goToScreen("gate")}
           className="btn-base button-accent fixed bottom-6 right-6 z-40 shadow-[var(--shadow-subtle)]"
         >
           Plan Trip
