@@ -118,7 +118,7 @@ const NAV_LINKS = [
 ] as const;
 
 function Header(_props: { onNav?: (s: Screen) => void }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   return (
     <header className="sticky top-0 z-50 border-b border-hairline bg-background">
       <div className="page-container flex h-16 items-center justify-between md:h-[72px]">
