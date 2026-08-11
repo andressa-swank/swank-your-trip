@@ -10,33 +10,124 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BookDirectRouteImport } from './routes/book-direct'
+import { Route as ConciergeRouteImport } from './routes/concierge'
+import { Route as FindYourPathRouteImport } from './routes/find-your-path'
+import { Route as BookDirectBangkokRouteImport } from './routes/book-direct.bangkok'
+import { Route as ConciergeConfirmationRouteImport } from './routes/concierge.confirmation'
+import { Route as ConciergeStartRouteImport } from './routes/concierge.start'
+import { Route as FindYourPathResultRouteImport } from './routes/find-your-path.result'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookDirectRoute = BookDirectRouteImport.update({
+  id: '/book-direct',
+  path: '/book-direct',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConciergeRoute = ConciergeRouteImport.update({
+  id: '/concierge',
+  path: '/concierge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FindYourPathRoute = FindYourPathRouteImport.update({
+  id: '/find-your-path',
+  path: '/find-your-path',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookDirectBangkokRoute = BookDirectBangkokRouteImport.update({
+  id: '/bangkok',
+  path: '/bangkok',
+  getParentRoute: () => BookDirectRoute,
+} as any)
+const ConciergeConfirmationRoute = ConciergeConfirmationRouteImport.update({
+  id: '/confirmation',
+  path: '/confirmation',
+  getParentRoute: () => ConciergeRoute,
+} as any)
+const ConciergeStartRoute = ConciergeStartRouteImport.update({
+  id: '/start',
+  path: '/start',
+  getParentRoute: () => ConciergeRoute,
+} as any)
+const FindYourPathResultRoute = FindYourPathResultRouteImport.update({
+  id: '/result',
+  path: '/result',
+  getParentRoute: () => FindYourPathRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/book-direct': typeof BookDirectRouteWithChildren
+  '/concierge': typeof ConciergeRouteWithChildren
+  '/find-your-path': typeof FindYourPathRouteWithChildren
+  '/book-direct/bangkok': typeof BookDirectBangkokRoute
+  '/concierge/confirmation': typeof ConciergeConfirmationRoute
+  '/concierge/start': typeof ConciergeStartRoute
+  '/find-your-path/result': typeof FindYourPathResultRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/book-direct': typeof BookDirectRouteWithChildren
+  '/concierge': typeof ConciergeRouteWithChildren
+  '/find-your-path': typeof FindYourPathRouteWithChildren
+  '/book-direct/bangkok': typeof BookDirectBangkokRoute
+  '/concierge/confirmation': typeof ConciergeConfirmationRoute
+  '/concierge/start': typeof ConciergeStartRoute
+  '/find-your-path/result': typeof FindYourPathResultRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/book-direct': typeof BookDirectRouteWithChildren
+  '/concierge': typeof ConciergeRouteWithChildren
+  '/find-your-path': typeof FindYourPathRouteWithChildren
+  '/book-direct/bangkok': typeof BookDirectBangkokRoute
+  '/concierge/confirmation': typeof ConciergeConfirmationRoute
+  '/concierge/start': typeof ConciergeStartRoute
+  '/find-your-path/result': typeof FindYourPathResultRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/book-direct'
+    | '/concierge'
+    | '/find-your-path'
+    | '/book-direct/bangkok'
+    | '/concierge/confirmation'
+    | '/concierge/start'
+    | '/find-your-path/result'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/book-direct'
+    | '/concierge'
+    | '/find-your-path'
+    | '/book-direct/bangkok'
+    | '/concierge/confirmation'
+    | '/concierge/start'
+    | '/find-your-path/result'
+  id:
+    | '__root__'
+    | '/'
+    | '/book-direct'
+    | '/concierge'
+    | '/find-your-path'
+    | '/book-direct/bangkok'
+    | '/concierge/confirmation'
+    | '/concierge/start'
+    | '/find-your-path/result'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BookDirectRoute: typeof BookDirectRouteWithChildren
+  ConciergeRoute: typeof ConciergeRouteWithChildren
+  FindYourPathRoute: typeof FindYourPathRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +139,101 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/book-direct': {
+      id: '/book-direct'
+      path: '/book-direct'
+      fullPath: '/book-direct'
+      preLoaderRoute: typeof BookDirectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/concierge': {
+      id: '/concierge'
+      path: '/concierge'
+      fullPath: '/concierge'
+      preLoaderRoute: typeof ConciergeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/find-your-path': {
+      id: '/find-your-path'
+      path: '/find-your-path'
+      fullPath: '/find-your-path'
+      preLoaderRoute: typeof FindYourPathRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book-direct/bangkok': {
+      id: '/book-direct/bangkok'
+      path: '/bangkok'
+      fullPath: '/book-direct/bangkok'
+      preLoaderRoute: typeof BookDirectBangkokRouteImport
+      parentRoute: typeof BookDirectRoute
+    }
+    '/concierge/confirmation': {
+      id: '/concierge/confirmation'
+      path: '/confirmation'
+      fullPath: '/concierge/confirmation'
+      preLoaderRoute: typeof ConciergeConfirmationRouteImport
+      parentRoute: typeof ConciergeRoute
+    }
+    '/concierge/start': {
+      id: '/concierge/start'
+      path: '/start'
+      fullPath: '/concierge/start'
+      preLoaderRoute: typeof ConciergeStartRouteImport
+      parentRoute: typeof ConciergeRoute
+    }
+    '/find-your-path/result': {
+      id: '/find-your-path/result'
+      path: '/result'
+      fullPath: '/find-your-path/result'
+      preLoaderRoute: typeof FindYourPathResultRouteImport
+      parentRoute: typeof FindYourPathRoute
+    }
   }
 }
 
+interface BookDirectRouteChildren {
+  BookDirectBangkokRoute: typeof BookDirectBangkokRoute
+}
+
+const BookDirectRouteChildren: BookDirectRouteChildren = {
+  BookDirectBangkokRoute: BookDirectBangkokRoute,
+}
+
+const BookDirectRouteWithChildren = BookDirectRoute._addFileChildren(
+  BookDirectRouteChildren,
+)
+
+interface ConciergeRouteChildren {
+  ConciergeConfirmationRoute: typeof ConciergeConfirmationRoute
+  ConciergeStartRoute: typeof ConciergeStartRoute
+}
+
+const ConciergeRouteChildren: ConciergeRouteChildren = {
+  ConciergeConfirmationRoute: ConciergeConfirmationRoute,
+  ConciergeStartRoute: ConciergeStartRoute,
+}
+
+const ConciergeRouteWithChildren = ConciergeRoute._addFileChildren(
+  ConciergeRouteChildren,
+)
+
+interface FindYourPathRouteChildren {
+  FindYourPathResultRoute: typeof FindYourPathResultRoute
+}
+
+const FindYourPathRouteChildren: FindYourPathRouteChildren = {
+  FindYourPathResultRoute: FindYourPathResultRoute,
+}
+
+const FindYourPathRouteWithChildren = FindYourPathRoute._addFileChildren(
+  FindYourPathRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BookDirectRoute: BookDirectRouteWithChildren,
+  ConciergeRoute: ConciergeRouteWithChildren,
+  FindYourPathRoute: FindYourPathRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
