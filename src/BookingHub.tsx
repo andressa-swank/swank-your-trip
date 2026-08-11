@@ -1,4 +1,4 @@
-import { useNavigate } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import heroPhoto from "@/assets/hero-photo.png.asset.json";
 import amanPoolPhoto from "@/assets/aman-pool.webp";
