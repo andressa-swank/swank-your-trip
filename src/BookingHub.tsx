@@ -1270,11 +1270,11 @@ function DestinationScreen({
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="listing-grid">
             {MOST_BOOKED_HOTELS.map((hotel) => (
               <article
                 key={hotel}
-                className="group flex flex-col overflow-hidden rounded-[8px] border border-hairline bg-background transition-all duration-[180ms] hover:-translate-y-0.5 hover:shadow-[var(--shadow-subtle)]"
+                className="group flex flex-col bg-background transition-all duration-[180ms] hover:-translate-y-0.5"
               >
                 <div className="hotel-card__media">
                   <span className="max-w-[82%] px-4 text-center text-[12px] leading-[18px] text-ink-muted">
@@ -1284,12 +1284,14 @@ function DestinationScreen({
                     Most booked
                   </span>
                 </div>
-                <div className="flex min-h-[112px] items-start p-5 md:p-6">
-                  <h3 className="text-[22px] leading-[30px] font-normal text-ink">{hotel}</h3>
+                <div className="listing-card__body flex flex-col gap-1">
+                  <span className="listing-card__tag">Thailand</span>
+                  <h3 className="listing-card__name">{hotel}</h3>
                 </div>
               </article>
             ))}
           </div>
+
         </section>
       </div>
       <div className="border-t border-hairline py-6 text-center">
