@@ -1071,30 +1071,33 @@ function IntakeScreen({
 function ConfirmScreen({ onHome }: { onHome: () => void }) {
   return (
     <>
-      <PageIntro title="Done." />
+      <PageIntro title="Your request is in!" />
       <div className="page-container pb-16 pt-12 md:pb-24 md:pt-12">
         <div className="mx-auto max-w-[680px]">
-          <h2 className="section-heading mb-4 text-ink">We're on it.</h2>
-          <p className="body-copy mb-8 text-ink-muted">
-            In the meantime, we've sent you a confirmation email. If you don't see it in the next few minutes,
-            check your spam folder and mark us as safe.
+          <p className="body-copy text-ink-muted">
+            We'll be in touch if we need any additional information. Your personalized proposal will be ready
+            within 1–3 business days, depending on the complexity of your trip.
           </p>
-          <div className="rounded-[8px] border border-hairline bg-soft p-6">
-            <p className="mb-3 text-[15px] font-medium text-ink">What happens next</p>
-            {[
-              "We'll be in touch within 24 hours",
-              "We may have a quick follow-up question or two",
-              "Your proposal will be ready within one to three days depending on complexity",
-            ].map((li) => (
-              <div key={li} className="flex gap-3 py-2 text-[16px] leading-7 text-ink-muted">
-                <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
-                <span>{li}</span>
-              </div>
-            ))}
+
+          <div className="mt-10 rounded-[8px] border border-hairline bg-soft p-6 md:p-8">
+            <h2 className="section-heading text-ink">Want to talk it through?</h2>
+            <p className="mt-4 text-[16px] leading-7 text-ink-muted">
+              If you'd like one-on-one advice in the meantime, you can book an optional consultation with Don or
+              one of our Travel Specialists.
+            </p>
+            <a
+              href="https://calendly.com/book-swankguide"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-base button-accent mt-6"
+            >
+              Book a Consultation
+            </a>
+            <p className="mt-4 text-[15px] leading-6 text-ink-muted">
+              Your consultation fee will be credited toward your planning fee.
+            </p>
           </div>
-          <p className="mt-6 text-[15px] leading-6 italic text-ink-muted">
-            Changes, group policies, and refund details will be included in your proposal.
-          </p>
+
           <button onClick={onHome} className="text-link mt-8 inline-flex min-h-11 items-center text-[15px]">
             Back to start
           </button>
