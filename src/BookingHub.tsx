@@ -1489,10 +1489,10 @@ export default function BookingHub({ initialScreen = "gate" }: { initialScreen?:
 
   return (
     <div className="flex min-h-screen flex-col bg-background text-ink antialiased">
-      <Header onNav={setScreen} />
+      <Header onNav={goToScreen} />
 
       <main className="flex-1">
-        {screen === "gate" && <GateScreen onNav={setScreen} />}
+        {screen === "gate" && <GateScreen onNav={goToScreen} />}
         {(screen === "quiz-1" || screen === "quiz-2" || screen === "quiz-3") && (
           <QuizScreen step={Number(screen.split("-")[1]) as 1 | 2 | 3} onAnswer={handleQuizAnswer} />
         )}
@@ -1502,7 +1502,7 @@ export default function BookingHub({ initialScreen = "gate" }: { initialScreen?:
             onContinue={() => goToScreen(quizResult.path === "book-now" ? "destination" : "intake")}
           />
         )}
-        {screen === "how" && <HowScreen onNav={setScreen} />}
+        {screen === "how" && <HowScreen onNav={goToScreen} />}
         {screen === "intake" && (
           <IntakeScreen onSubmitted={() => goToScreen("confirm")} onSwitchToBookDirect={() => goToScreen("destination")} />
         )}
@@ -1518,7 +1518,7 @@ export default function BookingHub({ initialScreen = "gate" }: { initialScreen?:
         )}
       </main>
 
-      <Footer onNav={setScreen} />
+      <Footer onNav={goToScreen} />
 
       {showFloatingCta && (
         <button
