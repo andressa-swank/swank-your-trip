@@ -1325,7 +1325,7 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
         <div className="mt-auto flex flex-col gap-3">
           <button className="btn-base button-primary w-full justify-between">
             <span>Book with Swank</span>
-            <span className="badge-pill shrink-0 whitespace-nowrap bg-brand uppercase tracking-wide text-ink">
+            <span className="badge-pill shrink-0 whitespace-nowrap bg-ink uppercase tracking-wide text-white">
               {isBestValue ? "Best Value" : "Swank Value"}
             </span>
           </button>
