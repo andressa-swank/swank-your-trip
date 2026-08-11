@@ -436,13 +436,47 @@ textarea.field-control {
 }
 
 .hotel-card__media {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
+  border-radius: 0;
   background: var(--color-surface-soft);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
+}
+
+/* Listing grid ------------------------------------------------------------ */
+
+.listing-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 20px;
+}
+@media (max-width: 1024px) {
+  .listing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 767px) {
+  .listing-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.listing-card__body {
+  padding: 25px 10px;
+}
+.listing-card__tag {
+  font-size: 12px;
+  line-height: 18px;
+  color: var(--color-text);
+}
+.listing-card__name {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: var(--color-text);
 }
 .hotel-card__media img {
   width: 100%;
