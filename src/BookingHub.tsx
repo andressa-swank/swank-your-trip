@@ -1284,8 +1284,7 @@ function DestinationScreen({
                     Most booked
                   </span>
                 </div>
-                <div className="listing-card__body flex flex-col gap-1">
-                  <span className="listing-card__tag">Thailand</span>
+                <div className="listing-card__body">
                   <h3 className="listing-card__name">{hotel}</h3>
                 </div>
               </article>
