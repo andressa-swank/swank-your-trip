@@ -204,7 +204,10 @@
 body {
   font-family: "Suisse Intl", "Suisse", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background: var(--color-background);
-  color: var(--color-text);
+  color: var(--color-body);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
 }
 
 .page-container {
@@ -214,6 +217,7 @@ body {
   padding-inline: 20px;
 }
 
+/* H1 — homepage */
 .display-heading {
   font-size: 38px;
   line-height: 46px;
@@ -221,19 +225,44 @@ body {
   letter-spacing: 0;
 }
 
+/* H1 — detail/hero pages */
+.display-heading--hero {
+  font-size: 40px;
+  line-height: 40px;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+/* H2 — homepage */
 .section-heading {
   font-size: 26px;
   line-height: 39px;
   font-weight: 400;
   letter-spacing: 0;
+  color: var(--color-body);
 }
 
-.body-copy {
-  font-size: 18px;
-  line-height: 36px;
+/* H2 — detail pages */
+.section-heading--detail {
+  font-size: 24px;
+  line-height: 24px;
   font-weight: 400;
   letter-spacing: 0;
   color: var(--color-body);
+}
+
+.body-copy {
+  font-size: 14px;
+  line-height: 21px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--color-body);
+}
+
+.tab-nav-item {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text);
 }
 
 @media (max-width: 767px) {
@@ -244,13 +273,21 @@ body {
     font-size: 32px;
     line-height: 39px;
   }
+  .display-heading--hero {
+    font-size: 34px;
+    line-height: 38px;
+  }
   .section-heading {
     font-size: 24px;
     line-height: 34px;
   }
+  .section-heading--detail {
+    font-size: 22px;
+    line-height: 28px;
+  }
   .body-copy {
-    font-size: 17px;
-    line-height: 30px;
+    font-size: 14px;
+    line-height: 20px;
   }
 }
 
