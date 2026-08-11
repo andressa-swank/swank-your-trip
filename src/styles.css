@@ -261,12 +261,13 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 52px;
-  padding: 14px 24px;
-  border-radius: 4px;
-  font-size: 16px;
-  line-height: 22px;
-  font-weight: 400;
+  padding: 12px 28px;
+  border-radius: 24px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  border: none;
+  box-shadow: none;
   transition:
     background-color 180ms ease,
     color 180ms ease,
@@ -275,23 +276,14 @@ body {
   cursor: pointer;
 }
 
-.button-primary {
-  border: 1px solid var(--color-text);
-  background: var(--color-text);
-  color: #ffffff;
-}
-.button-primary:hover {
-  background: #000000;
-}
-
+.button-primary,
 .button-accent {
-  border: 1px solid var(--color-accent);
   background: var(--color-accent);
   color: var(--color-text);
 }
+.button-primary:hover,
 .button-accent:hover {
   background: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
 }
 
 .button-secondary {
