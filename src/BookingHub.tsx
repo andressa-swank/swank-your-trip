@@ -482,7 +482,7 @@ function GateScreen({ onNav }: { onNav: (s: Screen) => void }) {
               {[
                 "Personally vetted — no sponsorships, no paid placements",
                 "Compare rates across major platforms in seconds",
-                "Free destination guide with every booking",
+                "Trip-prep kit plus our destination e-book with every booking",
               ].map((li) => (
                 <div key={li} className="flex gap-3 text-[16px] leading-7 text-ink-muted">
                   <span className="mt-3 h-1.5 w-1.5 shrink-0 rounded-full bg-ink" />
@@ -1344,7 +1344,7 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
           {open && (
             <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">
               Hotels treat our bookings differently: better rooms, real perks, our team in your corner.
-              You'll also receive our trip-prep kit.
+              You'll receive our trip-prep kit plus our destination e-book.
             </div>
           )}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -1418,7 +1418,7 @@ function HotelBangkokScreen({
         <div className="mt-12 rounded-[8px] border border-hairline bg-soft p-6 md:p-8">
           <p className="text-[16px] leading-7 text-ink-muted">
             <strong className="font-medium text-ink">
-              Book through any of our links and we'll send you our free Bangkok destination guide
+              Book through any of our links and you'll receive our trip-prep kit plus our Bangkok destination e-book
             </strong>
             : where to eat, what to skip, and the spots worth your time. Forward your confirmation to{" "}
             <span className="text-link">vip@swankguide.com</span>
