@@ -151,22 +151,23 @@
   --color-background: #ffffff;
   --color-surface: #ffffff;
   --color-surface-soft: #f5f4f0;
-  --color-text: #1a1a1a;
+  --color-text: #231f20;
+  --color-body: #333333;
   --color-text-muted: #66645f;
   --color-border: #d9d7d1;
   --color-border-soft: #e8e6e1;
-  --color-accent: #f0e40c;
+  --color-accent: #f4e30c;
   --color-accent-hover: #ded300;
   --color-error: #b42318;
-  --color-focus: #1a1a1a;
+  --color-focus: #231f20;
 
-  --container-max: 1400px;
+  --container-max: 1695px;
   --container-padding-desktop: 20px;
   --container-padding-mobile: 16px;
 
   --radius-small: 4px;
   --radius-medium: 8px;
-  --shadow-subtle: 0 8px 28px rgba(26, 26, 26, 0.08);
+  --shadow-subtle: 0 8px 28px rgba(35, 31, 32, 0.08);
 
   --space-1: 4px;
   --space-2: 8px;
@@ -183,7 +184,7 @@
 
   /* map to app semantics */
   --background: #ffffff;
-  --foreground: #1a1a1a;
+  --foreground: #231f20;
   --muted-foreground: #66645f;
   --border: #d9d7d1;
 }
