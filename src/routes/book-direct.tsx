@@ -1,5 +1,6 @@
 import { Outlet, createFileRoute, useRouterState } from "@tanstack/react-router";
 import BookDirectHybrid from "../components/BookDirectHybrid";
+import "../book-direct-card.css";
 
 export const Route = createFileRoute("/book-direct")({
   head: () => ({
