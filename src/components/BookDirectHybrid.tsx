@@ -30,7 +30,7 @@ type DestinationItem = { label: string; href?: string; children?: DestinationIte
 type DestinationRegion = { label: string; items: DestinationItem[] };
 
 const WEBBEDS_ENDPOINT = "/api/webbeds/searchhotels";
-const MOST_BOOKED_PLACEHOLDER = "One sentence about the hotel Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar aliquam viverra.";
+const MOST_BOOKED_PLACEHOLDER = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
 const DEFAULT_AFFILIATE_LINKS = [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }];
 
 const HOTELS: Hotel[] = [
@@ -206,7 +206,7 @@ function HotelResultCard({ hotel, availability }: { hotel: Hotel; availability: 
             <span className="hotel-card__value-tag">{availability?.price ?? (isBestValue ? "Best Value" : "Swank Value")}</span>
           </div>
           {isLoading && <div className="rounded-[8px] border border-hairline bg-soft p-4 text-[15px] leading-6 text-ink-muted">Checking Swank availability for your dates...</div>}
-          <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">{isBestValue ? "Why best value?" : "Why this rate?"} {open ? "-" : "+"}</button>
+          <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">{isBestValue ? "Why best value?" : "Why this rate?"}</button>
           {open && <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">Hotels treat our bookings differently: better rooms, real perks, our team in your corner. You'll receive our trip-prep kit plus our destination e-book.</div>}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="hotel-card__cta-secondary" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
@@ -234,7 +234,7 @@ function MostBookedHotelCard({ hotel }: { hotel: MostBookedHotel }) {
             <a href="#" className="hotel-card__cta-primary flex-1">Book with Swank</a>
             <span className="hotel-card__value-tag">Best Value</span>
           </div>
-          <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">Why best value? {open ? "-" : "+"}</button>
+          <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">Why best value?</button>
           {open && <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">Hotels treat our bookings differently: better rooms, real perks, our team in your corner. You'll receive our trip-prep kit plus our destination e-book.</div>}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="hotel-card__cta-secondary" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
