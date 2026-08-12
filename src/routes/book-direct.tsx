@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import BookingHub from "../BookingHub";
+import BookDirectHybrid from "../components/BookDirectHybrid";
 
 export const Route = createFileRoute("/book-direct")({
   head: () => ({
@@ -7,7 +7,7 @@ export const Route = createFileRoute("/book-direct")({
       { title: "Book Direct | Swank Guide" },
       {
         name: "description",
-        content: "Browse Swank Guide destinations and handpicked hotels, then choose the booking option that works for you.",
+        content: "Search hotel availability with Swank or browse curated destination picks and affiliate booking links.",
       },
     ],
   }),
@@ -15,5 +15,5 @@ export const Route = createFileRoute("/book-direct")({
 });
 
 function BookDirectPage() {
-  return <BookingHub initialScreen="destination" />;
+  return <BookDirectHybrid />;
 }
