@@ -132,7 +132,7 @@ function SearchBar({ onSearch }: { onSearch: (form: SearchForm) => void }) {
         </div>
         <button type="submit" className="btn-base button-accent min-h-14 whitespace-nowrap">Search hotels</button>
       </div>
-      <p className="mt-3 text-[14px] leading-6 text-ink-muted">Use dates to check Swank availability through the API. Browse destinations below without entering dates.</p>
+      <p className="mt-3 text-[14px] leading-6 text-ink-muted">{"\n"}</p>
     </form>
   );
 }
@@ -168,7 +168,7 @@ async function fetchAvailability(hotels: Hotel[], form: SearchForm): Promise<Rec
   return Object.fromEntries(hotels.map((hotel) => [hotel.id, available[hotel.id] ?? { status: "unavailable" }]));
 }
 
-function HotelResultCard({ hotel, availability }: { hotel: Hotel; availability?: Availability }) {
+function HotelResultCard({ hotel, availability }: { hotel: Hotel; availability: Availability | undefined }) {
   const [open, setOpen] = useState(false);
   const isLoading = availability?.status === "loading";
   const isBestValue = hotel.tier === "Best Value";
