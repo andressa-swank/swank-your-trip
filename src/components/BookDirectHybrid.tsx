@@ -110,7 +110,7 @@ function SearchBar({ onSearch }: { onSearch: (form: SearchForm) => void }) {
     <form onSubmit={submit} className="rounded-[8px] border border-hairline bg-background p-4 shadow-[var(--shadow-subtle)] md:p-5">
       <div className="grid gap-4 md:grid-cols-[minmax(220px,2fr)_minmax(150px,1fr)_minmax(150px,1fr)_minmax(110px,0.7fr)_auto] md:items-end">
         <div>
-          <label className="field-label" htmlFor="book-direct-query">City or hotel</label>
+          <label className="field-label" htmlFor="book-direct-query">City or Hotel</label>
           <input id="book-direct-query" value={form.query} onChange={(event) => update("query", event.target.value)} placeholder="Bangkok or hotel name" className="field-control" />
         </div>
         <div>
@@ -130,7 +130,7 @@ function SearchBar({ onSearch }: { onSearch: (form: SearchForm) => void }) {
             <option value="4">4+</option>
           </select>
         </div>
-        <button type="submit" className="btn-base button-accent min-h-14 whitespace-nowrap">Search hotels</button>
+        <button type="submit" className="btn-base button-accent min-h-14 whitespace-nowrap">Book Now</button>
       </div>
       <p className="mt-3 text-[14px] leading-6 text-ink-muted">{"\n"}</p>
     </form>
@@ -204,7 +204,7 @@ function DestinationSection() {
     <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="destination-nav-title">
       <div className="mb-6 max-w-[720px]">
         <Eyebrow className="mb-3 text-ink-muted">{"\n"}</Eyebrow>
-        <h2 id="destination-nav-title" className="section-heading text-ink">Browse by Destination&nbsp;</h2>
+        <h2 id="destination-nav-title" className="section-heading text-ink">Browse by Destination</h2>
       </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {DESTINATIONS.map((destination) =>
