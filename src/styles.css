@@ -214,7 +214,11 @@ body {
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
-  padding-inline: 20px;
+  padding-inline: 24px;
+}
+
+section + section {
+  margin-top: 48px;
 }
 
 /* H1 — homepage */
@@ -892,7 +896,7 @@ textarea.field-control {
 .book-direct-hero {
   position: relative;
   display: flex;
-  min-height: 500px;
+  min-height: 340px;
   align-items: flex-end;
   overflow: hidden;
   background: #2d342b;
@@ -918,8 +922,8 @@ textarea.field-control {
 .book-direct-hero__content {
   position: relative;
   z-index: 1;
-  padding-bottom: 56px;
-  padding-top: 160px;
+  padding-bottom: 40px;
+  padding-top: 64px;
 }
 
 @media (max-width: 767px) {
