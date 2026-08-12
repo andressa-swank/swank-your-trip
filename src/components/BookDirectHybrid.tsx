@@ -224,20 +224,20 @@ function MostBookedHotelCard({ hotel }: { hotel: MostBookedHotel }) {
     <article className="flex flex-col overflow-hidden rounded-[8px] border border-hairline bg-background transition-all duration-[180ms] hover:-translate-y-0.5 hover:shadow-[var(--shadow-subtle)]">
       <div className="hotel-card__media">
         <span className="max-w-[82%] px-4 text-center text-[12px] leading-[18px] text-ink-muted">[ {hotel.photoTag} ]</span>
-        <span className="badge-pill absolute bottom-3 left-3 bg-brand uppercase tracking-wide text-ink">Most booked</span>
+        <span className="hotel-card__badge--most-booked">Most booked</span>
       </div>
-      <div className="flex flex-1 flex-col p-5 md:p-6">
-        <h3 className="mb-2 text-[24px] leading-8 font-normal text-ink">{hotel.name}</h3>
-        <p className="mb-6 text-[16px] leading-7 text-ink-muted">{hotel.desc}</p>
+      <div className="hotel-card flex flex-1 flex-col">
+        <h3 className="hotel-card__title">{hotel.name}</h3>
+        <p className="hotel-card__description mb-6">{hotel.desc}</p>
         <div className="mt-auto flex flex-col gap-3">
-          <a href="#" className="btn-base button-primary w-full justify-between">
-            <span>Book with Swank</span>
-            <span className="badge-pill shrink-0 whitespace-nowrap bg-ink uppercase tracking-wide text-white">Best Value</span>
-          </a>
+          <div className="flex items-center">
+            <a href="#" className="hotel-card__cta-primary flex-1">Book with Swank</a>
+            <span className="hotel-card__value-tag">Best Value</span>
+          </div>
           <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">Why best value? {open ? "-" : "+"}</button>
           {open && <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">Hotels treat our bookings differently: better rooms, real perks, our team in your corner. You'll receive our trip-prep kit plus our destination e-book.</div>}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="btn-base button-secondary w-full" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
+            {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="hotel-card__cta-secondary" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
           </div>
         </div>
       </div>
