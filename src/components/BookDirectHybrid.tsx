@@ -203,8 +203,8 @@ function DestinationSection() {
   return (
     <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="destination-nav-title">
       <div className="mb-6 max-w-[720px]">
-        <Eyebrow className="mb-3 text-ink-muted">Browse by destination</Eyebrow>
-        <h2 id="destination-nav-title" className="section-heading text-ink">Navigate without entering dates.</h2>
+        <Eyebrow className="mb-3 text-ink-muted">{"\n"}</Eyebrow>
+        <h2 id="destination-nav-title" className="section-heading text-ink">Browse by Destination&nbsp;</h2>
       </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {DESTINATIONS.map((destination) =>
