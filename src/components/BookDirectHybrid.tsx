@@ -17,26 +17,35 @@ type Hotel = {
   affiliateLinks: { label: string; href: string }[];
 };
 
+type MostBookedHotel = {
+  name: string;
+  photoTag: string;
+  desc: string;
+  affiliateLinks: { label: string; href: string }[];
+};
+
 type SearchForm = { query: string; checkIn: string; checkOut: string; guests: string };
 type Availability = { status: AvailabilityStatus; price?: string; bookingUrl?: string };
 type DestinationItem = { label: string; href?: string; children?: DestinationItem[] };
 type DestinationRegion = { label: string; items: DestinationItem[] };
 
 const WEBBEDS_ENDPOINT = "/api/webbeds/searchhotels";
+const MOST_BOOKED_PLACEHOLDER = "One sentence about the hotel Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pulvinar aliquam viverra.";
+const DEFAULT_AFFILIATE_LINKS = [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }];
 
 const HOTELS: Hotel[] = [
-  { id: "hotel-como", name: "COMO Metropolitan Bangkok", destination: "Bangkok, Thailand", tier: "Best Value", badge: "stayed", photoTag: "COMO Bangkok", desc: "Understated, design-forward, calm. One of the most consistently well-executed hotels in the city, and usually one of the better-priced options at this quality level.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
-  { id: "hotel-standard", name: "The Standard Bangkok", destination: "Bangkok, Thailand", tier: "Best Value", badge: "stayed", photoTag: "The Standard", desc: "The most fun option on this list. Playful design, a great rooftop, strong restaurants and bars, a genuinely energetic vibe. Often surprisingly well-priced.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
-  { id: "hotel-sala", name: "Sala Rattanakosin", destination: "Bangkok, Thailand", tier: "Best Value", badge: "trusted", photoTag: "Sala Rattanakosin", desc: "Small, intimate, directly across the river from Wat Arun. The views are the whole point. Not full-service. Better for design-conscious travelers who value atmosphere over amenities.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
-  { id: "hotel-peninsula", name: "The Peninsula Bangkok", destination: "Bangkok, Thailand", tier: "Mid-Range", badge: "stayed", photoTag: "Peninsula Bangkok", desc: "The gold standard for classic Bangkok luxe. Impeccable service, serious river views, one of the best pool setups in the city. Consistently punches above its rate.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
-  { id: "hotel-kimpton", name: "Kimpton Maa-Lai", destination: "Bangkok, Thailand", tier: "Mid-Range", badge: "trusted", photoTag: "Kimpton Maa-Lai", desc: "Feels more boutique than its size suggests. Thoughtful design, next to Lumphini Park, reliably good value. Smart pick for stylish travelers without the top-tier price tag.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
-  { id: "hotel-sukhothai", name: "The Sukhothai Bangkok", destination: "Bangkok, Thailand", tier: "Mid-Range", badge: "trusted", photoTag: "The Sukhothai", desc: "Classic Bangkok in every sense. Traditional Thai architecture, lush gardens, a calm that's rare in the city. The Celadon restaurant is a destination in its own right.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
-  { id: "hotel-siam", name: "The Siam", destination: "Bangkok, Thailand", tier: "Splurge", badge: "stayed", photoTag: "The Siam", desc: "The best design hotel in Bangkok. Bill Bensley, riverfront, feels like a private residence crossed with a museum. The pool, the bar, the rooms: all exceptional.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
-  { id: "hotel-fourseasons", name: "Four Seasons Bangkok", destination: "Bangkok, Thailand", tier: "Splurge", badge: "stayed", photoTag: "Four Seasons", desc: "A newer property that has quickly become one of the strongest in the city. Beautifully designed, serious pool complex, prime Chao Phraya riverfront.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
-  { id: "hotel-mandarin", name: "Mandarin Oriental Bangkok", destination: "Bangkok, Thailand", tier: "Splurge", badge: "stayed", photoTag: "Mandarin Oriental", desc: "A Bangkok icon with real history. The jazz bar, the riverside setting, the sense of place. Book it for the experience, shop the rates carefully.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
+  { id: "hotel-como", name: "COMO Metropolitan Bangkok", destination: "Bangkok, Thailand", tier: "Best Value", badge: "stayed", photoTag: "COMO Bangkok", desc: "Understated, design-forward, calm. One of the most consistently well-executed hotels in the city, and usually one of the better-priced options at this quality level.", affiliateLinks: DEFAULT_AFFILIATE_LINKS },
+  { id: "hotel-standard", name: "The Standard Bangkok", destination: "Bangkok, Thailand", tier: "Best Value", badge: "stayed", photoTag: "The Standard", desc: "The most fun option on this list. Playful design, a great rooftop, strong restaurants and bars, a genuinely energetic vibe. Often surprisingly well-priced.", affiliateLinks: DEFAULT_AFFILIATE_LINKS },
+  { id: "hotel-sala", name: "Sala Rattanakosin", destination: "Bangkok, Thailand", tier: "Best Value", badge: "trusted", photoTag: "Sala Rattanakosin", desc: "Small, intimate, directly across the river from Wat Arun. The views are the whole point. Not full-service. Better for design-conscious travelers who value atmosphere over amenities.", affiliateLinks: DEFAULT_AFFILIATE_LINKS },
+  { id: "hotel-peninsula", name: "The Peninsula Bangkok", destination: "Bangkok, Thailand", tier: "Mid-Range", badge: "stayed", photoTag: "Peninsula Bangkok", desc: "The gold standard for classic Bangkok luxe. Impeccable service, serious river views, one of the best pool setups in the city. Consistently punches above its rate.", affiliateLinks: DEFAULT_AFFILIATE_LINKS },
+  { id: "hotel-kimpton", name: "Kimpton Maa-Lai", destination: "Bangkok, Thailand", tier: "Mid-Range", badge: "trusted", photoTag: "Kimpton Maa-Lai", desc: "Feels more boutique than its size suggests. Thoughtful design, next to Lumphini Park, reliably good value. Smart pick for stylish travelers without the top-tier price tag.", affiliateLinks: DEFAULT_AFFILIATE_LINKS },
+  { id: "hotel-sukhothai", name: "The Sukhothai Bangkok", destination: "Bangkok, Thailand", tier: "Mid-Range", badge: "trusted", photoTag: "The Sukhothai", desc: "Classic Bangkok in every sense. Traditional Thai architecture, lush gardens, a calm that's rare in the city. The Celadon restaurant is a destination in its own right.", affiliateLinks: DEFAULT_AFFILIATE_LINKS },
+  { id: "hotel-siam", name: "The Siam", destination: "Bangkok, Thailand", tier: "Splurge", badge: "stayed", photoTag: "The Siam", desc: "The best design hotel in Bangkok. Bill Bensley, riverfront, feels like a private residence crossed with a museum. The pool, the bar, the rooms: all exceptional.", affiliateLinks: DEFAULT_AFFILIATE_LINKS },
+  { id: "hotel-fourseasons", name: "Four Seasons Bangkok", destination: "Bangkok, Thailand", tier: "Splurge", badge: "stayed", photoTag: "Four Seasons", desc: "A newer property that has quickly become one of the strongest in the city. Beautifully designed, serious pool complex, prime Chao Phraya riverfront.", affiliateLinks: DEFAULT_AFFILIATE_LINKS },
+  { id: "hotel-mandarin", name: "Mandarin Oriental Bangkok", destination: "Bangkok, Thailand", tier: "Splurge", badge: "stayed", photoTag: "Mandarin Oriental", desc: "A Bangkok icon with real history. The jazz bar, the riverside setting, the sense of place. Book it for the experience, shop the rates carefully.", affiliateLinks: DEFAULT_AFFILIATE_LINKS },
 ];
 
-const MOST_BOOKED_HOTELS = [
+const MOST_BOOKED_HOTELS: MostBookedHotel[] = [
   "The Sarojin",
   "Pimalai Resort & Spa",
   "The Surin Phuket",
@@ -49,7 +58,7 @@ const MOST_BOOKED_HOTELS = [
   "Be Tulum",
   "Fort Printers",
   "Nantipa",
-];
+].map((name) => ({ name, photoTag: name, desc: MOST_BOOKED_PLACEHOLDER, affiliateLinks: DEFAULT_AFFILIATE_LINKS }));
 
 const DESTINATION_REGIONS: DestinationRegion[] = [
   { label: "Asia", items: [{ label: "Thailand", children: [{ label: "Bangkok", href: "/book-direct/bangkok" }] }, { label: "Bali" }, { label: "India" }, { label: "Sri Lanka" }] },
@@ -198,6 +207,34 @@ function HotelResultCard({ hotel, availability }: { hotel: Hotel; availability: 
           </a>
           {isLoading && <div className="rounded-[8px] border border-hairline bg-soft p-4 text-[15px] leading-6 text-ink-muted">Checking Swank availability for your dates...</div>}
           <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">{isBestValue ? "Why best value?" : "Why this rate?"} {open ? "-" : "+"}</button>
+          {open && <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">Hotels treat our bookings differently: better rooms, real perks, our team in your corner. You'll receive our trip-prep kit plus our destination e-book.</div>}
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+            {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="btn-base button-secondary w-full" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function MostBookedHotelCard({ hotel }: { hotel: MostBookedHotel }) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <article className="flex flex-col overflow-hidden rounded-[8px] border border-hairline bg-background transition-all duration-[180ms] hover:-translate-y-0.5 hover:shadow-[var(--shadow-subtle)]">
+      <div className="hotel-card__media">
+        <span className="max-w-[82%] px-4 text-center text-[12px] leading-[18px] text-ink-muted">[ {hotel.photoTag} ]</span>
+        <span className="badge-pill absolute bottom-3 left-3 bg-brand uppercase tracking-wide text-ink">Most booked</span>
+      </div>
+      <div className="flex flex-1 flex-col p-5 md:p-6">
+        <h3 className="mb-2 text-[24px] leading-8 font-normal text-ink">{hotel.name}</h3>
+        <p className="mb-6 text-[16px] leading-7 text-ink-muted">{hotel.desc}</p>
+        <div className="mt-auto flex flex-col gap-3">
+          <a href="#" className="btn-base button-primary w-full justify-between">
+            <span>Book with Swank</span>
+            <span className="badge-pill shrink-0 whitespace-nowrap bg-ink uppercase tracking-wide text-white">Best Value</span>
+          </a>
+          <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">Why best value? {open ? "-" : "+"}</button>
           {open && <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">Hotels treat our bookings differently: better rooms, real perks, our team in your corner. You'll receive our trip-prep kit plus our destination e-book.</div>}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="btn-base button-secondary w-full" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
@@ -368,16 +405,8 @@ export default function BookDirectHybrid() {
               <Eyebrow className="mb-3 text-ink-muted">{"\n"}</Eyebrow>
               <h2 id="most-booked-title" className="section-heading text-ink">Most booked hotels</h2>
             </div>
-            <div className="listing-grid">
-              {MOST_BOOKED_HOTELS.map((hotel) => (
-                <article key={hotel} className="group flex flex-col bg-background transition-all duration-[180ms] hover:-translate-y-0.5">
-                  <div className="hotel-card__media">
-                    <span className="max-w-[82%] px-4 text-center text-[12px] leading-[18px] text-ink-muted">[ {hotel} ]</span>
-                    <span className="badge-pill absolute bottom-3 left-3 bg-brand uppercase tracking-wide text-ink">Most booked</span>
-                  </div>
-                  <div className="listing-card__body"><h3 className="listing-card__name">{hotel}</h3></div>
-                </article>
-              ))}
+            <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
+              {MOST_BOOKED_HOTELS.map((hotel) => <MostBookedHotelCard key={hotel.name} hotel={hotel} />)}
             </div>
           </section>
 
