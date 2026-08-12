@@ -168,7 +168,7 @@ async function fetchAvailability(hotels: Hotel[], form: SearchForm): Promise<Rec
   return Object.fromEntries(hotels.map((hotel) => [hotel.id, available[hotel.id] ?? { status: "unavailable" }]));
 }
 
-function HotelResultCard({ hotel, availability }: { hotel: Hotel; availability?: Availability }) {
+function HotelResultCard({ hotel, availability }: { hotel: Hotel; availability: Availability | undefined }) {
   const [open, setOpen] = useState(false);
   const isLoading = availability?.status === "loading";
   const isBestValue = hotel.tier === "Best Value";
