@@ -1,0 +1,81 @@
+/* Book Direct hotel cards -------------------------------------------------- */
+
+/* Badge: align with the existing .badge-pill standard and remove yellow from MOST BOOKED. */
+section[aria-labelledby="most-booked-title"] .hotel-card__media .badge-pill {
+  height: 28px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  background: #ffffff;
+  color: #231f20;
+  border: 1px solid #231f20;
+  text-transform: uppercase;
+}
+
+/* Reserve yellow for the primary CTA. */
+section[aria-labelledby="most-booked-title"] .button-primary {
+  min-height: 44px;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 4px;
+  background: #f4e30c;
+  color: #231f20;
+  font-family: "Suisse Medium", "Suisse Intl", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  justify-content: flex-start;
+}
+
+/* Make BEST VALUE read as a separate, discreet value tag inside the CTA row. */
+section[aria-labelledby="most-booked-title"] .button-primary .badge-pill {
+  display: inline-flex;
+  height: auto;
+  margin-left: 8px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #231f20;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+/* Card title: align with the homepage H2 spec. */
+section[aria-labelledby="most-booked-title"] h3 {
+  font-family: "Suisse Medium", "Suisse Intl", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 39px;
+  color: #333333;
+}
+
+/* Body copy. */
+section[aria-labelledby="most-booked-title"] p {
+  font-family: "Suisse Regular", "Suisse Intl", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+}
+
+/* Secondary CTAs: smaller and quieter than the primary CTA. */
+section[aria-labelledby="most-booked-title"] .button-secondary {
+  height: 36px;
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 4px;
+  border: 1px solid #e5e5e5;
+  background: transparent;
+  color: #333333;
+  font-size: 13px;
+}
+
+/* Grid spacing: match the confirmed spec. */
+section[aria-labelledby="most-booked-title"] > .grid {
+  margin: 0 -10px;
+}
+
+section[aria-labelledby="most-booked-title"] > .grid > article {
+  padding: 25px 10px;
+}
