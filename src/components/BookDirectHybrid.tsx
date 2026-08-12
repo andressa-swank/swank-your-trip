@@ -126,7 +126,7 @@ function SearchBar({ onSearch }: { onSearch: (form: SearchForm) => void }) {
 
   return (
     <form onSubmit={submit} className="rounded-[8px] border border-hairline bg-background p-4 shadow-[var(--shadow-subtle)] md:p-5">
-      <div className="grid gap-4 md:grid-cols-[minmax(220px,2fr)_minmax(150px,1fr)_minmax(150px,1fr)_minmax(110px,0.7fr)_auto] md:items-end">
+      <div className="search-bar md:items-end">
         <div>
           <label className="field-label" htmlFor="book-direct-query">City or Hotel</label>
           <input id="book-direct-query" value={form.query} onChange={(event) => update("query", event.target.value)} placeholder="Bangkok or hotel name" className="field-control" />
