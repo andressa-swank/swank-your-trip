@@ -403,11 +403,11 @@ export default function BookDirectHybrid() {
           <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="most-booked-title">
             <div className="mb-8 max-w-[720px]">
               <Eyebrow className="mb-3 text-ink-muted">{"\n"}</Eyebrow>
-              <h2 id="most-booked-title" className="section-heading text-ink">Most booked hotels</h2>
-            </div>
-            <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
-              {MOST_BOOKED_HOTELS.map((hotel) => <MostBookedHotelCard key={hotel.name} hotel={hotel} />)}
-            </div>
+            <h2 id="most-booked-title" className="section-heading text-ink">Most booked hotels</h2>
+          </div>
+          <div className="hotel-card-grid grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
+            {MOST_BOOKED_HOTELS.map((hotel) => <MostBookedHotelCard key={hotel.name} hotel={hotel} />)}
+          </div>
           </section>
 
           {search && (
