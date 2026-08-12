@@ -1434,7 +1434,7 @@ function HotelBangkokScreen({
   return (
     <>
       <PageIntro
-        eyebrow="Change destination"
+        eyebrow="\n"
         title="Bangkok"
         sub="Book Direct"
         onBack={onChangeDestination}
