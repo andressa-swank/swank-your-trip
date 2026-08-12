@@ -293,8 +293,8 @@ export default function BookDirectHybrid() {
           <img src={bookDirectHero} alt="Historic Italian villa surrounded by gardens and Tuscan hills" width={1200} height={800} />
           <div className="book-direct-hero__overlay" />
           <div className="page-container book-direct-hero__content">
-            <Eyebrow className="text-white/80">Book Direct</Eyebrow>
-            <h1 className="display-heading mt-3 max-w-[760px] text-white">Search directly or browse our picks.</h1>
+            <Eyebrow className="text-white/80">{"\n"}</Eyebrow>
+            <h1 className="display-heading mt-3 max-w-[760px] text-white">Book Direct</h1>
           </div>
         </section>
 
