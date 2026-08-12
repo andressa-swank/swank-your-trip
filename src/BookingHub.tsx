@@ -1388,27 +1388,19 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
             hotel.badge === "stayed" ? "bg-brand text-ink" : "bg-ink text-white"
           }`}
         >
-          {hotel.badge === "stayed" ? "✦ Swank Tested" : "✦ Trusted Pick"}
+          {hotel.badge === "stayed" ? "Swank Tested" : "Trusted Pick"}
         </span>
       </div>
-      <div className="flex flex-1 flex-col p-5 md:p-6">
-        <h3 className="mb-2 text-[24px] leading-8 font-normal text-ink">{hotel.name}</h3>
-        <p className="mb-6 text-[16px] leading-7 text-ink-muted">{hotel.desc}</p>
+      <div className="hotel-card flex flex-1 flex-col">
+        <h3 className="hotel-card__title">{hotel.name}</h3>
+        <p className="hotel-card__description mb-6">{hotel.desc}</p>
         <div className="mt-auto flex flex-col gap-3">
-          <button className="btn-base button-primary w-full justify-between">
-            <span>Book with Swank</span>
-            <span className="badge-pill shrink-0 whitespace-nowrap bg-ink uppercase tracking-wide text-white">
-              {isBestValue ? "Best Value" : "Swank Value"}
-            </span>
-          </button>
+          <div className="flex items-center">
+            <button className="hotel-card__cta-primary flex-1">Book with Swank</button>
+            <span className="hotel-card__value-tag">{isBestValue ? "Best Value" : "Swank Value"}</span>
+          </div>
           <button onClick={() => setOpen((o) => !o)} className="text-link self-start text-[15px] leading-6">
-            {isBestValue
-              ? open
-                ? "Why best value? −"
-                : "Why best value? +"
-              : open
-                ? "Why this rate? −"
-                : "Why this rate? +"}
+            {isBestValue ? "Why best value?" : "Why this rate?"}
           </button>
           {open && (
             <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">
@@ -1417,8 +1409,8 @@ function HotelCard({ hotel }: { hotel: Hotel }) {
             </div>
           )}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <button className="btn-base button-secondary w-full">Booking.com</button>
-            <button className="btn-base button-secondary w-full">Expedia</button>
+            <button className="hotel-card__cta-secondary">Booking.com</button>
+            <button className="hotel-card__cta-secondary">Expedia</button>
           </div>
         </div>
       </div>
@@ -1476,7 +1468,7 @@ function HotelBangkokScreen({
               <h2 className="text-[22px] leading-[30px] font-normal text-ink">{tier}</h2>
               {tierSub[tier] && <span className="text-[15px] leading-6 text-ink-muted">{tierSub[tier]}</span>}
             </div>
-            <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
+            <div className="hotel-card-grid grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
               {HOTELS.filter((h) => h.tier === tier).map((h) => (
                 <HotelCard key={h.id} hotel={h} />
               ))}
