@@ -19,6 +19,8 @@ type Hotel = {
 
 type SearchForm = { query: string; checkIn: string; checkOut: string; guests: string };
 type Availability = { status: AvailabilityStatus; price?: string; bookingUrl?: string };
+type DestinationItem = { label: string; href?: string; children?: DestinationItem[] };
+type DestinationRegion = { label: string; items: DestinationItem[] };
 
 const WEBBEDS_ENDPOINT = "/api/webbeds/searchhotels";
 
@@ -49,7 +51,14 @@ const MOST_BOOKED_HOTELS = [
   "Nantipa",
 ];
 
-const DESTINATIONS = ["Bangkok", "Koh Samui", "Greater Phuket", "Chiang Mai & Chiang Rai", "Bali", "Mexico", "Europe", "US + Canada"];
+const DESTINATION_REGIONS: DestinationRegion[] = [
+  { label: "Asia", items: [{ label: "Thailand", children: [{ label: "Bangkok", href: "/book-direct/bangkok" }] }, { label: "Bali" }, { label: "India" }, { label: "Sri Lanka" }] },
+  { label: "Caribbean & Central America", items: [{ label: "Jamaica" }, { label: "St. Lucia" }, { label: "Costa Rica" }] },
+  { label: "Europe", items: [{ label: "France" }, { label: "Italy" }, { label: "UK" }] },
+  { label: "Mexico", items: [{ label: "Zihuatanejo" }, { label: "Tulum" }] },
+  { label: "Nordic Region", items: [{ label: "Iceland" }, { label: "Norway" }] },
+  { label: "US + Canada", items: [{ label: "USA" }, { label: "Canada" }] },
+];
 
 function Eyebrow({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <p className={`text-[12px] font-medium uppercase tracking-[0.14em] ${className}`}>{children}</p>;
@@ -199,6 +208,66 @@ function HotelResultCard({ hotel, availability }: { hotel: Hotel; availability: 
   );
 }
 
+function DestinationRegionCard({ region }: { region: DestinationRegion }) {
+  const [open, setOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState<DestinationItem | null>(null);
+  const visibleItems = activeItem?.children ?? region.items;
+
+  function toggleOpen() {
+    setOpen((current) => !current);
+    setActiveItem(null);
+  }
+
+  return (
+    <article className="overflow-hidden rounded-[8px] border border-hairline bg-background transition-shadow duration-[180ms] hover:shadow-[var(--shadow-subtle)]">
+      <button type="button" onClick={toggleOpen} className="flex min-h-20 w-full items-center justify-between px-5 py-4 text-left text-[20px] leading-7 text-ink md:px-6">
+        <span>{region.label}</span>
+        <span aria-hidden="true" className="text-[22px] leading-none text-ink-muted">{open ? "-" : "+"}</span>
+      </button>
+
+      <div className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+        <div className="overflow-hidden">
+          <div className="border-t border-hairline bg-soft p-4 md:p-5">
+            {activeItem && (
+              <button type="button" onClick={() => setActiveItem(null)} className="mb-3 text-[14px] leading-5 text-ink-muted underline underline-offset-4">
+                Back to {region.label}
+              </button>
+            )}
+            <div className="space-y-2">
+              {visibleItems.map((item) => {
+                if (item.href) {
+                  return (
+                    <Link key={item.label} to={item.href} className="flex min-h-12 items-center justify-between rounded-[8px] border border-line bg-background px-4 py-3 text-[16px] text-ink hover:bg-brand">
+                      <span>{item.label}</span>
+                      <span aria-hidden="true">›</span>
+                    </Link>
+                  );
+                }
+
+                if (item.children) {
+                  return (
+                    <button key={item.label} type="button" onClick={() => setActiveItem(item)} className="flex min-h-12 w-full items-center justify-between rounded-[8px] border border-line bg-background px-4 py-3 text-left text-[16px] text-ink hover:bg-brand">
+                      <span>{item.label}</span>
+                      <span aria-hidden="true">›</span>
+                    </button>
+                  );
+                }
+
+                return (
+                  <div key={item.label} className="flex min-h-12 items-center justify-between rounded-[8px] border border-hairline bg-background px-4 py-3 text-[16px] text-ink-muted">
+                    <span>{item.label}</span>
+                    <span className="badge-pill bg-soft uppercase tracking-wide text-ink-muted">Coming soon</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 function DestinationSection() {
   return (
     <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="destination-nav-title">
@@ -206,18 +275,8 @@ function DestinationSection() {
         <Eyebrow className="mb-3 text-ink-muted">{"\n"}</Eyebrow>
         <h2 id="destination-nav-title" className="section-heading text-ink">Browse by Destination</h2>
       </div>
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {DESTINATIONS.map((destination) =>
-          destination === "Bangkok" ? (
-            <Link key={destination} to="/book-direct/bangkok" className="flex min-h-14 items-center justify-between rounded-[8px] border border-line bg-background px-4 py-3 text-[16px] text-ink hover:bg-soft">
-              <span>{destination}</span><span aria-hidden="true">›</span>
-            </Link>
-          ) : (
-            <div key={destination} className="flex min-h-14 items-center justify-between rounded-[8px] border border-hairline bg-soft px-4 py-3 text-[16px] text-ink-muted">
-              <span>{destination}</span><span className="badge-pill bg-background uppercase tracking-wide text-ink-muted">Coming soon</span>
-            </div>
-          ),
-        )}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {DESTINATION_REGIONS.map((region) => <DestinationRegionCard key={region.label} region={region} />)}
       </div>
     </section>
   );
