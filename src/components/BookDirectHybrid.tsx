@@ -17,139 +17,21 @@ type Hotel = {
   affiliateLinks: { label: string; href: string }[];
 };
 
-type SearchForm = {
-  query: string;
-  checkIn: string;
-  checkOut: string;
-  guests: string;
-};
-
-type Availability = {
-  status: AvailabilityStatus;
-  price?: string;
-  bookingUrl?: string;
-};
+type SearchForm = { query: string; checkIn: string; checkOut: string; guests: string };
+type Availability = { status: AvailabilityStatus; price?: string; bookingUrl?: string };
 
 const WEBBEDS_ENDPOINT = "/api/webbeds/searchhotels";
 
 const HOTELS: Hotel[] = [
-  {
-    id: "hotel-como",
-    name: "COMO Metropolitan Bangkok",
-    destination: "Bangkok, Thailand",
-    tier: "Best Value",
-    badge: "stayed",
-    photoTag: "COMO Bangkok",
-    desc: "Understated, design-forward, calm. One of the most consistently well-executed hotels in the city, and usually one of the better-priced options at this quality level.",
-    affiliateLinks: [
-      { label: "Booking.com", href: "#" },
-      { label: "Expedia", href: "#" },
-    ],
-  },
-  {
-    id: "hotel-standard",
-    name: "The Standard Bangkok",
-    destination: "Bangkok, Thailand",
-    tier: "Best Value",
-    badge: "stayed",
-    photoTag: "The Standard",
-    desc: "The most fun option on this list. Playful design, a great rooftop, strong restaurants and bars, a genuinely energetic vibe. Often surprisingly well-priced.",
-    affiliateLinks: [
-      { label: "Booking.com", href: "#" },
-      { label: "Expedia", href: "#" },
-    ],
-  },
-  {
-    id: "hotel-sala",
-    name: "Sala Rattanakosin",
-    destination: "Bangkok, Thailand",
-    tier: "Best Value",
-    badge: "trusted",
-    photoTag: "Sala Rattanakosin",
-    desc: "Small, intimate, directly across the river from Wat Arun. The views are the whole point. Not full-service. Better for design-conscious travelers who value atmosphere over amenities.",
-    affiliateLinks: [
-      { label: "Booking.com", href: "#" },
-      { label: "Expedia", href: "#" },
-    ],
-  },
-  {
-    id: "hotel-peninsula",
-    name: "The Peninsula Bangkok",
-    destination: "Bangkok, Thailand",
-    tier: "Mid-Range",
-    badge: "stayed",
-    photoTag: "Peninsula Bangkok",
-    desc: "The gold standard for classic Bangkok luxe. Impeccable service, serious river views, one of the best pool setups in the city. Consistently punches above its rate.",
-    affiliateLinks: [
-      { label: "Booking.com", href: "#" },
-      { label: "Expedia", href: "#" },
-    ],
-  },
-  {
-    id: "hotel-kimpton",
-    name: "Kimpton Maa-Lai",
-    destination: "Bangkok, Thailand",
-    tier: "Mid-Range",
-    badge: "trusted",
-    photoTag: "Kimpton Maa-Lai",
-    desc: "Feels more boutique than its size suggests. Thoughtful design, next to Lumphini Park, reliably good value. Smart pick for stylish travelers without the top-tier price tag.",
-    affiliateLinks: [
-      { label: "Booking.com", href: "#" },
-      { label: "Expedia", href: "#" },
-    ],
-  },
-  {
-    id: "hotel-sukhothai",
-    name: "The Sukhothai Bangkok",
-    destination: "Bangkok, Thailand",
-    tier: "Mid-Range",
-    badge: "trusted",
-    photoTag: "The Sukhothai",
-    desc: "Classic Bangkok in every sense. Traditional Thai architecture, lush gardens, a calm that's rare in the city. The Celadon restaurant is a destination in its own right.",
-    affiliateLinks: [
-      { label: "Booking.com", href: "#" },
-      { label: "Expedia", href: "#" },
-    ],
-  },
-  {
-    id: "hotel-siam",
-    name: "The Siam",
-    destination: "Bangkok, Thailand",
-    tier: "Splurge",
-    badge: "stayed",
-    photoTag: "The Siam",
-    desc: "The best design hotel in Bangkok. Bill Bensley, riverfront, feels like a private residence crossed with a museum. The pool, the bar, the rooms: all exceptional.",
-    affiliateLinks: [
-      { label: "Booking.com", href: "#" },
-      { label: "Expedia", href: "#" },
-    ],
-  },
-  {
-    id: "hotel-fourseasons",
-    name: "Four Seasons Bangkok",
-    destination: "Bangkok, Thailand",
-    tier: "Splurge",
-    badge: "stayed",
-    photoTag: "Four Seasons",
-    desc: "A newer property that has quickly become one of the strongest in the city. Beautifully designed, serious pool complex, prime Chao Phraya riverfront.",
-    affiliateLinks: [
-      { label: "Booking.com", href: "#" },
-      { label: "Expedia", href: "#" },
-    ],
-  },
-  {
-    id: "hotel-mandarin",
-    name: "Mandarin Oriental Bangkok",
-    destination: "Bangkok, Thailand",
-    tier: "Splurge",
-    badge: "stayed",
-    photoTag: "Mandarin Oriental",
-    desc: "A Bangkok icon with real history. The jazz bar, the riverside setting, the sense of place. Book it for the experience, shop the rates carefully.",
-    affiliateLinks: [
-      { label: "Booking.com", href: "#" },
-      { label: "Expedia", href: "#" },
-    ],
-  },
+  { id: "hotel-como", name: "COMO Metropolitan Bangkok", destination: "Bangkok, Thailand", tier: "Best Value", badge: "stayed", photoTag: "COMO Bangkok", desc: "Understated, design-forward, calm. One of the most consistently well-executed hotels in the city, and usually one of the better-priced options at this quality level.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
+  { id: "hotel-standard", name: "The Standard Bangkok", destination: "Bangkok, Thailand", tier: "Best Value", badge: "stayed", photoTag: "The Standard", desc: "The most fun option on this list. Playful design, a great rooftop, strong restaurants and bars, a genuinely energetic vibe. Often surprisingly well-priced.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
+  { id: "hotel-sala", name: "Sala Rattanakosin", destination: "Bangkok, Thailand", tier: "Best Value", badge: "trusted", photoTag: "Sala Rattanakosin", desc: "Small, intimate, directly across the river from Wat Arun. The views are the whole point. Not full-service. Better for design-conscious travelers who value atmosphere over amenities.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
+  { id: "hotel-peninsula", name: "The Peninsula Bangkok", destination: "Bangkok, Thailand", tier: "Mid-Range", badge: "stayed", photoTag: "Peninsula Bangkok", desc: "The gold standard for classic Bangkok luxe. Impeccable service, serious river views, one of the best pool setups in the city. Consistently punches above its rate.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
+  { id: "hotel-kimpton", name: "Kimpton Maa-Lai", destination: "Bangkok, Thailand", tier: "Mid-Range", badge: "trusted", photoTag: "Kimpton Maa-Lai", desc: "Feels more boutique than its size suggests. Thoughtful design, next to Lumphini Park, reliably good value. Smart pick for stylish travelers without the top-tier price tag.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
+  { id: "hotel-sukhothai", name: "The Sukhothai Bangkok", destination: "Bangkok, Thailand", tier: "Mid-Range", badge: "trusted", photoTag: "The Sukhothai", desc: "Classic Bangkok in every sense. Traditional Thai architecture, lush gardens, a calm that's rare in the city. The Celadon restaurant is a destination in its own right.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
+  { id: "hotel-siam", name: "The Siam", destination: "Bangkok, Thailand", tier: "Splurge", badge: "stayed", photoTag: "The Siam", desc: "The best design hotel in Bangkok. Bill Bensley, riverfront, feels like a private residence crossed with a museum. The pool, the bar, the rooms: all exceptional.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
+  { id: "hotel-fourseasons", name: "Four Seasons Bangkok", destination: "Bangkok, Thailand", tier: "Splurge", badge: "stayed", photoTag: "Four Seasons", desc: "A newer property that has quickly become one of the strongest in the city. Beautifully designed, serious pool complex, prime Chao Phraya riverfront.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
+  { id: "hotel-mandarin", name: "Mandarin Oriental Bangkok", destination: "Bangkok, Thailand", tier: "Splurge", badge: "stayed", photoTag: "Mandarin Oriental", desc: "A Bangkok icon with real history. The jazz bar, the riverside setting, the sense of place. Book it for the experience, shop the rates carefully.", affiliateLinks: [{ label: "Booking.com", href: "#" }, { label: "Expedia", href: "#" }] },
 ];
 
 const MOST_BOOKED_HOTELS = [
@@ -167,16 +49,7 @@ const MOST_BOOKED_HOTELS = [
   "Nantipa",
 ];
 
-const DESTINATIONS = [
-  "Bangkok",
-  "Koh Samui",
-  "Greater Phuket",
-  "Chiang Mai & Chiang Rai",
-  "Bali",
-  "Mexico",
-  "Europe",
-  "US + Canada",
-];
+const DESTINATIONS = ["Bangkok", "Koh Samui", "Greater Phuket", "Chiang Mai & Chiang Rai", "Bali", "Mexico", "Europe", "US + Canada"];
 
 function Eyebrow({ children, className = "" }: { children: ReactNode; className?: string }) {
   return <p className={`text-[12px] font-medium uppercase tracking-[0.14em] ${className}`}>{children}</p>;
@@ -200,24 +73,12 @@ function Header() {
         </Link>
         <nav className="hidden items-center gap-7 md:flex">
           {links.map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              activeOptions={{ exact: link.to === "/" }}
-              className="text-[15px] leading-5 font-normal text-ink-muted transition-colors duration-[180ms] hover:text-ink"
-              activeProps={{ className: "text-ink font-medium border-b-2 border-brand pb-0.5" }}
-            >
+            <Link key={link.to} to={link.to} activeOptions={{ exact: link.to === "/" }} className="text-[15px] leading-5 font-normal text-ink-muted transition-colors duration-[180ms] hover:text-ink" activeProps={{ className: "text-ink font-medium border-b-2 border-brand pb-0.5" }}>
               {link.label}
             </Link>
           ))}
         </nav>
-        <button
-          type="button"
-          onClick={() => setOpen((value) => !value)}
-          aria-expanded={open}
-          aria-label={open ? "Close menu" : "Open menu"}
-          className="flex h-11 w-11 items-center justify-center text-xl text-ink md:hidden"
-        >
+        <button type="button" onClick={() => setOpen((value) => !value)} aria-expanded={open} aria-label={open ? "Close menu" : "Open menu"} className="flex h-11 w-11 items-center justify-center text-xl text-ink md:hidden">
           {open ? "x" : "☰"}
         </button>
       </div>
@@ -225,14 +86,7 @@ function Header() {
         <nav className="border-t border-hairline bg-background md:hidden">
           <div className="page-container flex flex-col py-2">
             {links.map((link) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                activeOptions={{ exact: link.to === "/" }}
-                onClick={() => setOpen(false)}
-                className="py-3 text-[15px] leading-5 text-ink-muted"
-                activeProps={{ className: "text-ink font-medium" }}
-              >
+              <Link key={link.to} to={link.to} activeOptions={{ exact: link.to === "/" }} onClick={() => setOpen(false)} className="py-3 text-[15px] leading-5 text-ink-muted" activeProps={{ className: "text-ink font-medium" }}>
                 {link.label}
               </Link>
             ))}
@@ -257,13 +111,7 @@ function SearchBar({ onSearch }: { onSearch: (form: SearchForm) => void }) {
       <div className="grid gap-4 md:grid-cols-[minmax(220px,2fr)_minmax(150px,1fr)_minmax(150px,1fr)_minmax(110px,0.7fr)_auto] md:items-end">
         <div>
           <label className="field-label" htmlFor="book-direct-query">City or hotel</label>
-          <input
-            id="book-direct-query"
-            value={form.query}
-            onChange={(event) => update("query", event.target.value)}
-            placeholder="Bangkok or hotel name"
-            className="field-control"
-          />
+          <input id="book-direct-query" value={form.query} onChange={(event) => update("query", event.target.value)} placeholder="Bangkok or hotel name" className="field-control" />
         </div>
         <div>
           <label className="field-label" htmlFor="book-direct-check-in">Check-in</label>
@@ -284,9 +132,7 @@ function SearchBar({ onSearch }: { onSearch: (form: SearchForm) => void }) {
         </div>
         <button type="submit" className="btn-base button-accent min-h-14 whitespace-nowrap">Search hotels</button>
       </div>
-      <p className="mt-3 text-[14px] leading-6 text-ink-muted">
-        Use dates to check Swank availability through the API. Browse destinations below without entering dates.
-      </p>
+      <p className="mt-3 text-[14px] leading-6 text-ink-muted">Use dates to check Swank availability through the API. Browse destinations below without entering dates.</p>
     </form>
   );
 }
@@ -331,9 +177,7 @@ function HotelResultCard({ hotel, availability }: { hotel: Hotel; availability?:
     <article className="flex flex-col overflow-hidden rounded-[8px] border border-hairline bg-background transition-shadow duration-[180ms] hover:shadow-[var(--shadow-subtle)]">
       <div className="hotel-card__media">
         <span className="px-4 text-center text-[12px] leading-[18px] text-ink-muted">[ {hotel.photoTag} ]</span>
-        <span className={`badge-pill absolute bottom-3 left-3 ${hotel.badge === "stayed" ? "bg-brand text-ink" : "bg-ink text-white"}`}>
-          {hotel.badge === "stayed" ? "Swank Tested" : "Trusted Pick"}
-        </span>
+        <span className={`badge-pill absolute bottom-3 left-3 ${hotel.badge === "stayed" ? "bg-brand text-ink" : "bg-ink text-white"}`}>{hotel.badge === "stayed" ? "Swank Tested" : "Trusted Pick"}</span>
       </div>
       <div className="flex flex-1 flex-col p-5 md:p-6">
         <h3 className="mb-2 text-[24px] leading-8 font-normal text-ink">{hotel.name}</h3>
@@ -341,29 +185,41 @@ function HotelResultCard({ hotel, availability }: { hotel: Hotel; availability?:
         <div className="mt-auto flex flex-col gap-3">
           <a href={availability?.bookingUrl ?? "#"} className="btn-base button-primary w-full justify-between">
             <span>Book with Swank</span>
-            <span className="badge-pill shrink-0 whitespace-nowrap bg-ink uppercase tracking-wide text-white">
-              {availability?.price ?? (isBestValue ? "Best Value" : "Swank Value")}
-            </span>
+            <span className="badge-pill shrink-0 whitespace-nowrap bg-ink uppercase tracking-wide text-white">{availability?.price ?? (isBestValue ? "Best Value" : "Swank Value")}</span>
           </a>
           {isLoading && <div className="rounded-[8px] border border-hairline bg-soft p-4 text-[15px] leading-6 text-ink-muted">Checking Swank availability for your dates...</div>}
-          <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">
-            {isBestValue ? "Why best value?" : "Why this rate?"} {open ? "-" : "+"}
-          </button>
-          {open && (
-            <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">
-              Hotels treat our bookings differently: better rooms, real perks, our team in your corner. You'll receive our trip-prep kit plus our destination e-book.
-            </div>
-          )}
+          <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">{isBestValue ? "Why best value?" : "Why this rate?"} {open ? "-" : "+"}</button>
+          {open && <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">Hotels treat our bookings differently: better rooms, real perks, our team in your corner. You'll receive our trip-prep kit plus our destination e-book.</div>}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {hotel.affiliateLinks.map((link) => (
-              <a key={link.label} href={link.href} className="btn-base button-secondary w-full" target="_blank" rel="noopener noreferrer">
-                {link.label}
-              </a>
-            ))}
+            {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="btn-base button-secondary w-full" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
           </div>
         </div>
       </div>
     </article>
+  );
+}
+
+function DestinationSection() {
+  return (
+    <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="destination-nav-title">
+      <div className="mb-6 max-w-[720px]">
+        <Eyebrow className="mb-3 text-ink-muted">Browse by destination</Eyebrow>
+        <h2 id="destination-nav-title" className="section-heading text-ink">Navigate without entering dates.</h2>
+      </div>
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {DESTINATIONS.map((destination) =>
+          destination === "Bangkok" ? (
+            <Link key={destination} to="/book-direct/bangkok" className="flex min-h-14 items-center justify-between rounded-[8px] border border-line bg-background px-4 py-3 text-[16px] text-ink hover:bg-soft">
+              <span>{destination}</span><span aria-hidden="true">›</span>
+            </Link>
+          ) : (
+            <div key={destination} className="flex min-h-14 items-center justify-between rounded-[8px] border border-hairline bg-soft px-4 py-3 text-[16px] text-ink-muted">
+              <span>{destination}</span><span className="badge-pill bg-background uppercase tracking-wide text-ink-muted">Coming soon</span>
+            </div>
+          ),
+        )}
+      </div>
+    </section>
   );
 }
 
@@ -389,9 +245,7 @@ function Footer() {
             <p className="mb-4 text-[12px] font-medium uppercase tracking-[0.14em] text-ink-muted">Community</p>
             <div className="space-y-3 text-[15px] leading-6 text-ink-muted">
               <p><Link to="/concierge" className="text-link">Why we're different</Link></p>
-              <p>Blog</p>
-              <p>FAQ</p>
-              <p>Newsletter</p>
+              <p>Blog</p><p>FAQ</p><p>Newsletter</p>
             </div>
           </div>
         </div>
@@ -448,26 +302,7 @@ export default function BookDirectHybrid() {
           <SearchBar onSearch={handleSearch} />
           {error && <p className="mt-5 rounded-[8px] border border-hairline bg-soft p-4 text-[15px] leading-6 text-ink-muted">{error}</p>}
 
-          {search && (
-            <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="search-results-title">
-              <div className="mb-8 max-w-[720px]">
-                <Eyebrow className="mb-3 text-ink-muted">Search results</Eyebrow>
-                <h2 id="search-results-title" className="section-heading text-ink">Hotels matching your search</h2>
-                <p className="mt-3 text-[16px] leading-7 text-ink-muted">
-                  The cards keep the Swank model. Book with Swank is the API route, and affiliate buttons stay as the parallel external route.
-                </p>
-              </div>
-              {searchResults.length > 0 ? (
-                <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
-                  {searchResults.map((hotel) => <HotelResultCard key={hotel.id} hotel={hotel} availability={availability[hotel.id]} />)}
-                </div>
-              ) : (
-                <div className="rounded-[8px] border border-hairline bg-soft p-6 md:p-8">
-                  <p className="text-[16px] leading-7 text-ink-muted">We do not have a Swank search result for that yet. Try Bangkok, or browse by destination below.</p>
-                </div>
-              )}
-            </section>
-          )}
+          <DestinationSection />
 
           <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="most-booked-title">
             <div className="mb-8 max-w-[720px]">
@@ -487,25 +322,24 @@ export default function BookDirectHybrid() {
             </div>
           </section>
 
-          <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="destination-nav-title">
-            <div className="mb-6 max-w-[720px]">
-              <Eyebrow className="mb-3 text-ink-muted">Browse by destination</Eyebrow>
-              <h2 id="destination-nav-title" className="section-heading text-ink">Navigate without entering dates.</h2>
-            </div>
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {DESTINATIONS.map((destination) =>
-                destination === "Bangkok" ? (
-                  <Link key={destination} to="/book-direct/bangkok" className="flex min-h-14 items-center justify-between rounded-[8px] border border-line bg-background px-4 py-3 text-[16px] text-ink hover:bg-soft">
-                    <span>{destination}</span><span aria-hidden="true">›</span>
-                  </Link>
-                ) : (
-                  <div key={destination} className="flex min-h-14 items-center justify-between rounded-[8px] border border-hairline bg-soft px-4 py-3 text-[16px] text-ink-muted">
-                    <span>{destination}</span><span className="badge-pill bg-background uppercase tracking-wide text-ink-muted">Coming soon</span>
-                  </div>
-                ),
+          {search && (
+            <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="search-results-title">
+              <div className="mb-8 max-w-[720px]">
+                <Eyebrow className="mb-3 text-ink-muted">Search results</Eyebrow>
+                <h2 id="search-results-title" className="section-heading text-ink">Hotels matching your search</h2>
+                <p className="mt-3 text-[16px] leading-7 text-ink-muted">The cards keep the Swank model. Book with Swank is the API route, and affiliate buttons stay as the parallel external route.</p>
+              </div>
+              {searchResults.length > 0 ? (
+                <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
+                  {searchResults.map((hotel) => <HotelResultCard key={hotel.id} hotel={hotel} availability={availability[hotel.id]} />)}
+                </div>
+              ) : (
+                <div className="rounded-[8px] border border-hairline bg-soft p-6 md:p-8">
+                  <p className="text-[16px] leading-7 text-ink-muted">We do not have a Swank search result for that yet. Try Bangkok, or browse by destination above.</p>
+                </div>
               )}
-            </div>
-          </section>
+            </section>
+          )}
         </section>
       </main>
       <Footer />
