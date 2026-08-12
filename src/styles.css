@@ -214,7 +214,11 @@ body {
   width: 100%;
   max-width: var(--container-max);
   margin-inline: auto;
-  padding-inline: 20px;
+  padding-inline: 24px;
+}
+
+section + section {
+  margin-top: 48px;
 }
 
 /* H1 — homepage */
@@ -892,7 +896,7 @@ textarea.field-control {
 .book-direct-hero {
   position: relative;
   display: flex;
-  min-height: 500px;
+  min-height: 340px;
   align-items: flex-end;
   overflow: hidden;
   background: #2d342b;
@@ -918,8 +922,8 @@ textarea.field-control {
 .book-direct-hero__content {
   position: relative;
   z-index: 1;
-  padding-bottom: 56px;
-  padding-top: 160px;
+  padding-bottom: 40px;
+  padding-top: 64px;
 }
 
 @media (max-width: 767px) {
@@ -935,4 +939,141 @@ textarea.field-control {
     padding-bottom: 40px;
     padding-top: 128px;
   }
+}
+
+/* Book Direct search & grids --------------------------------------------- */
+
+.search-bar {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 0.8fr auto;
+  gap: 16px;
+  max-width: 1200px;
+}
+
+@media (max-width: 767px) {
+  .search-bar {
+    grid-template-columns: 1fr;
+  }
+}
+
+.destination-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .destination-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .destination-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.destination-card {
+  padding: 25px 10px;
+}
+
+.hotel-card-grid {
+  margin: 0 -10px;
+}
+
+.hotel-card {
+  padding: 25px 10px;
+}
+
+.hotel-card__badge--most-booked {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  background: #ffffff;
+  color: #231f20;
+  border: 1px solid #231f20;
+  text-transform: uppercase;
+}
+
+.hotel-card__cta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 4px;
+  background: #f4e30c;
+  color: #231f20;
+  font-family: "Suisse Intl", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  cursor: pointer;
+  transition: background-color 180ms ease;
+}
+
+.hotel-card__cta-primary:hover {
+  background: #ded300;
+}
+
+.hotel-card__value-tag {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #231f20;
+  background: transparent;
+  border: none;
+}
+
+.hotel-card__title {
+  font-family: "Suisse Intl", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 39px;
+  color: #333333;
+}
+
+.hotel-card__description {
+  font-family: "Suisse Intl", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #333333;
+}
+
+.hotel-card__cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 36px;
+  padding: 0 16px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  background: transparent;
+  color: #333333;
+  font-family: "Suisse Intl", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 18px;
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.hotel-card__cta-secondary:hover {
+  background: #f5f4f0;
 }

@@ -126,7 +126,7 @@ function SearchBar({ onSearch }: { onSearch: (form: SearchForm) => void }) {
 
   return (
     <form onSubmit={submit} className="rounded-[8px] border border-hairline bg-background p-4 shadow-[var(--shadow-subtle)] md:p-5">
-      <div className="grid gap-4 md:grid-cols-[minmax(220px,2fr)_minmax(150px,1fr)_minmax(150px,1fr)_minmax(110px,0.7fr)_auto] md:items-end">
+      <div className="search-bar md:items-end">
         <div>
           <label className="field-label" htmlFor="book-direct-query">City or Hotel</label>
           <input id="book-direct-query" value={form.query} onChange={(event) => update("query", event.target.value)} placeholder="Bangkok or hotel name" className="field-control" />
@@ -197,19 +197,19 @@ function HotelResultCard({ hotel, availability }: { hotel: Hotel; availability: 
         <span className="px-4 text-center text-[12px] leading-[18px] text-ink-muted">[ {hotel.photoTag} ]</span>
         <span className={`badge-pill absolute bottom-3 left-3 ${hotel.badge === "stayed" ? "bg-brand text-ink" : "bg-ink text-white"}`}>{hotel.badge === "stayed" ? "Swank Tested" : "Trusted Pick"}</span>
       </div>
-      <div className="flex flex-1 flex-col p-5 md:p-6">
-        <h3 className="mb-2 text-[24px] leading-8 font-normal text-ink">{hotel.name}</h3>
-        <p className="mb-6 text-[16px] leading-7 text-ink-muted">{hotel.desc}</p>
+      <div className="hotel-card flex flex-1 flex-col">
+        <h3 className="hotel-card__title">{hotel.name}</h3>
+        <p className="hotel-card__description mb-6">{hotel.desc}</p>
         <div className="mt-auto flex flex-col gap-3">
-          <a href={availability?.bookingUrl ?? "#"} className="btn-base button-primary w-full justify-between">
-            <span>Book with Swank</span>
-            <span className="badge-pill shrink-0 whitespace-nowrap bg-ink uppercase tracking-wide text-white">{availability?.price ?? (isBestValue ? "Best Value" : "Swank Value")}</span>
-          </a>
+          <div className="flex items-center">
+            <a href={availability?.bookingUrl ?? "#"} className="hotel-card__cta-primary flex-1">Book with Swank</a>
+            <span className="hotel-card__value-tag">{availability?.price ?? (isBestValue ? "Best Value" : "Swank Value")}</span>
+          </div>
           {isLoading && <div className="rounded-[8px] border border-hairline bg-soft p-4 text-[15px] leading-6 text-ink-muted">Checking Swank availability for your dates...</div>}
           <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">{isBestValue ? "Why best value?" : "Why this rate?"} {open ? "-" : "+"}</button>
           {open && <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">Hotels treat our bookings differently: better rooms, real perks, our team in your corner. You'll receive our trip-prep kit plus our destination e-book.</div>}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="btn-base button-secondary w-full" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
+            {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="hotel-card__cta-secondary" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
           </div>
         </div>
       </div>
@@ -224,20 +224,20 @@ function MostBookedHotelCard({ hotel }: { hotel: MostBookedHotel }) {
     <article className="flex flex-col overflow-hidden rounded-[8px] border border-hairline bg-background transition-all duration-[180ms] hover:-translate-y-0.5 hover:shadow-[var(--shadow-subtle)]">
       <div className="hotel-card__media">
         <span className="max-w-[82%] px-4 text-center text-[12px] leading-[18px] text-ink-muted">[ {hotel.photoTag} ]</span>
-        <span className="badge-pill absolute bottom-3 left-3 bg-brand uppercase tracking-wide text-ink">Most booked</span>
+        <span className="hotel-card__badge--most-booked">Most booked</span>
       </div>
-      <div className="flex flex-1 flex-col p-5 md:p-6">
-        <h3 className="mb-2 text-[24px] leading-8 font-normal text-ink">{hotel.name}</h3>
-        <p className="mb-6 text-[16px] leading-7 text-ink-muted">{hotel.desc}</p>
+      <div className="hotel-card flex flex-1 flex-col">
+        <h3 className="hotel-card__title">{hotel.name}</h3>
+        <p className="hotel-card__description mb-6">{hotel.desc}</p>
         <div className="mt-auto flex flex-col gap-3">
-          <a href="#" className="btn-base button-primary w-full justify-between">
-            <span>Book with Swank</span>
-            <span className="badge-pill shrink-0 whitespace-nowrap bg-ink uppercase tracking-wide text-white">Best Value</span>
-          </a>
+          <div className="flex items-center">
+            <a href="#" className="hotel-card__cta-primary flex-1">Book with Swank</a>
+            <span className="hotel-card__value-tag">Best Value</span>
+          </div>
           <button onClick={() => setOpen((value) => !value)} className="text-link self-start text-[15px] leading-6">Why best value? {open ? "-" : "+"}</button>
           {open && <div className="rounded-[8px] border-l-[3px] border-brand bg-soft p-4 text-[15px] leading-6 italic text-ink-muted">Hotels treat our bookings differently: better rooms, real perks, our team in your corner. You'll receive our trip-prep kit plus our destination e-book.</div>}
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="btn-base button-secondary w-full" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
+            {hotel.affiliateLinks.map((link) => <a key={link.label} href={link.href} className="hotel-card__cta-secondary" target="_blank" rel="noopener noreferrer">{link.label}</a>)}
           </div>
         </div>
       </div>
@@ -312,7 +312,7 @@ function DestinationSection() {
         <Eyebrow className="mb-3 text-ink-muted">{"\n"}</Eyebrow>
         <h2 id="destination-nav-title" className="section-heading text-ink">Browse by Destination</h2>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="destination-grid">
         {DESTINATION_REGIONS.map((region) => <DestinationRegionCard key={region.label} region={region} />)}
       </div>
     </section>
@@ -403,11 +403,11 @@ export default function BookDirectHybrid() {
           <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="most-booked-title">
             <div className="mb-8 max-w-[720px]">
               <Eyebrow className="mb-3 text-ink-muted">{"\n"}</Eyebrow>
-              <h2 id="most-booked-title" className="section-heading text-ink">Most booked hotels</h2>
-            </div>
-            <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
-              {MOST_BOOKED_HOTELS.map((hotel) => <MostBookedHotelCard key={hotel.name} hotel={hotel} />)}
-            </div>
+            <h2 id="most-booked-title" className="section-heading text-ink">Most booked hotels</h2>
+          </div>
+          <div className="hotel-card-grid grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
+            {MOST_BOOKED_HOTELS.map((hotel) => <MostBookedHotelCard key={hotel.name} hotel={hotel} />)}
+          </div>
           </section>
 
           {search && (
@@ -418,7 +418,7 @@ export default function BookDirectHybrid() {
                 <p className="mt-3 text-[16px] leading-7 text-ink-muted">The cards keep the Swank model. Book with Swank is the API route, and affiliate buttons stay as the parallel external route.</p>
               </div>
               {searchResults.length > 0 ? (
-                <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
+                <div className="hotel-card-grid grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
                   {searchResults.map((hotel) => <HotelResultCard key={hotel.id} hotel={hotel} availability={availability[hotel.id]} />)}
                 </div>
               ) : (
