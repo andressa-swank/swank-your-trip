@@ -312,7 +312,7 @@ function DestinationSection() {
         <Eyebrow className="mb-3 text-ink-muted">{"\n"}</Eyebrow>
         <h2 id="destination-nav-title" className="section-heading text-ink">Browse by Destination</h2>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="destination-grid">
         {DESTINATION_REGIONS.map((region) => <DestinationRegionCard key={region.label} region={region} />)}
       </div>
     </section>
