@@ -306,7 +306,7 @@ export default function BookDirectHybrid() {
 
           <section className="mt-12 border-b border-hairline pb-12" aria-labelledby="most-booked-title">
             <div className="mb-8 max-w-[720px]">
-              <Eyebrow className="mb-3 text-ink-muted">Guest favorites</Eyebrow>
+              <Eyebrow className="mb-3 text-ink-muted">{"\n"}</Eyebrow>
               <h2 id="most-booked-title" className="section-heading text-ink">Most booked hotels</h2>
             </div>
             <div className="listing-grid">
