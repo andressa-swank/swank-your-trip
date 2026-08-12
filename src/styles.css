@@ -950,6 +950,12 @@ textarea.field-control {
   max-width: 1200px;
 }
 
+@media (max-width: 767px) {
+  .search-bar {
+    grid-template-columns: 1fr;
+  }
+}
+
 .destination-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
