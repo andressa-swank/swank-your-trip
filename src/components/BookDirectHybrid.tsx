@@ -418,7 +418,7 @@ export default function BookDirectHybrid() {
                 <p className="mt-3 text-[16px] leading-7 text-ink-muted">The cards keep the Swank model. Book with Swank is the API route, and affiliate buttons stay as the parallel external route.</p>
               </div>
               {searchResults.length > 0 ? (
-                <div className="grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
+                <div className="hotel-card-grid grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-2 md:gap-y-12 xl:grid-cols-3">
                   {searchResults.map((hotel) => <HotelResultCard key={hotel.id} hotel={hotel} availability={availability[hotel.id]} />)}
                 </div>
               ) : (
