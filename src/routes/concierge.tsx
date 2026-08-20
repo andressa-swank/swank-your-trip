@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import BookingHub from "../BookingHub";
+import "../concierge-flow.css";
 
 export const Route = createFileRoute("/concierge")({
   head: () => ({
@@ -15,5 +16,12 @@ export const Route = createFileRoute("/concierge")({
 });
 
 function ConciergePage() {
-  return <BookingHub initialScreen="intake" />;
+  return (
+    <div className="concierge-flow-shell">
+      <BookingHub initialScreen="intake" />
+      <Link to="/concierge/how" className="concierge-how-access">
+        How Concierge Works
+      </Link>
+    </div>
+  );
 }
