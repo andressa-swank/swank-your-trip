@@ -7,7 +7,7 @@ export const Route = createFileRoute("/concierge")({
       { title: "Concierge Trip Planning | Swank Guide" },
       {
         name: "description",
-        content: "See how Swank Guide Concierge helps plan, advise, book, and manage the details of your trip.",
+        content: "Tell Swank Guide the essentials of your trip so we can prepare your personalized proposal.",
       },
     ],
   }),
@@ -15,5 +15,5 @@ export const Route = createFileRoute("/concierge")({
 });
 
 function ConciergePage() {
-  return <BookingHub initialScreen="how" />;
+  return <BookingHub initialScreen="intake" />;
 }
