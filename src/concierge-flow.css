@@ -1,0 +1,54 @@
+.concierge-flow-shell {
+  position: relative;
+}
+
+.concierge-how-access {
+  position: fixed;
+  z-index: 40;
+  top: 50%;
+  left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-text);
+  border-left: 0;
+  border-radius: 0 4px 4px 0;
+  background: #ffffff;
+  color: var(--color-text);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
+  box-shadow: var(--shadow-subtle);
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.concierge-how-access:hover {
+  background: var(--color-surface-soft);
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .concierge-how-access {
+    position: absolute;
+    top: 168px;
+    left: 16px;
+    right: auto;
+    min-height: 36px;
+    padding: 8px 12px;
+    border: 1px solid var(--color-text);
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 18px;
+    writing-mode: horizontal-tb;
+    transform: none;
+    box-shadow: none;
+  }
+}
