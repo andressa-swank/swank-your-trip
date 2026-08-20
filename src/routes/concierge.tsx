@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
 import BookingHub from "../BookingHub";
 import "../concierge-flow.css";
 
@@ -16,6 +16,14 @@ export const Route = createFileRoute("/concierge")({
 });
 
 function ConciergePage() {
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+
+  if (pathname !== "/concierge") {
+    return <Outlet />;
+  }
+
   return (
     <div className="concierge-flow-shell">
       <BookingHub initialScreen="intake" />
