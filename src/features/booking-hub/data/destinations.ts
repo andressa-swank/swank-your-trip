@@ -1,0 +1,16 @@
+export const DESTINATIONS = [
+  { name: "Bangkok, Thailand", built: true },
+  { name: "Koh Samui, Thailand", built: false },
+  { name: "Greater Phuket, Thailand", built: false },
+  { name: "Chiang Mai & Rai, Thailand", built: false },
+  { name: "Pattaya & Hua Hin, Thailand", built: false },
+  { name: "Bali, Indonesia", built: false },
+  { name: "India", built: false },
+  { name: "Sri Lanka", built: false },
+  { name: "Caribbean", built: false },
+  { name: "Central America", built: false },
+  { name: "Europe", built: false },
+  { name: "Mexico", built: false },
+  { name: "Nordic", built: false },
+  { name: "US + Canada", built: false },
+];
