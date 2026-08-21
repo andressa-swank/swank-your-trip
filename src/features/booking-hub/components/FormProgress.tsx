@@ -6,7 +6,7 @@ export function FormProgress({
 }: {
   step: number;
   total: number;
-  pct: number;
+  pct: number | undefined;
 }) {
   return (
     <div className="mb-8 md:mb-10">
