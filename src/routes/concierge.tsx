@@ -2,6 +2,13 @@ import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-r
 import BookingHub from "../BookingHub";
 import "../concierge-flow.css";
 
+const CONCIERGE_STEP_KEY = "swank-concierge-step";
+
+function resetConciergeStep() {
+  if (typeof window === "undefined") return;
+  window.sessionStorage.removeItem(CONCIERGE_STEP_KEY);
+}
+
 export const Route = createFileRoute("/concierge")({
   head: () => ({
     meta: [
@@ -23,6 +30,8 @@ function ConciergePage() {
   if (pathname !== "/concierge") {
     return <Outlet />;
   }
+
+  resetConciergeStep();
 
   return (
     <div className="concierge-flow-shell">
