@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import BookingHub from "../BookingHub";
+import BookingHub from "../features/booking-hub/BookingHub";
 
 const title = "Swank Guide Booking Hub — Concierge or Book Direct";
 const description =

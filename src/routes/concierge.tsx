@@ -1,5 +1,5 @@
 import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
-import BookingHub from "../BookingHub";
+import BookingHub from "../features/booking-hub/BookingHub";
 import "../concierge-flow.css";
 
 const CONCIERGE_STEP_KEY = "swank-concierge-step";

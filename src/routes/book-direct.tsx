@@ -1,5 +1,5 @@
 import { Outlet, createFileRoute, useRouterState } from "@tanstack/react-router";
-import BookDirectHybrid from "../components/BookDirectHybrid";
+import BookDirectScreen from "../features/booking-hub/screens/BookDirectScreen";
 
 export const Route = createFileRoute("/book-direct")({
   head: () => ({
@@ -16,5 +16,5 @@ export const Route = createFileRoute("/book-direct")({
 
 function BookDirectPage() {
   const pathname = useRouterState({ select: (state) => state.location.pathname });
-  return pathname === "/book-direct" ? <BookDirectHybrid /> : <Outlet />;
+  return pathname === "/book-direct" ? <BookDirectScreen /> : <Outlet />;
 }
