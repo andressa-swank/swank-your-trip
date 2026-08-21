@@ -121,17 +121,7 @@ export function ConciergeIntakeScreen({
       </PageIntro>
       <div className="page-container pb-16 pt-12 md:pb-24 md:pt-12">
         <div ref={formTop} className="mx-auto max-w-[680px]" style={{ scrollMarginTop: 96 }}>
-          <div className="mb-8 md:mb-10">
-            <div className="mb-2 flex items-center justify-between text-[12px] uppercase tracking-[0.14em] text-ink-muted">
-              <span>{step} of 7</span>
-            </div>
-            <div className="h-[3px] w-full overflow-hidden bg-hairline">
-              <div
-                className="h-full bg-ink transition-[width] duration-300"
-                style={{ width: `${pct}%` }}
-              />
-            </div>
-          </div>
+          <FormProgress step={step} total={7} pct={pct} />
 
           <div key={step} className="animate-step">
             {step === 1 && (

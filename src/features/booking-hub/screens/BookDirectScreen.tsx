@@ -354,7 +354,7 @@ function Footer() {
   );
 }
 
-export default function BookDirectHybrid() {
+export default function BookDirectScreen() {
   const [search, setSearch] = useState<SearchForm | null>(null);
   const [availability, setAvailability] = useState<Record<string, Availability>>({});
   const [error, setError] = useState("");
