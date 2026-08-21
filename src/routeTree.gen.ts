@@ -12,12 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BookDirectRouteImport } from './routes/book-direct'
 import { Route as ConciergeRouteImport } from './routes/concierge'
-import { Route as ConciergeHallRouteImport } from './routes/concierge-hall'
 import { Route as FindYourPathRouteImport } from './routes/find-your-path'
 import { Route as BookDirectBangkokRouteImport } from './routes/book-direct.bangkok'
 import { Route as ConciergeConfirmationRouteImport } from './routes/concierge.confirmation'
 import { Route as ConciergeHowRouteImport } from './routes/concierge.how'
-import { Route as ConciergeStartRouteImport } from './routes/concierge.start'
 import { Route as FindYourPathResultRouteImport } from './routes/find-your-path.result'
 
 const IndexRoute = IndexRouteImport.update({
@@ -33,11 +31,6 @@ const BookDirectRoute = BookDirectRouteImport.update({
 const ConciergeRoute = ConciergeRouteImport.update({
   id: '/concierge',
   path: '/concierge',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConciergeHallRoute = ConciergeHallRouteImport.update({
-  id: '/concierge-hall',
-  path: '/concierge-hall',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FindYourPathRoute = FindYourPathRouteImport.update({
@@ -60,11 +53,6 @@ const ConciergeHowRoute = ConciergeHowRouteImport.update({
   path: '/how',
   getParentRoute: () => ConciergeRoute,
 } as any)
-const ConciergeStartRoute = ConciergeStartRouteImport.update({
-  id: '/start',
-  path: '/start',
-  getParentRoute: () => ConciergeRoute,
-} as any)
 const FindYourPathResultRoute = FindYourPathResultRouteImport.update({
   id: '/result',
   path: '/result',
@@ -75,24 +63,20 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/book-direct': typeof BookDirectRouteWithChildren
   '/concierge': typeof ConciergeRouteWithChildren
-  '/concierge-hall': typeof ConciergeHallRoute
   '/find-your-path': typeof FindYourPathRouteWithChildren
   '/book-direct/bangkok': typeof BookDirectBangkokRoute
   '/concierge/confirmation': typeof ConciergeConfirmationRoute
   '/concierge/how': typeof ConciergeHowRoute
-  '/concierge/start': typeof ConciergeStartRoute
   '/find-your-path/result': typeof FindYourPathResultRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/book-direct': typeof BookDirectRouteWithChildren
   '/concierge': typeof ConciergeRouteWithChildren
-  '/concierge-hall': typeof ConciergeHallRoute
   '/find-your-path': typeof FindYourPathRouteWithChildren
   '/book-direct/bangkok': typeof BookDirectBangkokRoute
   '/concierge/confirmation': typeof ConciergeConfirmationRoute
   '/concierge/how': typeof ConciergeHowRoute
-  '/concierge/start': typeof ConciergeStartRoute
   '/find-your-path/result': typeof FindYourPathResultRoute
 }
 export interface FileRoutesById {
@@ -100,12 +84,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/book-direct': typeof BookDirectRouteWithChildren
   '/concierge': typeof ConciergeRouteWithChildren
-  '/concierge-hall': typeof ConciergeHallRoute
   '/find-your-path': typeof FindYourPathRouteWithChildren
   '/book-direct/bangkok': typeof BookDirectBangkokRoute
   '/concierge/confirmation': typeof ConciergeConfirmationRoute
   '/concierge/how': typeof ConciergeHowRoute
-  '/concierge/start': typeof ConciergeStartRoute
   '/find-your-path/result': typeof FindYourPathResultRoute
 }
 export interface FileRouteTypes {
@@ -114,36 +96,30 @@ export interface FileRouteTypes {
     | '/'
     | '/book-direct'
     | '/concierge'
-    | '/concierge-hall'
     | '/find-your-path'
     | '/book-direct/bangkok'
     | '/concierge/confirmation'
     | '/concierge/how'
-    | '/concierge/start'
     | '/find-your-path/result'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/book-direct'
     | '/concierge'
-    | '/concierge-hall'
     | '/find-your-path'
     | '/book-direct/bangkok'
     | '/concierge/confirmation'
     | '/concierge/how'
-    | '/concierge/start'
     | '/find-your-path/result'
   id:
     | '__root__'
     | '/'
     | '/book-direct'
     | '/concierge'
-    | '/concierge-hall'
     | '/find-your-path'
     | '/book-direct/bangkok'
     | '/concierge/confirmation'
     | '/concierge/how'
-    | '/concierge/start'
     | '/find-your-path/result'
   fileRoutesById: FileRoutesById
 }
@@ -151,7 +127,6 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookDirectRoute: typeof BookDirectRouteWithChildren
   ConciergeRoute: typeof ConciergeRouteWithChildren
-  ConciergeHallRoute: typeof ConciergeHallRoute
   FindYourPathRoute: typeof FindYourPathRouteWithChildren
 }
 
@@ -176,13 +151,6 @@ declare module '@tanstack/react-router' {
       path: '/concierge'
       fullPath: '/concierge'
       preLoaderRoute: typeof ConciergeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/concierge-hall': {
-      id: '/concierge-hall'
-      path: '/concierge-hall'
-      fullPath: '/concierge-hall'
-      preLoaderRoute: typeof ConciergeHallRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/find-your-path': {
@@ -213,13 +181,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ConciergeHowRouteImport
       parentRoute: typeof ConciergeRoute
     }
-    '/concierge/start': {
-      id: '/concierge/start'
-      path: '/start'
-      fullPath: '/concierge/start'
-      preLoaderRoute: typeof ConciergeStartRouteImport
-      parentRoute: typeof ConciergeRoute
-    }
     '/find-your-path/result': {
       id: '/find-your-path/result'
       path: '/result'
@@ -245,13 +206,11 @@ const BookDirectRouteWithChildren = BookDirectRoute._addFileChildren(
 interface ConciergeRouteChildren {
   ConciergeConfirmationRoute: typeof ConciergeConfirmationRoute
   ConciergeHowRoute: typeof ConciergeHowRoute
-  ConciergeStartRoute: typeof ConciergeStartRoute
 }
 
 const ConciergeRouteChildren: ConciergeRouteChildren = {
   ConciergeConfirmationRoute: ConciergeConfirmationRoute,
   ConciergeHowRoute: ConciergeHowRoute,
-  ConciergeStartRoute: ConciergeStartRoute,
 }
 
 const ConciergeRouteWithChildren = ConciergeRoute._addFileChildren(
@@ -274,7 +233,6 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookDirectRoute: BookDirectRouteWithChildren,
   ConciergeRoute: ConciergeRouteWithChildren,
-  ConciergeHallRoute: ConciergeHallRoute,
   FindYourPathRoute: FindYourPathRouteWithChildren,
 }
 export const routeTree = rootRouteImport
