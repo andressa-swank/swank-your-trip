@@ -1,6 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import BookingHub from "../BookingHub";
 
+const CONCIERGE_STEP_KEY = "swank-concierge-step";
+
+function resetConciergeStep() {
+  if (typeof window === "undefined") return;
+  window.sessionStorage.removeItem(CONCIERGE_STEP_KEY);
+}
+
 export const Route = createFileRoute("/concierge/start")({
   head: () => ({
     meta: [
@@ -15,5 +22,6 @@ export const Route = createFileRoute("/concierge/start")({
 });
 
 function ConciergeStartPage() {
+  resetConciergeStep();
   return <BookingHub initialScreen="intake" />;
 }
