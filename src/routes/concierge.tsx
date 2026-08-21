@@ -27,7 +27,7 @@ function ConciergePage() {
   return (
     <div className="concierge-flow-shell">
       <BookingHub initialScreen="intake" />
-      <Link to="/concierge/how" className="concierge-how-access">
+      <Link to="/concierge-hall" className="concierge-how-access">
         How Concierge Works
       </Link>
     </div>
