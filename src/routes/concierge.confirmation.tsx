@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import BookingHub from "../BookingHub";
+import BookingHub from "../features/booking-hub/BookingHub";
 
 export const Route = createFileRoute("/concierge/confirmation")({
   head: () => ({
