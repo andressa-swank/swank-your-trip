@@ -891,7 +891,15 @@ function IntakeScreen({
 
   return (
     <>
-      <PageIntro eyebrow="Concierge" title="Tell us about your trip." />
+      <PageIntro eyebrow="Concierge" title="Tell us about your trip.">
+        <Link
+          to="/concierge-hall"
+          className="concierge-how-access"
+          aria-label="Learn how Concierge works"
+        >
+          How Concierge Works
+        </Link>
+      </PageIntro>
       <div className="page-container pb-16 pt-12 md:pb-24 md:pt-12">
         <div ref={formTop} className="mx-auto max-w-[680px]" style={{ scrollMarginTop: 96 }}>
           <div className="mb-8 md:mb-10">

@@ -33,12 +33,5 @@ function ConciergePage() {
 
   resetConciergeStep();
 
-  return (
-    <div className="concierge-flow-shell">
-      <BookingHub initialScreen="intake" />
-      <Link to="/concierge-hall" className="concierge-how-access">
-        How Concierge Works
-      </Link>
-    </div>
-  );
+  return <BookingHub initialScreen="intake" />;
 }
