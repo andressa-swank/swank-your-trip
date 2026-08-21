@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet, useRouterState } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useRouterState } from "@tanstack/react-router";
 import BookingHub from "../BookingHub";
 import "../concierge-flow.css";
 
@@ -33,12 +33,5 @@ function ConciergePage() {
 
   resetConciergeStep();
 
-  return (
-    <div className="concierge-flow-shell">
-      <BookingHub initialScreen="intake" />
-      <Link to="/concierge-hall" className="concierge-how-access">
-        How Concierge Works
-      </Link>
-    </div>
-  );
+  return <BookingHub initialScreen="intake" />;
 }
