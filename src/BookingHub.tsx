@@ -29,8 +29,8 @@ const SCREEN_PATHS: Record<Screen, string> = {
   "quiz-2": "/find-your-path",
   "quiz-3": "/find-your-path",
   "quiz-result": "/find-your-path/result",
-  how: "/concierge",
-  intake: "/concierge/start",
+  how: "/concierge/how",
+  intake: "/concierge",
   confirm: "/concierge/confirmation",
   destination: "/book-direct",
   "hotel-bangkok": "/book-direct/bangkok",
@@ -894,7 +894,7 @@ function IntakeScreen({
       <PageIntro eyebrow="Concierge" title="Tell us about your trip.">
         {step === 1 && (
           <Link
-            to="/concierge-hall"
+            to="/concierge/how"
             className="concierge-how-access"
             aria-label="Learn how Concierge works"
           >
