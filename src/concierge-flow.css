@@ -1,56 +1,20 @@
-.concierge-flow-shell {
-  position: relative;
-}
-
 .concierge-how-access {
-  position: fixed;
-  z-index: 40;
-  top: 50%;
-  left: 0;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   min-height: 44px;
-  padding: 0 14px;
-  border: 1px solid #231f20;
-  border-left: 0;
-  border-radius: 0 4px 4px 0;
-  background: #ffffff;
-  color: #231f20;
-  font-size: 13px;
-  line-height: 18px;
-  font-weight: 500;
-  letter-spacing: 0;
-  text-decoration: none;
-  transform: translateY(-50%);
-  box-shadow: 0 6px 18px rgb(0 0 0 / 8%);
+  padding: 8px 0;
+  color: #6b6a69;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  text-decoration: underline;
+  text-underline-offset: 4px;
   transition:
-    background-color 180ms ease,
     color 180ms ease,
     opacity 180ms ease;
 }
 
 .concierge-how-access:hover {
-  background: #f4e30c;
   color: #231f20;
   opacity: 1;
-}
-
-@media (max-width: 767px) {
-  .concierge-how-access {
-    top: auto;
-    bottom: 16px;
-    left: 16px;
-    right: 16px;
-    width: auto;
-    min-height: 44px;
-    padding: 0 16px;
-    border: 1px solid #231f20;
-    border-radius: 4px;
-    background: #ffffff;
-    font-size: 13px;
-    line-height: 18px;
-    transform: none;
-    box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
-  }
 }
