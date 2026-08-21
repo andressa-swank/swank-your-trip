@@ -10,7 +10,7 @@ export type Screen =
   | "destination"
   | "hotel-bangkok";
 
-type Hotel = {
+export type Hotel = {
   id: string;
   name: string;
   tier: "Best Value" | "Mid-Range" | "Splurge";
