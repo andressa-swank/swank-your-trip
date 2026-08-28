@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import heroPhoto from "@/assets/hero-photo.png.asset.json";
 import { Btn } from "../components/Button";
-import { Eyebrow } from "../components/Eyebrow";
 import { TestimonialsSection } from "../components/TestimonialsSection";
 import { TestedStaysSection } from "../components/TestedStaysSection";
 import type { Screen } from "../types";
@@ -41,17 +40,9 @@ export function LandingScreen({ onNav }: { onNav: (s: Screen) => void }) {
           height={1080}
           className="absolute inset-0 h-full w-full object-cover"
         />
-        <div className="page-container relative z-10 pb-10 md:pb-[72px]">
-          <div className="animate-enter max-w-[680px]">
-            <Eyebrow className="text-brand">Booking Hub</Eyebrow>
-            <h1 className="display-heading mt-3 text-white">
-              Pick your
-              <br />
-              path.
-            </h1>
-            <p className="body-copy mt-5 max-w-[620px] text-white/85">
-              Two ways to book with us. However much help you want, we've got a lane for it.
-            </p>
+        <div className="page-container relative z-10">
+          <div className="animate-enter mx-auto max-w-[680px]">
+            <h1 className="display-heading text-white">Pick your path.</h1>
           </div>
         </div>
         <div className="absolute bottom-4 left-1/2 z-10 -translate-x-1/2 text-[12px] uppercase tracking-[0.14em] text-white/70">
@@ -60,6 +51,9 @@ export function LandingScreen({ onNav }: { onNav: (s: Screen) => void }) {
       </section>
 
       <section className="page-container py-12 md:py-[72px]">
+        <p className="mx-auto mb-10 max-w-[680px] text-center text-[20px] leading-[30px] text-ink">
+          Two ways to book with us. However much help you want, we've got a lane for it.
+        </p>
         <div ref={cardsRef} className="choice-grid">
           <div className="surface-card choice-card" style={cardAnim(0)}>
             <div className="mb-4 flex items-start justify-between gap-4">
