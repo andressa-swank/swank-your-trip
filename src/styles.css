@@ -445,7 +445,9 @@ textarea.field-control {
 .landing-hero {
   position: relative;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   min-height: 620px;
   height: clamp(620px, 82vh, 760px);
   background-position: center;
@@ -463,9 +465,9 @@ textarea.field-control {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.1) 0%,
-    rgba(0, 0, 0, 0.18) 45%,
-    rgba(0, 0, 0, 0.68) 100%
+    rgba(0, 0, 0, 0.32) 0%,
+    rgba(0, 0, 0, 0.22) 45%,
+    rgba(0, 0, 0, 0.5) 100%
   );
 }
 @media (max-width: 767px) {
