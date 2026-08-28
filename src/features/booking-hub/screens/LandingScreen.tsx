@@ -52,6 +52,9 @@ export function LandingScreen({ onNav }: { onNav: (s: Screen) => void }) {
       </section>
 
       <section className="page-container py-12 md:py-[72px]">
+        <p className="mx-auto mb-10 max-w-[680px] text-center text-[20px] leading-[30px] text-ink">
+          Two ways to book with us. However much help you want, we've got a lane for it.
+        </p>
         <div ref={cardsRef} className="choice-grid">
           <div className="surface-card choice-card" style={cardAnim(0)}>
             <div className="mb-4 flex items-start justify-between gap-4">
