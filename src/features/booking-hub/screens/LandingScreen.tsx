@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import heroPhoto from "@/assets/hero-photo.png.asset.json";
 import { Btn } from "../components/Button";
-import { Eyebrow } from "../components/Eyebrow";
 import { TestimonialsSection } from "../components/TestimonialsSection";
 import { TestedStaysSection } from "../components/TestedStaysSection";
 import type { Screen } from "../types";
