@@ -224,7 +224,7 @@ function MostBookedHotelCard({ hotel }: { hotel: MostBookedHotel }) {
     <article className="flex flex-col overflow-hidden rounded-[8px] border border-hairline bg-background transition-all duration-[180ms] hover:-translate-y-0.5 hover:shadow-[var(--shadow-subtle)]">
       <div className="hotel-card__media">
         <span className="max-w-[82%] px-4 text-center text-[12px] leading-[18px] text-ink-muted">[ {hotel.photoTag} ]</span>
-        <span className="hotel-card__badge--most-booked">Most booked</span>
+        <span className="most-booked-tag">most booked</span>
       </div>
       <div className="hotel-card flex flex-1 flex-col">
         <h3 className="hotel-card__title">{hotel.name}</h3>
