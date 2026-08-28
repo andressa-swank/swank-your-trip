@@ -164,9 +164,8 @@ export function DestinationScreen({
                   <span className="max-w-[82%] px-4 text-center text-[12px] leading-[18px] text-ink-muted">
                     [ {hotel} ]
                   </span>
-                  <span className="badge-pill absolute bottom-3 left-3 bg-brand uppercase tracking-wide text-ink">
-                    Most booked
-                  </span>
+                  <span className="most-booked-tag">most booked</span>
+
                 </div>
                 <div className="listing-card__body">
                   <h3 className="listing-card__name">{hotel}</h3>
