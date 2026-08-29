@@ -29,7 +29,7 @@ The top navigation item `Concierge` should open `/concierge` and land at the beg
 
 `/concierge/how` is the separate education page for How Concierge Works. It is not a step inside the form. On desktop, the intake page exposes it as a discreet fixed tab on the left side of the screen. On mobile, the same access appears as a compact button below the form title area.
 
-The Concierge intake collects trip basics across multiple steps and currently logs/submits through the placeholder intake flow. The API endpoint should be wired in `src/BookingHub.tsx` through `INTAKE_ENDPOINT` when the backend is ready.
+The Concierge intake collects trip basics across multiple steps and currently logs/submits through the placeholder intake flow. The API endpoint is defined as `INTAKE_ENDPOINT` in `src/features/booking-hub/constants.ts` and used by `src/features/booking-hub/screens/ConciergeIntakeScreen.tsx`. See `src/features/booking-hub/CONCIERGE_HANDOFF.md` for the complete developer handoff.
 
 ## Book Direct Flow
 
@@ -77,8 +77,12 @@ Inside the WebBeds booking flow, affiliate links should not appear. Affiliate li
 
 | File | Purpose |
 | --- | --- |
-| `src/BookingHub.tsx` | Shared booking hub screens, Concierge flow, and internal flow navigation. |
-| `src/components/BookDirectHybrid.tsx` | Book Direct page, search UI, destination browsing, and hotel results/cards. |
+| `src/features/booking-hub/BookingHub.tsx` | Shared booking hub shell and internal flow navigation. |
+| `src/features/booking-hub/CONCIERGE_HANDOFF.md` | Complete Concierge implementation map and developer handoff. |
+| `src/features/booking-hub/screens/ConciergeIntakeScreen.tsx` | Seven-step Concierge form and submission behavior. |
+| `src/features/booking-hub/screens/ConciergeHowScreen.tsx` | How Concierge Works page. |
+| `src/features/booking-hub/screens/ConciergeConfirmationScreen.tsx` | Post-submission confirmation page. |
+| `src/features/booking-hub/screens/BookDirectScreen.tsx` | Book Direct page, search UI, destination browsing, and hotel results/cards. |
 | `src/routes/concierge.tsx` | `/concierge`, starts the intake form and exposes the How Concierge Works access. |
 | `src/routes/concierge.how.tsx` | `/concierge/how`, explains How Concierge Works. |
 | `src/routes/book-direct.tsx` | `/book-direct`, main Book Direct entry page. |
