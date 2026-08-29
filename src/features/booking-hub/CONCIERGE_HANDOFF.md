@@ -1,5 +1,15 @@
 # Concierge handoff
 
+The complete portable implementation package is now located at:
+
+- [Concierge Handoff implementation package](./concierge-handoff/README.md)
+
+It includes both a standalone React/TypeScript version and a WordPress-ready HTML/CSS/JavaScript version, with the full seven-step form, How Concierge Works, confirmation state, Book Direct switch, payload contract, endpoint configuration, and installation instructions.
+
+---
+
+# Concierge handoff
+
 This folder contains the working Concierge flow used by the Swank Guide Booking Hub.
 
 ## Public routes
