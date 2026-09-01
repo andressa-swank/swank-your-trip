@@ -1035,8 +1035,8 @@ textarea.field-control {
   padding: 0 16px;
   border: none;
   border-radius: 4px;
-  background: #231f20;
-  color: #ffffff;
+  background: #f4e30c;
+  color: #231f20;
   font-family: "Suisse Intl", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -1047,9 +1047,20 @@ textarea.field-control {
     box-shadow 180ms ease;
 }
 
-.hotel-card__cta-primary:hover {
-  background: #231f20;
+.hotel-card__cta-primary:hover,
+.hotel-card__cta-primary:focus,
+.hotel-card__cta-primary:focus-visible,
+.hotel-card__cta-primary:active {
+  background: #f4e30c;
+  color: #231f20;
+  border: none;
   opacity: 0.92;
+}
+
+.hotel-card__cta-primary:disabled {
+  background: #f4e30c;
+  color: #231f20;
+  opacity: 0.5;
 }
 
 .hotel-card__value-tag {
@@ -1133,3 +1144,19 @@ textarea.field-control {
 .most-booked-card__arrow{position:absolute;top:50%;z-index:2;width:44px;height:44px;display:flex;align-items:center;justify-content:center;transform:translateY(-50%);border:0;border-radius:50%;background:rgba(255,255,255,.92);color:#231f20;font-size:20px;cursor:pointer}
 .most-booked-card__arrow.is-prev{left:16px}.most-booked-card__arrow.is-next{right:16px}
 .most-booked-card__view{position:absolute;left:16px;bottom:16px;z-index:2;width:calc(50% - 16px);height:40px;border:1px solid #fff;border-radius:24px;background:rgba(0,0,0,.35);color:#fff;font-size:13px;line-height:18px;cursor:pointer}
+
+/* Most Booked primary CTA: brand yellow */
+.most-booked-card__primary>button:first-child,
+.most-booked-card__primary>button:first-child:hover,
+.most-booked-card__primary>button:first-child:focus,
+.most-booked-card__primary>button:first-child:focus-visible,
+.most-booked-card__primary>button:first-child:active{background:#f4e30c;color:#231f20;border:none;transition:opacity 180ms ease,box-shadow 180ms ease}
+.most-booked-card__primary>button:first-child:hover{opacity:.92}
+.most-booked-card__primary>button:first-child:disabled{opacity:.5}
+.hotel-card__cta-primary,
+.hotel-card__cta-primary:hover,
+.hotel-card__cta-primary:focus,
+.hotel-card__cta-primary:focus-visible,
+.hotel-card__cta-primary:active{background:#f4e30c;color:#231f20;border:none}
+.hotel-card__cta-primary:hover{opacity:.92}
+.hotel-card__cta-primary:disabled{opacity:.5}
