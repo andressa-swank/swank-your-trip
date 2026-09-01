@@ -43,7 +43,7 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
     return () => window.removeEventListener("scroll", update);
   }, []);
 
-  const current = testimonials[testimonial];
+  const current = testimonials[testimonial] ?? testimonials[0]!;
   const cycle = (direction: number) =>
     setTestimonial((value) => (value + direction + testimonials.length) % testimonials.length);
 
