@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import bookDirectHero from "@/assets/book-direct-hero.webp";
 import { HotelCard } from "../components/HotelCard";
 import { DESTINATION_REGIONS, type DestinationItem } from "../data/destinations";
@@ -12,24 +12,45 @@ const DESCRIPTIONS: Record<string, string> = {
   "The Surin Phuket": "The Surin Phuket perches on Thailand's finest sand, where Aman architect Ed Tuttle's hillside cottages blend tropical luxury with understated elegance. Think design-forward minimalism meets barefoot sophistication—a resort that whispers rather than shouts.",
 };
 
-function MostBookedCard({ name }: { name: string }) {
+function MostBookedCard({ name, photos = [] }: { name: string; photos?: string[] }) {
   const [open, setOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+
+  useEffect(() => {
+    if (!hovered || photos.length < 2) return;
+    const timer = window.setInterval(() => setPhotoIndex((value) => (value + 1) % photos.length), 1200);
+    return () => window.clearInterval(timer);
+  }, [hovered, photos.length]);
+
+  function cycle(direction: number) {
+    setPhotoIndex((value) => (value + direction + photos.length) % photos.length);
+  }
+
   return (
     <article className="most-booked-card">
-      <div className="most-booked-card__media">
-        <span>[ {name} ]</span>
+      <div className="most-booked-card__media" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+        {photos.length ? <img src={photos[photoIndex]} alt={name} /> : <span>[ {name} ]</span>}
         <span className="most-booked-tag">Most booked</span>
-        <span className="most-booked-card__hover">View Hotel</span>
+        {hovered && photos.length > 1 && (
+          <>
+            <button type="button" aria-label="Previous photo" className="most-booked-card__arrow is-prev" onClick={() => cycle(-1)}>‹</button>
+            <button type="button" aria-label="Next photo" className="most-booked-card__arrow is-next" onClick={() => cycle(1)}>›</button>
+          </>
+        )}
+        {hovered && <button type="button" className="most-booked-card__view">View Hotel</button>}
       </div>
       <div className="most-booked-card__body">
         <h3>{name}</h3>
         <p>{DESCRIPTIONS[name] ?? LOREM}</p>
         <div className="most-booked-card__actions">
           <div className="most-booked-card__primary">
-            <button type="button">Book with Swank</button><span>Best Value</span>
+            <button type="button">Book with Swank</button>
+            <button type="button" className="most-booked-card__why" onClick={() => setOpen((value) => !value)}>
+              Best Value – Why? <span aria-hidden="true">⌄</span>
+            </button>
           </div>
-          <button type="button" className="most-booked-card__why" onClick={() => setOpen((value) => !value)}>Best Value – Why?</button>
-          {open && <div className="hotel-card__why-panel">Hotels treat our bookings differently: better rooms, real perks, and our team in your corner.</div>}
+          {open && <div className="hotel-card__why-panel">Hotels treat our bookings differently: better rooms, real perks, our team in your corner. You'll receive our trip-prep kit plus our destination e-book.</div>}
           <div className="most-booked-card__secondary">
             <button type="button">Booking.com</button><button type="button">Expedia</button>
           </div>
