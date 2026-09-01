@@ -50,7 +50,7 @@ export function FindYourPathScreen({
             {[1, 2, 3].map((d) => (
               <span
                 key={d}
-                className={`h-[3px] flex-1 ${d <= step ? "bg-ink" : "bg-hairline"}`}
+                className={`h-7 w-[3px] ${d <= step ? "bg-brand" : "bg-hairline"}`}
               />
             ))}
           </div>
