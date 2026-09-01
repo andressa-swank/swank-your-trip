@@ -19,7 +19,7 @@ export function BangkokHotelsScreen({
   return (
     <>
       <PageIntro
-        eyebrow="\n"
+        eyebrow="Book Direct"
         title="Bangkok"
         sub="Book Direct"
         onBack={onChangeDestination}
