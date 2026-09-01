@@ -1035,8 +1035,8 @@ textarea.field-control {
   padding: 0 16px;
   border: none;
   border-radius: 4px;
-  background: #231f20;
-  color: #ffffff;
+  background: #f4e30c;
+  color: #231f20;
   font-family: "Suisse Intl", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -1047,9 +1047,20 @@ textarea.field-control {
     box-shadow 180ms ease;
 }
 
-.hotel-card__cta-primary:hover {
-  background: #231f20;
+.hotel-card__cta-primary:hover,
+.hotel-card__cta-primary:focus,
+.hotel-card__cta-primary:focus-visible,
+.hotel-card__cta-primary:active {
+  background: #f4e30c;
+  color: #231f20;
+  border: none;
   opacity: 0.92;
+}
+
+.hotel-card__cta-primary:disabled {
+  background: #f4e30c;
+  color: #231f20;
+  opacity: 0.5;
 }
 
 .hotel-card__value-tag {
