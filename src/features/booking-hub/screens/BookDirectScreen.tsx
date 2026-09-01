@@ -274,7 +274,7 @@ function DestinationRegionCard({ region }: { region: DestinationRegion }) {
               {visibleItems.map((item) => {
                 if (item.href) {
                   return (
-                    <Link key={item.label} to={item.href} className="flex min-h-12 items-center justify-between rounded-[8px] border border-line bg-background px-4 py-3 text-[16px] text-ink hover:bg-brand">
+                    <Link key={item.label} to={item.href} className="flex min-h-12 items-center justify-between rounded-[8px] border border-line bg-background px-4 py-3 text-[16px] text-ink hover:bg-soft">
                       <span>{item.label}</span>
                       <span aria-hidden="true">›</span>
                     </Link>
@@ -283,7 +283,7 @@ function DestinationRegionCard({ region }: { region: DestinationRegion }) {
 
                 if (item.children) {
                   return (
-                    <button key={item.label} type="button" onClick={() => setActiveItem(item)} className="flex min-h-12 w-full items-center justify-between rounded-[8px] border border-line bg-background px-4 py-3 text-left text-[16px] text-ink hover:bg-brand">
+                    <button key={item.label} type="button" onClick={() => setActiveItem(item)} className="flex min-h-12 w-full items-center justify-between rounded-[8px] border border-line bg-background px-4 py-3 text-left text-[16px] text-ink hover:bg-soft">
                       <span>{item.label}</span>
                       <span aria-hidden="true">›</span>
                     </button>
