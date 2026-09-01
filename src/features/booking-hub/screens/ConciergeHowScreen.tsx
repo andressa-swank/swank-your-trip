@@ -1,239 +1,129 @@
-import raftingAsset from "@/assets/concierge-group-rafting.jpg.asset.json";
-import coverAsset from "@/assets/concierge-how-cover.jpg.asset.json";
-import poolAsset from "@/assets/concierge-how-pool.jpg.asset.json";
-import { Btn } from "../components/Button";
+import { useEffect, useState } from "react";
 import type { Screen } from "../types";
 
-const TIERS = [
-  {
-    title: "Level 1: Hotels + perks + VIP",
-    desc: "Already know your hotel? We'll hunt down the best rate and unlock VIP perks, upgrades, late checkout, welcome amenities. At no cost to you.",
-    cta: "Book with perks",
-    price: "Free",
-    note: null as string | null,
-    badge: null as string | null,
-  },
-  {
-    title: "Level 2: Hotels + transfers & tours",
-    desc: "Everything in Level 1, plus zero airport pickup lottery. Every transfer and tour is vetted and pre-booked, no surprises, no haggling.",
-    cta: "Add a transfer or tour",
-    price: "$25",
-    note: "Per transfer or tour",
-    badge: null,
-  },
-  {
-    title: "Level 3: Concierge",
-    desc: "Everything in Levels 1–2, plus our specialty: matching you with hotels that have real character, tested by us, fit to your style and budget.",
-    cta: "Find my hotel",
-    price: "$30",
-    note: "Per night",
-    badge: "Most popular",
-  },
-  {
-    title: "Level 4: Concierge plus",
-    desc: 'The full "just take care of it" tier, your entire itinerary designed by experts: where to go, how long, activities, and flights.',
-    cta: "Plan my full trip",
-    price: "$50",
-    note: "Per night",
-    badge: null,
-  },
+const HERO = "/__l5e/assets-v1/81eb00a4-25f4-42a0-86bc-2fc1a3bc7da2/concierge-how-pool.jpg";
+const CLOSING = "/__l5e/assets-v1/e61d9d8c-127c-4ef6-a2bf-fd09d3663260/concierge-how-cover.jpg";
+
+const reasons = [
+  { n: "01", title: "Perks you can't get on your own + VIP", desc: "Room upgrades, free breakfast, late checkout. We advocate for the best perks." },
+  { n: "02", title: "Price monitoring", desc: "For cancellable bookings, we track your rate. If it drops, we rebook. You save." },
+  { n: "03", title: "Save hours of research", desc: "We've done the legwork. No sponsorships, no paid placements. Honest picks you can trust." },
+  { n: "04", title: "Free destination guide", desc: "Our insider guide packed with everything you need for a great trip." },
 ];
 
-const REFUNDS = [
-  { label: "Trip spend under $5,000", value: "Non-refundable", muted: true },
-  { label: "Trip spend $5,000–$12,000", value: "50% refunded", muted: false },
-  { label: "Trip spend over $12,000", value: "75% refunded", muted: false },
+const testimonials = [
+  { quote: "Your recommendations are absolutely 10 out of 10. Keep up the great work. We'll definitely be back.", author: "David and friends, Playa Viva" },
+  { quote: "Anyone can plan a trip, but when you want the details to matter, their insights and knowledge turn it into an unforgettable experience.", author: "Trisha, honeymoon in Bali" },
+  { quote: "The Swank team were awesome, great communication, real value, and the right accommodation options.", author: "Rob, family trip in Thailand" },
 ];
 
-const CHANGES = [
-  {
-    title: "Small change",
-    desc: "You're changing one thing, whether that's one hotel, one date, or one vendor. The rest of your trip stays the same.",
-    price: "First one free, then $75",
-  },
-  {
-    title: "Big change",
-    desc: "You're changing something that affects your whole trip, like new dates across several hotels, a different route, or adding or removing a destination.",
-    price: "$200",
-  },
-];
+function DetailIcon() {
+  return <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="8" y="6" width="32" height="36" rx="2" /><path d="M15 16h18M15 24h18M15 32h10" /></svg>;
+}
+function ProposalIcon() {
+  return <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="5" y="10" width="38" height="28" rx="2" /><path d="M6 12l18 15 18-15" /></svg>;
+}
+function ApprovalIcon() {
+  return <svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><circle cx="24" cy="24" r="18" /><path d="M16 24l6 6 12-13" /></svg>;
+}
 
 export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
+  const [scrollY, setScrollY] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [testimonial, setTestimonial] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      setScrollY(window.scrollY);
+      setProgress(Math.min(100, (window.scrollY / max) * 100));
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    return () => window.removeEventListener("scroll", update);
+  }, []);
+
+  const current = testimonials[testimonial];
+  const cycle = (direction: number) =>
+    setTestimonial((value) => (value + direction + testimonials.length) % testimonials.length);
+
   return (
-    <>
-      <section className="relative h-[340px] w-full overflow-hidden md:h-[520px]">
-        <img
-          src={coverAsset.url}
-          alt="Swank concierge travel scene"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.32)_0%,rgba(0,0,0,0.22)_45%,rgba(0,0,0,0.5)_100%)]" />
-        <div className="page-container relative flex h-full flex-col items-center justify-center text-center">
-          <p className="mb-6 font-[Arial,Helvetica,sans-serif] text-[16px] uppercase tracking-[0.18em] text-white/80 sm:mb-8">Concierge</p>
-          <h1 className="font-[Arial,Helvetica,sans-serif] text-[40px] font-bold leading-[1.1] text-white md:text-[60px]">How concierge works</h1>
-          <p className="mt-7 font-[Arial,Helvetica,sans-serif] text-[21px] leading-[1.45] text-white/85 sm:mt-10">
-            Takes less than two minutes.
-          </p>
-          <div className="mt-8">
-            <Btn variant="accent" onClick={() => onNav("intake")}>
-              Let&apos;s get started
-            </Btn>
-          </div>
+    <div className="concierge-how">
+      <div className="concierge-scroll-track" aria-hidden="true"><span style={{ width: `${progress}%` }} /></div>
+
+      {scrollY > 480 && (
+        <div className="concierge-scroll-header">
+          <button type="button" className="concierge-mini-brand" onClick={() => onNav("gate")}>
+            <span /> Swank Guide
+          </button>
+          <button type="button" className="concierge-pill concierge-pill-small" onClick={() => onNav("intake")}>Let's get started</button>
+        </div>
+      )}
+
+      {scrollY > 640 && (
+        <div className="concierge-floating-cta">
+          <span>Takes less than two minutes.</span>
+          <button type="button" className="concierge-pill" onClick={() => onNav("intake")}>Let's get started</button>
+        </div>
+      )}
+
+      <section className="concierge-how-hero">
+        <img src={HERO} alt="" />
+        <div className="concierge-photo-overlay" />
+        <h1>Why Us. What You Get. How It Works</h1>
+      </section>
+
+      <section className="concierge-reasons">
+        {reasons.map((reason, index) => (
+          <article key={reason.n} style={{ animationDelay: `${index * 80}ms` }}>
+            <span>{reason.n}</span>
+            <h2>{reason.title}</h2>
+            <p>{reason.desc}</p>
+          </article>
+        ))}
+      </section>
+
+      <p className="concierge-commission">We earn a commission when you book. That's how we keep the lights on — it costs you nothing extra.</p>
+
+      <section className="concierge-levels">
+        <header>
+          <h2>Levels of service</h2>
+          <p>From hotel bookings with perks to your full trip planned</p>
+        </header>
+        <div className="concierge-level-gradient" />
+        <div className="concierge-level-grid">
+          <article><h3>Hotel + VIP perks</h3><p>Free</p></article>
+          <article><h3>Full concierge planning</h3><p>From $30/day</p></article>
+        </div>
+        <p className="concierge-fee-note">Some levels have a planning fee — many are refundable after your trip. <span>See how it works →</span></p>
+      </section>
+
+      <section className="concierge-expect">
+        <h2>What to expect</h2>
+        <div>
+          <article><DetailIcon /><h3>Give us your trip details</h3></article>
+          <article><ProposalIcon /><h3>We'll send you a proposal</h3></article>
+          <article><ApprovalIcon /><h3>You approve or request changes — we handle everything</h3></article>
         </div>
       </section>
 
-      <section className="page-container py-12 md:py-[72px]">
-        <div className="mx-auto max-w-[1100px]">
-          <h2 className="font-[Arial,Helvetica,sans-serif] text-[30px] font-bold leading-[1.15] text-ink md:text-[42px]">Choose your level of support</h2>
-          <p className="mt-6 max-w-[900px] font-[Arial,Helvetica,sans-serif] text-[18px] leading-[1.5] text-ink-muted md:text-[21px]">
-            Every trip gets the same care, though not every trip takes the same work. We pour our
-            expertise, time, and industry relationships into making sure your travel is seamless, and
-            below you&apos;ll find what&apos;s included at each level, what it costs, and how much
-            comes back to you after you travel, since many of our fees are refunded. Fees are per
-            trip for up to two travelers, not per person.
-          </p>
+      <div className="concierge-start-block">
+        <button type="button" className="concierge-pill concierge-pill-large" onClick={() => onNav("intake")}>Let's get started</button>
+        <p>Takes less than two minutes</p>
+      </div>
 
-          <div className="mt-10">
-            {TIERS.map((tier) => (
-              <div
-                key={tier.title}
-                className="grid gap-4 border-b border-hairline py-8 last:border-b-0 md:grid-cols-[4px_1fr_200px] md:gap-5"
-              >
-                <span className="hidden h-10 w-1 bg-brand md:block" />
-                <div>
-                  <div className="mb-3 flex flex-wrap items-center gap-3">
-                    <h3 className="font-[Arial,Helvetica,sans-serif] text-[24px] font-bold leading-[1.2] text-ink">{tier.title}</h3>
-                    {tier.badge && (
-                      <span className="rounded-full bg-brand px-3.5 py-[5px] font-[Arial,Helvetica,sans-serif] text-[12px] font-bold text-ink">
-                        {tier.badge}
-                      </span>
-                    )}
-                  </div>
-                  <p className="mb-4 max-w-[620px] font-[Arial,Helvetica,sans-serif] text-[16px] leading-[1.5] text-ink-muted">{tier.desc}</p>
-                  <button
-                    type="button"
-                    onClick={() => onNav("intake")}
-                    className="font-[Arial,Helvetica,sans-serif] text-[16px] text-ink underline underline-offset-4 transition-opacity duration-[180ms] hover:opacity-70"
-                  >
-                    {tier.cta}
-                  </button>
-                </div>
-                <div className="md:text-right">
-                  <p className="font-[Arial,Helvetica,sans-serif] text-[24px] font-bold leading-[1.2] text-ink">{tier.price}</p>
-                  {tier.note && (
-                    <span className="mt-1 block font-[Arial,Helvetica,sans-serif] text-[12px] text-ink-muted">{tier.note}</span>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+      <section className="concierge-closing">
+        <img src={CLOSING} alt="" />
+        <div className="concierge-photo-overlay" />
+        <div className="concierge-closing-content">
+          <button type="button" onClick={() => cycle(-1)} aria-label="Previous testimonial">‹</button>
+          <blockquote key={testimonial}>
+            <p>“{current.quote}”</p>
+            <footer>{current.author}</footer>
+          </blockquote>
+          <button type="button" onClick={() => cycle(1)} aria-label="Next testimonial">›</button>
         </div>
       </section>
-
-      <section className="border-t border-hairline bg-soft py-12 md:py-16">
-        <div className="page-container">
-          <div className="mx-auto max-w-[1100px]">
-            <h2 className="font-[Arial,Helvetica,sans-serif] text-[30px] font-bold leading-[1.15] text-ink md:text-[42px]">What&apos;s refundable</h2>
-            <p className="mt-6 max-w-[900px] font-[Arial,Helvetica,sans-serif] text-[18px] leading-[1.5] text-ink-muted md:text-[21px]">
-              The more you book with us, the more we can give back. This applies to the nightly fees
-              for concierge and concierge plus. Transfer, tour, and change fees are non-refundable,
-              and if your trip is canceled, the fee is non-refundable.
-            </p>
-            <div className="mt-10 border-t border-hairline">
-              {REFUNDS.map((row) => (
-                <div
-                  key={row.label}
-                  className="flex items-baseline justify-between gap-4 border-b border-hairline py-6"
-                >
-                  <span className="font-[Arial,Helvetica,sans-serif] text-[21px] leading-[1.3] text-ink">{row.label}</span>
-                  <span
-                    className={
-                      row.muted
-                        ? "font-[Arial,Helvetica,sans-serif] text-[19px] text-ink-muted"
-                        : "font-[Arial,Helvetica,sans-serif] text-[19px] font-bold text-ink"
-                    }
-                  >
-                    {row.value}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="page-container py-12 md:py-[72px]">
-        <div className="mx-auto max-w-[1100px]">
-          <h2 className="font-[Arial,Helvetica,sans-serif] text-[30px] font-bold leading-[1.15] text-ink md:text-[42px]">
-            Groups of three or more start at concierge plus
-          </h2>
-          <p className="mt-6 max-w-[900px] font-[Arial,Helvetica,sans-serif] text-[18px] leading-[1.5] text-ink-muted md:text-[21px]">
-            We love planning family and group trips, though they just take more work behind the
-            scenes. Most booking systems are built for two people per room; add a third traveler or a
-            child and the process goes manual, with direct back-and-forth on age policies and
-            adjoining rooms. Concierge plus gives us the dedicated time to handle it all, so your
-            crew travels without a hitch.
-          </p>
-        </div>
-      </section>
-
-      <figure className="m-0">
-        <img
-          src={raftingAsset.url}
-          alt="A group of travelers whitewater rafting together down a river"
-          loading="lazy"
-          className="h-[280px] w-full object-cover md:h-[520px]"
-        />
-      </figure>
-
-      <section className="border-t border-hairline py-12 md:py-16">
-        <div className="page-container">
-          <div className="mx-auto max-w-[1100px]">
-            <h2 className="font-[Arial,Helvetica,sans-serif] text-[30px] font-bold leading-[1.15] text-ink md:text-[42px]">Changes to your trip</h2>
-            <p className="mt-6 max-w-[900px] font-[Arial,Helvetica,sans-serif] text-[18px] leading-[1.5] text-ink-muted md:text-[21px]">
-              Plans change, and we get it. Your first minor change is on us. After that, changes carry
-              a non-refundable fee, because every change means real work behind the scenes.
-            </p>
-            <div className="mt-10">
-              {CHANGES.map((row) => (
-                <div
-                  key={row.title}
-                  className="grid gap-4 border-b border-hairline py-8 last:border-b-0 md:grid-cols-[4px_1fr_200px] md:gap-5"
-                >
-                  <span className="hidden h-10 w-1 bg-brand md:block" />
-                  <div>
-                    <h3 className="mb-2 font-[Arial,Helvetica,sans-serif] text-[24px] font-bold leading-[1.2] text-ink">{row.title}</h3>
-                    <p className="max-w-[700px] font-[Arial,Helvetica,sans-serif] text-[16px] leading-[1.5] text-ink-muted">{row.desc}</p>
-                  </div>
-                  <p className="whitespace-nowrap font-[Arial,Helvetica,sans-serif] text-[19px] font-bold text-ink md:text-right">
-                    {row.price}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden py-20 text-center md:py-28">
-        <img
-          src={poolAsset.url}
-          alt="Infinity pool overlooking the sea"
-          loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.35)_0%,rgba(0,0,0,0.45)_100%)]" />
-        <div className="page-container relative">
-          <h2 className="mx-auto max-w-[900px] font-[Arial,Helvetica,sans-serif] text-[28px] font-bold leading-[1.2] text-white md:text-[33px]">
-            Skip the guesswork. Let the Swank team build your trip.
-          </h2>
-          <div className="mt-8">
-            <Btn variant="accent" onClick={() => onNav("intake")}>
-              Let&apos;s get started
-            </Btn>
-          </div>
-        </div>
-      </section>
-    </>
+    </div>
   );
 }
