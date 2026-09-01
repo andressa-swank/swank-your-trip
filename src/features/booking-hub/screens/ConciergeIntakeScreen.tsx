@@ -149,7 +149,7 @@ export function ConciergeIntakeScreen({
         <div ref={formTop} className="mx-auto max-w-[680px]" style={{ scrollMarginTop: 96 }}>
           <div className="mb-9 h-[3px] w-full overflow-hidden bg-hairline">
             <div
-              className="h-full bg-accent transition-[width] duration-300"
+              className="h-full bg-brand transition-[width] duration-300"
               style={{ width: `${pct}%` }}
             />
           </div>
@@ -314,7 +314,7 @@ export function ConciergeIntakeScreen({
               type="button"
               disabled={sending}
               onClick={handleNext}
-              className="rounded-[24px] bg-accent px-10 py-[10px] text-[14px] font-normal text-ink disabled:opacity-60"
+              className="rounded-[24px] bg-brand px-10 py-[10px] text-[14px] font-normal text-ink disabled:opacity-60"
             >
               {step === TOTAL_STEPS ? (sending ? "Sending…" : "Submit") : "Next"}
             </button>
