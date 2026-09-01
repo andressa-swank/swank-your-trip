@@ -1,8 +1,43 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import bookDirectHero from "@/assets/book-direct-hero.webp";
-import { Eyebrow } from "../components/Eyebrow";
-import { DESTINATIONS } from "../data/destinations";
+import { HotelCard } from "../components/HotelCard";
+import { DESTINATION_REGIONS, type DestinationItem } from "../data/destinations";
 import { HOTELS, MOST_BOOKED_HOTELS } from "../data/hotels";
+
+const LOREM = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+
+const DESCRIPTIONS: Record<string, string> = {
+  "The Sarojin": "Just north of Phuket's crowds, The Sarojin is an elegant, design-forward boutique resort with real value. Quiet beach, lush grounds, great food—and one of the best hotel deals in Thailand.",
+  "Pimalai Resort & Spa": "The Pimalai Resort & Spa combines true barefoot luxury with remote jungle surroundings and a long stretch of quiet Koh Lanta beach. An independent Thai-owned resort that's elegant but unpretentious—big on privacy, service, and low-key sophistication.",
+  "The Surin Phuket": "The Surin Phuket perches on Thailand's finest sand, where Aman architect Ed Tuttle's hillside cottages blend tropical luxury with understated elegance. Think design-forward minimalism meets barefoot sophistication—a resort that whispers rather than shouts.",
+};
+
+function MostBookedCard({ name }: { name: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <article className="most-booked-card">
+      <div className="most-booked-card__media">
+        <span>[ {name} ]</span>
+        <span className="most-booked-tag">Most booked</span>
+        <span className="most-booked-card__hover">View Hotel</span>
+      </div>
+      <div className="most-booked-card__body">
+        <h3>{name}</h3>
+        <p>{DESCRIPTIONS[name] ?? LOREM}</p>
+        <div className="most-booked-card__actions">
+          <div className="most-booked-card__primary">
+            <button type="button">Book with Swank</button><span>Best Value</span>
+          </div>
+          <button type="button" className="most-booked-card__why" onClick={() => setOpen((value) => !value)}>Best Value – Why?</button>
+          {open && <div className="hotel-card__why-panel">Hotels treat our bookings differently: better rooms, real perks, and our team in your corner.</div>}
+          <div className="most-booked-card__secondary">
+            <button type="button">Booking.com</button><button type="button">Expedia</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+}
 
 export function DestinationScreen({
   onGoHotel,
@@ -11,176 +46,95 @@ export function DestinationScreen({
   onGoHotel: () => void;
   onSwitchConcierge: () => void;
 }) {
-  const [query, setQuery] = useState("");
-  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState({ query: "", checkIn: "", checkOut: "", guests: "2" });
+  const [hasSearched, setHasSearched] = useState(false);
+  const [results, setResults] = useState(HOTELS);
+  const [openRegions, setOpenRegions] = useState<Record<string, boolean>>({});
+  const [activeChildren, setActiveChildren] = useState<Record<string, string | null>>({});
 
-  const q = query.trim().toLowerCase();
-  const hotelMatches = q ? HOTELS.filter((h) => h.name.toLowerCase().includes(q)) : [];
-  const destMatches = q ? DESTINATIONS.filter((d) => d.name.toLowerCase().includes(q)) : DESTINATIONS;
-  const noMatches = q && hotelMatches.length === 0 && destMatches.length === 0;
+  function submitSearch(event: FormEvent) {
+    event.preventDefault();
+    const query = search.query.trim().toLowerCase();
+    setResults(HOTELS.filter((hotel) => !query || [hotel.name, "bangkok, thailand", hotel.tier].some((value) => value.toLowerCase().includes(query))));
+    setHasSearched(true);
+  }
 
-  const rowCls =
-    "flex items-center justify-between gap-3 border-b border-hairline py-3 text-[17px] leading-7 last:border-b-0";
+  function chooseItem(region: string, item: DestinationItem) {
+    if (item.goHotel) onGoHotel();
+    else if (item.children) setActiveChildren((current) => ({ ...current, [region]: item.label }));
+  }
 
   return (
     <>
-      <section className="book-direct-hero">
-        <img
-          src={bookDirectHero}
-          alt="Historic Italian villa surrounded by gardens and Tuscan hills"
-          width={1200}
-          height={800}
-        />
-        <div className="book-direct-hero__overlay" />
-        <div className="page-container book-direct-hero__content">
-          <Eyebrow className="text-white/80">Book Direct</Eyebrow>
-          <h1 className="display-heading mt-3 max-w-[760px] text-white">Where are you going?</h1>
-        </div>
+      <section className="destination-hero">
+        <img src={bookDirectHero} alt="Historic Italian villa surrounded by gardens and Tuscan hills" />
+        <div />
+        <h1>Book Direct</h1>
       </section>
-      <div className="page-container pb-16 pt-12 md:pb-24 md:pt-12">
-        <div className="relative mb-12 max-w-[680px]">
-          <label className="field-label" htmlFor="destination-search">
-            Destination
+
+      <div className="destination-page">
+        <form className="destination-search" onSubmit={submitSearch}>
+          <label className="destination-search__query">
+            <svg viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.2" /><path d="M12.5 12.5L16 16" /></svg>
+            <input value={search.query} onChange={(event) => setSearch({ ...search, query: event.target.value })} placeholder="Destination or hotel name" />
           </label>
-          <input
-            id="destination-search"
-            value={query}
-            onFocus={() => setOpen(true)}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setOpen(true);
-            }}
-            onBlur={() => setTimeout(() => setOpen(false), 150)}
-            placeholder="Search a city or country..."
-            className="field-control"
-          />
-          {open && (
-            <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-20 max-h-72 overflow-y-auto rounded-[8px] border border-line bg-background shadow-[var(--shadow-subtle)]">
-              {noMatches && (
-                <div className="flex items-center justify-between gap-3 border-b border-hairline px-4 py-3 text-[15px] text-ink-muted">
-                  <span>"{query}" is not one of our destinations or hotels yet</span>
-                  <span className="badge-pill shrink-0 bg-soft uppercase tracking-wide text-ink-muted">
-                    Coming soon
-                  </span>
-                </div>
-              )}
-              {hotelMatches.map((h) => (
-                <div
-                  key={h.id}
-                  onMouseDown={onGoHotel}
-                  className="flex cursor-pointer items-center justify-between gap-3 border-b border-hairline px-4 py-3 text-[16px] text-ink hover:bg-soft"
-                >
-                  <span>{h.name}</span>
-                  <span className="badge-pill shrink-0 bg-brand uppercase tracking-wide text-ink">
-                    Hotel
-                  </span>
-                </div>
-              ))}
-              {destMatches.map((d) => (
-                <div
-                  key={d.name}
-                  onMouseDown={() => d.built && onGoHotel()}
-                  className={`flex items-center justify-between gap-3 border-b border-hairline px-4 py-3 text-[16px] last:border-b-0 ${
-                    d.built ? "cursor-pointer text-ink hover:bg-soft" : "cursor-default text-ink-muted"
-                  }`}
-                >
-                  <span>{d.name}</span>
-                  {!d.built && (
-                    <span className="badge-pill shrink-0 bg-soft uppercase tracking-wide text-ink-muted">
-                      Coming soon
-                    </span>
+          <span className="destination-search__divider" />
+          <label><span>Check-in</span><input type="date" value={search.checkIn} onChange={(event) => setSearch({ ...search, checkIn: event.target.value })} /></label>
+          <span className="destination-search__divider" />
+          <label><span>Check-out</span><input type="date" value={search.checkOut} onChange={(event) => setSearch({ ...search, checkOut: event.target.value })} /></label>
+          <span className="destination-search__divider" />
+          <label><span>Guests</span><select value={search.guests} onChange={(event) => setSearch({ ...search, guests: event.target.value })}><option value="1">1 guest</option><option value="2">2 guests</option><option value="3">3 guests</option><option value="4+">4+ guests</option></select></label>
+          <button type="submit">Search</button>
+        </form>
+
+        <section className="destination-browse">
+          <h2>Browse by Destination</h2>
+          <div className="destination-region-grid">
+            {DESTINATION_REGIONS.map((region) => {
+              const open = !!openRegions[region.label];
+              const activeLabel = activeChildren[region.label];
+              const activeItem = activeLabel ? region.items.find((item) => item.label === activeLabel) : undefined;
+              const visibleItems = activeItem?.children ?? region.items;
+              return (
+                <article key={region.label} className={open ? "is-open" : ""}>
+                  <button type="button" className="destination-region__toggle" onClick={() => {
+                    setOpenRegions((current) => ({ ...current, [region.label]: !open }));
+                    if (open) setActiveChildren((current) => ({ ...current, [region.label]: null }));
+                  }}>
+                    <span>{region.label}</span><span>{open ? "–" : "+"}</span>
+                  </button>
+                  {open && (
+                    <div className="destination-region__items">
+                      {activeItem && <button type="button" className="destination-region__back" onClick={() => setActiveChildren((current) => ({ ...current, [region.label]: null }))}>← Back to {region.label}</button>}
+                      {visibleItems.map((item) => (
+                        <button type="button" key={item.label} onClick={() => chooseItem(region.label, item)}>
+                          <span>{item.label}</span>
+                          {item.children || item.goHotel ? <span>›</span> : !item.href ? <small>Coming soon</small> : null}
+                        </button>
+                      ))}
+                    </div>
                   )}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className="mb-8 flex items-center gap-4">
-          <div className="h-px flex-1 bg-hairline" />
-          <span className="text-[12px] uppercase tracking-[0.14em] text-ink-muted">Or browse by region</span>
-          <div className="h-px flex-1 bg-hairline" />
-        </div>
-
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3">
-          <div className="rounded-[8px] border border-hairline bg-background p-5 md:p-7">
-            <h2 className="mb-4 text-[22px] leading-[30px] font-normal text-ink">Regions</h2>
-            {["Asia", "Caribbean", "Central America", "Europe", "Mexico", "Nordic", "US + Canada"].map((r, i) => (
-              <div
-                key={r}
-                className={`${rowCls} ${i === 0 ? "font-medium text-ink" : "cursor-pointer text-ink-muted hover:text-ink hover:underline"}`}
-              >
-                <span>{r}</span> <span aria-hidden="true">›</span>
-              </div>
-            ))}
+                </article>
+              );
+            })}
           </div>
-          <div className="rounded-[8px] border border-hairline bg-background p-5 md:p-7">
-            <h2 className="mb-4 text-[22px] leading-[30px] font-normal text-ink">Asia</h2>
-            {["Thailand", "Bali", "India", "Sri Lanka"].map((c, i) => (
-              <div
-                key={c}
-                className={`${rowCls} ${i === 0 ? "font-medium text-ink" : "cursor-pointer text-ink-muted hover:text-ink hover:underline"}`}
-              >
-                <span>{c}</span> <span aria-hidden="true">›</span>
-              </div>
-            ))}
-          </div>
-          <div className="rounded-[8px] border border-hairline bg-background p-5 md:p-7">
-            <h2 className="mb-4 text-[22px] leading-[30px] font-normal text-ink">Thailand</h2>
-            <button
-              onClick={onGoHotel}
-              className={`${rowCls} w-full font-medium text-ink hover:underline`}
-            >
-              <span>Bangkok</span> <span aria-hidden="true">›</span>
-            </button>
-            {["Koh Samui", "Greater Phuket", "Chiang Mai & Chiang Rai", "Pattaya & Hua Hin"].map((c) => (
-              <div key={c} className={`${rowCls} text-ink-muted`}>
-                <span>{c}</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        </section>
 
-        <section className="mt-16 border-t border-hairline pt-12 md:mt-20 md:pt-16" aria-labelledby="most-booked-title">
-          <div className="mb-8 max-w-[720px] md:mb-10">
-            <p className="mb-3 text-[12px] font-medium uppercase tracking-[0.14em] text-ink-muted">
-              Guest favorites
-            </p>
-            <h2 id="most-booked-title" className="section-heading text-ink">
-              Most booked with Swank
-            </h2>
-            <p className="mt-3 text-[16px] leading-7 text-ink-muted">
-              The hotels our travelers ask for and book most often.
-            </p>
-          </div>
+        {hasSearched && (
+          <section className="destination-results">
+            <p>Search results</p>
+            <h2>Hotels matching your search</h2>
+            {results.length ? <div className="hotel-card-grid">{results.map((hotel) => <HotelCard key={hotel.id} hotel={hotel} />)}</div> : <div className="destination-no-results">We do not have a Swank search result for that yet. Try Bangkok, or browse by destination above.</div>}
+          </section>
+        )}
 
-          <div className="listing-grid">
-            {MOST_BOOKED_HOTELS.map((hotel) => (
-              <article
-                key={hotel}
-                className="group flex flex-col bg-background transition-all duration-[180ms] hover:-translate-y-0.5"
-              >
-                <div className="hotel-card__media">
-                  <span className="max-w-[82%] px-4 text-center text-[12px] leading-[18px] text-ink-muted">
-                    [ {hotel} ]
-                  </span>
-                  <span className="most-booked-tag">most booked</span>
-
-                </div>
-                <div className="listing-card__body">
-                  <h3 className="listing-card__name">{hotel}</h3>
-                </div>
-              </article>
-            ))}
-          </div>
-
+        <section className="most-booked-section">
+          <h2>Most booked hotels</h2>
+          <div className="most-booked-grid">{MOST_BOOKED_HOTELS.map((hotel) => <MostBookedCard key={hotel} name={hotel} />)}</div>
         </section>
       </div>
-      <div className="border-t border-hairline py-6 text-center">
-        <button onClick={onSwitchConcierge} className="text-link min-h-11 font-medium">
-          Switch to Concierge
-        </button>
-      </div>
+
+      <div className="destination-switch"><button type="button" onClick={onSwitchConcierge}>Switch to Concierge</button></div>
     </>
   );
 }
