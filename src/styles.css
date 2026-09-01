@@ -1111,3 +1111,21 @@ textarea.field-control {
 
 @media(max-width:900px){.destination-search{flex-wrap:wrap;border-radius:24px}.destination-search__query{flex:1 1 100%!important}.destination-search__divider{display:none}.destination-search label{flex:1 1 28%}.destination-region-grid,.most-booked-grid,.destination-results .hotel-card-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.choice-grid{grid-template-columns:1fr}.destination-hero{min-height:520px;height:70vh}.destination-page{padding-inline:16px}.destination-search{gap:16px;padding:20px}.destination-search label{flex:1 1 44%}.destination-search>button{width:100%}.destination-region-grid,.most-booked-grid,.destination-results .hotel-card-grid{grid-template-columns:1fr}.most-booked-grid{gap:48px}.hotel-card__secondary-row{grid-template-columns:1fr}.testimonial-stage{min-height:360px}}
+
+
+/* Supplied HTML: exact Most Booked card geometry and hover behavior */
+.most-booked-section{margin-top:48px;padding-top:0;padding-bottom:48px;border-top:0;border-bottom:1px solid #e8e6e1}
+.most-booked-section>h2{max-width:720px;margin:0 0 32px;font-size:26px;line-height:39px;font-weight:400}
+.most-booked-grid{gap:40px}
+.most-booked-card__media>img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity 200ms ease}
+.most-booked-card__body{padding-top:20px}
+.most-booked-card__body h3{margin-bottom:10px}
+.most-booked-card__body>p{margin-bottom:18px}
+.most-booked-card__actions{gap:14px}
+.most-booked-card__primary{gap:16px}
+.most-booked-card__primary>button:first-child{flex:0 0 auto}
+.most-booked-card__why{display:flex;align-items:center;gap:6px;align-self:auto;padding:0;border:0;background:none;color:#66645f;font-size:13px;font-weight:400;line-height:18px;text-decoration:none;white-space:nowrap}
+.most-booked-card__why span{padding:0;font-size:15px;line-height:1}
+.most-booked-card__arrow{position:absolute;top:50%;z-index:2;width:44px;height:44px;display:flex;align-items:center;justify-content:center;transform:translateY(-50%);border:0;border-radius:50%;background:rgba(255,255,255,.92);color:#231f20;font-size:20px;cursor:pointer}
+.most-booked-card__arrow.is-prev{left:16px}.most-booked-card__arrow.is-next{right:16px}
+.most-booked-card__view{position:absolute;left:16px;bottom:16px;z-index:2;width:calc(50% - 16px);height:40px;border:1px solid #fff;border-radius:24px;background:rgba(0,0,0,.35);color:#fff;font-size:13px;line-height:18px;cursor:pointer}
