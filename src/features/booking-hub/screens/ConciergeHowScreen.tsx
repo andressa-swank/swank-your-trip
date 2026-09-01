@@ -167,6 +167,15 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
         </div>
       </section>
 
+      <figure className="m-0">
+        <img
+          src={raftingAsset.url}
+          alt="A group of travelers whitewater rafting together down a river"
+          loading="lazy"
+          className="h-[280px] w-full object-cover md:h-[520px]"
+        />
+      </figure>
+
       <section className="border-t border-hairline py-12 md:py-16">
         <div className="page-container">
           <div className="mx-auto max-w-[1100px]">
