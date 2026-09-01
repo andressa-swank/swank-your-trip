@@ -1,9 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Btn } from "../components/Button";
-import { FormProgress } from "../components/FormProgress";
 import { OptionRow } from "../components/OptionRow";
-import { PageIntro } from "../components/PageIntro";
 import { INTAKE_ENDPOINT } from "../constants";
 import {
   INTAKE_DATA_KEY,
@@ -30,6 +27,8 @@ const emptyIntake: IntakeData = {
   budget: "",
   stage: "",
 };
+
+const TOTAL_STEPS = 7;
 
 export function ConciergeIntakeScreen({
   onSubmitted,
@@ -104,24 +103,56 @@ export function ConciergeIntakeScreen({
     }
   }
 
+  function handleNext() {
+    if (step === 1) {
+      if (!data.email || !data.email.includes("@")) {
+        setEmailError(true);
+        return;
+      }
+      setEmailError(false);
+    }
+    if (step < TOTAL_STEPS) {
+      setStep(step + 1);
+      return;
+    }
+    void submit();
+  }
+
   const pct = [14, 28, 42, 56, 70, 84, 98][step - 1];
 
   return (
     <>
-      <PageIntro eyebrow="Concierge" title="Tell us about your trip.">
-        {step === 1 && (
-          <Link
-            to="/concierge/how"
-            className="concierge-how-access"
-            aria-label="Learn how Concierge works"
-          >
-            How Concierge Works
-          </Link>
-        )}
-      </PageIntro>
-      <div className="page-container pb-16 pt-12 md:pb-24 md:pt-12">
+      <div className="bg-background pb-8 pt-10">
+        <div className="page-container text-center">
+          <h1 className="display-heading text-ink" style={{ scrollMarginTop: 96 }}>
+            Tell us about your trip
+          </h1>
+          <p className="mx-auto mt-5 max-w-[560px] text-[16px] leading-[26px] text-ink">
+            Our job? To make sure your trip feels exactly how you imagined — and to help you avoid
+            those "it looked better online" moments.
+          </p>
+          <p className="mx-auto mt-4 max-w-[560px] text-[16px] leading-[26px] text-ink">
+            Share a few details below, and we'll get right back to you. See{" "}
+            <Link
+              to="/concierge/how"
+              className="font-semibold underline underline-offset-[3px]"
+              aria-label="Learn how Concierge works"
+            >
+              How Concierge Works
+            </Link>{" "}
+            if you're wondering what happens next.
+          </p>
+        </div>
+      </div>
+
+      <div className="page-container pb-12 pt-12">
         <div ref={formTop} className="mx-auto max-w-[680px]" style={{ scrollMarginTop: 96 }}>
-          <FormProgress step={step} total={7} pct={pct} />
+          <div className="mb-9 h-[3px] w-full overflow-hidden bg-hairline">
+            <div
+              className="h-full bg-accent transition-[width] duration-300"
+              style={{ width: `${pct}%` }}
+            />
+          </div>
 
           <div key={step} className="animate-step">
             {step === 1 && (
@@ -136,22 +167,15 @@ export function ConciergeIntakeScreen({
                   className="hidden"
                 />
                 <div className="flex flex-col gap-5">
+                  <input
+                    id="fname"
+                    value={data.fname}
+                    onChange={(e) => patch({ fname: e.target.value })}
+                    placeholder="First name or nickname"
+                    aria-label="First name or nickname"
+                    className="field-control"
+                  />
                   <div>
-                    <label className="field-label" htmlFor="fname">
-                      First name or nickname
-                    </label>
-                    <input
-                      id="fname"
-                      value={data.fname}
-                      onChange={(e) => patch({ fname: e.target.value })}
-                      placeholder="First name or nickname"
-                      className="field-control"
-                    />
-                  </div>
-                  <div>
-                    <label className="field-label" htmlFor="email">
-                      Email address
-                    </label>
                     <input
                       id="email"
                       value={data.email}
@@ -161,6 +185,7 @@ export function ConciergeIntakeScreen({
                       }}
                       type="email"
                       placeholder="Email address"
+                      aria-label="Email address"
                       aria-invalid={emailError}
                       aria-describedby="email-error"
                       className="field-control"
@@ -171,37 +196,15 @@ export function ConciergeIntakeScreen({
                       </p>
                     )}
                   </div>
-                  <div>
-                    <label className="field-label" htmlFor="phone">
-                      Phone number
-                    </label>
-                    <div className="grid grid-cols-[auto_minmax(0,1fr)] gap-3">
-                      <select
-                        value={data.cc}
-                        onChange={(e) => patch({ cc: e.target.value })}
-                        aria-label="Country code"
-                        className="field-control w-auto"
-                      >
-                        <option value="+1">US +1</option>
-                        <option value="+44">UK +44</option>
-                        <option value="+61">Australia +61</option>
-                        <option value="+55">Brazil +55</option>
-                      </select>
-                      <input
-                        id="phone"
-                        value={data.phone}
-                        onChange={(e) => patch({ phone: e.target.value })}
-                        type="tel"
-                        placeholder="Phone number"
-                        className="field-control"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-10">
-                  <Btn full variant="accent" onClick={() => setStep(2)}>
-                    Next
-                  </Btn>
+                  <input
+                    id="phone"
+                    value={data.phone}
+                    onChange={(e) => patch({ phone: e.target.value })}
+                    type="tel"
+                    placeholder="Phone number"
+                    aria-label="Phone number"
+                    className="field-control"
+                  />
                 </div>
               </>
             )}
@@ -209,21 +212,14 @@ export function ConciergeIntakeScreen({
             {step === 2 && (
               <>
                 <h2 className="section-heading mb-6 text-ink">Where are you going?</h2>
-                <label className="field-label" htmlFor="dest">
-                  Destination
-                </label>
                 <input
                   id="dest"
                   value={data.dest}
                   onChange={(e) => patch({ dest: e.target.value })}
                   placeholder="e.g. Thailand, Paris, anywhere warm..."
+                  aria-label="Destination"
                   className="field-control"
                 />
-                <div className="mt-10">
-                  <Btn full variant="accent" onClick={() => setStep(3)}>
-                    Next
-                  </Btn>
-                </div>
               </>
             )}
 
@@ -247,11 +243,6 @@ export function ConciergeIntakeScreen({
                     className="field-control"
                   />
                 </div>
-                <div className="mt-10">
-                  <Btn full variant="accent" onClick={() => setStep(4)}>
-                    Next
-                  </Btn>
-                </div>
               </>
             )}
 
@@ -273,11 +264,6 @@ export function ConciergeIntakeScreen({
                     className="field-control"
                   />
                 </div>
-                <div className="mt-10">
-                  <Btn full variant="accent" onClick={() => setStep(5)}>
-                    Next
-                  </Btn>
-                </div>
               </>
             )}
 
@@ -286,21 +272,14 @@ export function ConciergeIntakeScreen({
                 <h2 className="section-heading mb-6 text-ink">
                   What kind of experience are you looking for?
                 </h2>
-                <label className="field-label" htmlFor="experience">
-                  Experience
-                </label>
                 <textarea
                   id="experience"
                   value={data.experience}
                   onChange={(e) => patch({ experience: e.target.value })}
                   placeholder="e.g. romantic anniversary, boutique and design-forward, something off the beaten path..."
+                  aria-label="Experience"
                   className="field-control"
                 />
-                <div className="mt-10">
-                  <Btn full variant="accent" onClick={() => setStep(6)}>
-                    Next
-                  </Btn>
-                </div>
               </>
             )}
 
@@ -312,11 +291,6 @@ export function ConciergeIntakeScreen({
                     <OptionRow key={o} label={o} selected={data.budget === o} onClick={() => patch({ budget: o })} />
                   ),
                 )}
-                <div className="mt-10">
-                  <Btn full variant="accent" onClick={() => setStep(7)}>
-                    Next
-                  </Btn>
-                </div>
               </>
             )}
 
@@ -331,18 +305,35 @@ export function ConciergeIntakeScreen({
                 ].map((o) => (
                   <OptionRow key={o} label={o} selected={data.stage === o} onClick={() => patch({ stage: o })} />
                 ))}
-                <div className="mt-10">
-                  <Btn full variant="accent" disabled={sending} onClick={submit}>
-                    {sending ? "Sending…" : "Submit"}
-                  </Btn>
-                </div>
               </>
+            )}
+          </div>
+
+          <div className="mt-9">
+            <button
+              type="button"
+              disabled={sending}
+              onClick={handleNext}
+              className="rounded-[24px] bg-accent px-10 py-[10px] text-[14px] font-normal text-ink disabled:opacity-60"
+            >
+              {step === TOTAL_STEPS ? (sending ? "Sending…" : "Submit") : "Next"}
+            </button>
+            {step > 1 && (
+              <div className="mt-4 text-left">
+                <button
+                  type="button"
+                  onClick={() => setStep(step - 1)}
+                  className="text-[14px] text-ink underline-offset-[3px] hover:underline"
+                >
+                  ← Back to previous question
+                </button>
+              </div>
             )}
           </div>
         </div>
       </div>
 
-      <div className="sticky bottom-0 z-10 border-t border-hairline bg-background py-4 text-center">
+      <div className="sticky bottom-0 z-10 border-t border-hairline bg-background py-9 text-center">
         <p className="text-[15px] leading-6 text-ink-muted">
           Prefer to book it yourself now?{" "}
           <button onClick={onSwitchToBookDirect} className="text-link font-medium">
