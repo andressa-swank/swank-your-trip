@@ -17,7 +17,7 @@ const TIERS = [
     desc: "Everything in Level 1, plus zero airport pickup lottery. Every transfer and tour is vetted and pre-booked, no surprises, no haggling.",
     cta: "Add a transfer or tour",
     price: "$25",
-    note: "Per transfer or tour. No nightly fee.",
+    note: "Per transfer or tour",
     badge: null,
   },
   {
