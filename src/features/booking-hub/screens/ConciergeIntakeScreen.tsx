@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+
 import { OptionRow } from "../components/OptionRow";
 import { INTAKE_ENDPOINT } from "../constants";
 import {
@@ -131,17 +131,7 @@ export function ConciergeIntakeScreen({
             Our job? To make sure your trip feels exactly how you imagined — and to help you avoid
             those "it looked better online" moments.
           </p>
-          <p className="mx-auto mt-4 max-w-[560px] text-[16px] leading-[26px] text-ink">
-            Share a few details below, and we'll get right back to you. See{" "}
-            <Link
-              to="/concierge/how"
-              className="font-semibold underline underline-offset-[3px]"
-              aria-label="Learn how Concierge works"
-            >
-              How Concierge Works
-            </Link>{" "}
-            if you're wondering what happens next.
-          </p>
+
         </div>
       </div>
 
