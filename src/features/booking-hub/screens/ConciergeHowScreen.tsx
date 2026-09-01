@@ -1,3 +1,4 @@
+import raftingAsset from "@/assets/concierge-group-rafting.jpg.asset.json";
 import { Btn } from "../components/Button";
 import { PageIntro } from "../components/PageIntro";
 import type { Screen } from "../types";
