@@ -1,3 +1,4 @@
+import raftingAsset from "@/assets/concierge-group-rafting.jpg.asset.json";
 import { Btn } from "../components/Button";
 import { PageIntro } from "../components/PageIntro";
 import type { Screen } from "../types";
@@ -16,7 +17,7 @@ const TIERS = [
     desc: "Everything in Level 1, plus zero airport pickup lottery. Every transfer and tour is vetted and pre-booked, no surprises, no haggling.",
     cta: "Add a transfer or tour",
     price: "$25",
-    note: "Per transfer or tour. No nightly fee.",
+    note: "Per transfer or tour",
     badge: null,
   },
   {
@@ -165,6 +166,15 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
           </p>
         </div>
       </section>
+
+      <figure className="m-0">
+        <img
+          src={raftingAsset.url}
+          alt="A group of travelers whitewater rafting together down a river"
+          loading="lazy"
+          className="h-[280px] w-full object-cover md:h-[520px]"
+        />
+      </figure>
 
       <section className="border-t border-hairline py-12 md:py-16">
         <div className="page-container">
