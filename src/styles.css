@@ -1153,3 +1153,10 @@ textarea.field-control {
 .most-booked-card__primary>button:first-child:active{background:#f4e30c;color:#231f20;border:none;transition:opacity 180ms ease,box-shadow 180ms ease}
 .most-booked-card__primary>button:first-child:hover{opacity:.92}
 .most-booked-card__primary>button:first-child:disabled{opacity:.5}
+.hotel-card__cta-primary,
+.hotel-card__cta-primary:hover,
+.hotel-card__cta-primary:focus,
+.hotel-card__cta-primary:focus-visible,
+.hotel-card__cta-primary:active{background:#f4e30c;color:#231f20;border:none}
+.hotel-card__cta-primary:hover{opacity:.92}
+.hotel-card__cta-primary:disabled{opacity:.5}
