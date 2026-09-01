@@ -1,6 +1,7 @@
 import raftingAsset from "@/assets/concierge-group-rafting.jpg.asset.json";
+import coverAsset from "@/assets/concierge-how-cover.jpg.asset.json";
+import poolAsset from "@/assets/concierge-how-pool.jpg.asset.json";
 import { Btn } from "../components/Button";
-import { PageIntro } from "../components/PageIntro";
 import type { Screen } from "../types";
 
 const TIERS = [
@@ -60,17 +61,26 @@ const CHANGES = [
 export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
   return (
     <>
-      <PageIntro
-        eyebrow="Concierge"
-        title="How concierge works"
-        sub="Takes less than two minutes."
-      >
-        <div className="mt-8">
-          <Btn variant="accent" onClick={() => onNav("intake")}>
-            Let&apos;s get started
-          </Btn>
+      <section className="relative h-[340px] w-full overflow-hidden md:h-[520px]">
+        <img
+          src={coverAsset.url}
+          alt="Swank concierge travel scene"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.32)_0%,rgba(0,0,0,0.22)_45%,rgba(0,0,0,0.5)_100%)]" />
+        <div className="page-container relative flex h-full flex-col items-center justify-center text-center">
+          <p className="mb-6 text-[13px] uppercase tracking-[0.18em] text-white/80 sm:mb-8">Concierge</p>
+          <h1 className="detail-h1 text-white">How concierge works</h1>
+          <p className="mt-7 text-[16px] leading-6 text-white/85 sm:mt-10">
+            Takes less than two minutes.
+          </p>
+          <div className="mt-8">
+            <Btn variant="accent" onClick={() => onNav("intake")}>
+              Let&apos;s get started
+            </Btn>
+          </div>
         </div>
-      </PageIntro>
+      </section>
 
       <section className="page-container py-12 md:py-[72px]">
         <div className="mx-auto max-w-[1100px]">
@@ -205,9 +215,16 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
         </div>
       </section>
 
-      <section className="border-t border-hairline bg-soft py-12 text-center md:py-16">
-        <div className="page-container">
-          <h2 className="section-heading mx-auto max-w-[820px] text-ink">
+      <section className="relative overflow-hidden py-20 text-center md:py-28">
+        <img
+          src={poolAsset.url}
+          alt="Infinity pool overlooking the sea"
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.35)_0%,rgba(0,0,0,0.45)_100%)]" />
+        <div className="page-container relative">
+          <h2 className="section-heading mx-auto max-w-[820px] text-white">
             Skip the guesswork. Let the Swank team build your trip.
           </h2>
           <div className="mt-8">
