@@ -1,5 +1,12 @@
 import { useEffect, useState, type FormEvent } from "react";
 import bookDirectHero from "@/assets/book-direct-hero.webp";
+import sarojin1Asset from "@/assets/sarojin1.png.asset.json";
+import sarojin2Asset from "@/assets/sarojin2.png.asset.json";
+import sarojin3Asset from "@/assets/sarojin3.png.asset.json";
+import pimalai1Asset from "@/assets/pimalai1.jpg.asset.json";
+import pimalai2Asset from "@/assets/pimalai2.jpg.asset.json";
+import surin1Asset from "@/assets/surin1.png.asset.json";
+import surin2Asset from "@/assets/surin2.png.asset.json";
 import { HotelCard } from "../components/HotelCard";
 import { DESTINATION_REGIONS, type DestinationItem } from "../data/destinations";
 import { HOTELS, MOST_BOOKED_HOTELS } from "../data/hotels";
@@ -10,6 +17,12 @@ const DESCRIPTIONS: Record<string, string> = {
   "The Sarojin": "Just north of Phuket's crowds, The Sarojin is an elegant, design-forward boutique resort with real value. Quiet beach, lush grounds, great food—and one of the best hotel deals in Thailand.",
   "Pimalai Resort & Spa": "The Pimalai Resort & Spa combines true barefoot luxury with remote jungle surroundings and a long stretch of quiet Koh Lanta beach. An independent Thai-owned resort that's elegant but unpretentious—big on privacy, service, and low-key sophistication.",
   "The Surin Phuket": "The Surin Phuket perches on Thailand's finest sand, where Aman architect Ed Tuttle's hillside cottages blend tropical luxury with understated elegance. Think design-forward minimalism meets barefoot sophistication—a resort that whispers rather than shouts.",
+};
+
+const MOST_BOOKED_PHOTOS: Record<string, string[]> = {
+  "The Sarojin": [sarojin1Asset.url, sarojin2Asset.url, sarojin3Asset.url],
+  "Pimalai Resort & Spa": [pimalai1Asset.url, pimalai2Asset.url],
+  "The Surin Phuket": [surin1Asset.url, surin2Asset.url],
 };
 
 function MostBookedCard({ name, photos = [] }: { name: string; photos?: string[] }) {
@@ -151,7 +164,7 @@ export function DestinationScreen({
 
         <section className="most-booked-section">
           <h2>Most booked hotels</h2>
-          <div className="most-booked-grid">{MOST_BOOKED_HOTELS.map((hotel) => <MostBookedCard key={hotel} name={hotel} />)}</div>
+          <div className="most-booked-grid">{MOST_BOOKED_HOTELS.map((hotel) => <MostBookedCard key={hotel} name={hotel} photos={MOST_BOOKED_PHOTOS[hotel] ?? []} />)}</div>
         </section>
       </div>
 
