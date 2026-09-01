@@ -69,9 +69,9 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.32)_0%,rgba(0,0,0,0.22)_45%,rgba(0,0,0,0.5)_100%)]" />
         <div className="page-container relative flex h-full flex-col items-center justify-center text-center">
-          <p className="mb-6 text-[13px] uppercase tracking-[0.18em] text-white/80 sm:mb-8">Concierge</p>
-          <h1 className="detail-h1 text-white">How concierge works</h1>
-          <p className="mt-7 text-[16px] leading-6 text-white/85 sm:mt-10">
+          <p className="mb-6 font-[Arial,Helvetica,sans-serif] text-[16px] uppercase tracking-[0.18em] text-white/80 sm:mb-8">Concierge</p>
+          <h1 className="font-[Arial,Helvetica,sans-serif] text-[40px] font-bold leading-[1.1] text-white md:text-[60px]">How concierge works</h1>
+          <p className="mt-7 font-[Arial,Helvetica,sans-serif] text-[21px] leading-[1.45] text-white/85 sm:mt-10">
             Takes less than two minutes.
           </p>
           <div className="mt-8">
@@ -84,8 +84,8 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
 
       <section className="page-container py-12 md:py-[72px]">
         <div className="mx-auto max-w-[1100px]">
-          <h2 className="section-heading text-ink">Choose your level of support</h2>
-          <p className="mt-6 body-copy text-ink-muted">
+          <h2 className="font-[Arial,Helvetica,sans-serif] text-[30px] font-bold leading-[1.15] text-ink md:text-[42px]">Choose your level of support</h2>
+          <p className="mt-6 max-w-[900px] font-[Arial,Helvetica,sans-serif] text-[18px] leading-[1.5] text-ink-muted md:text-[21px]">
             Every trip gets the same care, though not every trip takes the same work. We pour our
             expertise, time, and industry relationships into making sure your travel is seamless, and
             below you&apos;ll find what&apos;s included at each level, what it costs, and how much
@@ -102,26 +102,26 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
                 <span className="hidden h-10 w-1 bg-brand md:block" />
                 <div>
                   <div className="mb-3 flex flex-wrap items-center gap-3">
-                    <h3 className="text-[20px] font-medium leading-7 text-ink">{tier.title}</h3>
+                    <h3 className="font-[Arial,Helvetica,sans-serif] text-[24px] font-bold leading-[1.2] text-ink">{tier.title}</h3>
                     {tier.badge && (
-                      <span className="rounded-full bg-brand px-3.5 py-[5px] text-[13px] font-medium text-ink">
+                      <span className="rounded-full bg-brand px-3.5 py-[5px] font-[Arial,Helvetica,sans-serif] text-[12px] font-bold text-ink">
                         {tier.badge}
                       </span>
                     )}
                   </div>
-                  <p className="mb-4 max-w-[560px] body-copy text-ink-muted">{tier.desc}</p>
+                  <p className="mb-4 max-w-[620px] font-[Arial,Helvetica,sans-serif] text-[16px] leading-[1.5] text-ink-muted">{tier.desc}</p>
                   <button
                     type="button"
                     onClick={() => onNav("intake")}
-                    className="text-[14px] text-ink underline underline-offset-4 transition-opacity duration-[180ms] hover:opacity-70"
+                    className="font-[Arial,Helvetica,sans-serif] text-[16px] text-ink underline underline-offset-4 transition-opacity duration-[180ms] hover:opacity-70"
                   >
                     {tier.cta}
                   </button>
                 </div>
                 <div className="md:text-right">
-                  <p className="text-[22px] font-medium leading-7 text-ink">{tier.price}</p>
+                  <p className="font-[Arial,Helvetica,sans-serif] text-[24px] font-bold leading-[1.2] text-ink">{tier.price}</p>
                   {tier.note && (
-                    <span className="mt-1 block text-[14px] text-ink-muted">{tier.note}</span>
+                    <span className="mt-1 block font-[Arial,Helvetica,sans-serif] text-[12px] text-ink-muted">{tier.note}</span>
                   )}
                 </div>
               </div>
@@ -133,8 +133,8 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
       <section className="border-t border-hairline bg-soft py-12 md:py-16">
         <div className="page-container">
           <div className="mx-auto max-w-[1100px]">
-            <h2 className="section-heading text-ink">What&apos;s refundable</h2>
-            <p className="mt-6 body-copy text-ink-muted">
+            <h2 className="font-[Arial,Helvetica,sans-serif] text-[30px] font-bold leading-[1.15] text-ink md:text-[42px]">What&apos;s refundable</h2>
+            <p className="mt-6 max-w-[900px] font-[Arial,Helvetica,sans-serif] text-[18px] leading-[1.5] text-ink-muted md:text-[21px]">
               The more you book with us, the more we can give back. This applies to the nightly fees
               for concierge and concierge plus. Transfer, tour, and change fees are non-refundable,
               and if your trip is canceled, the fee is non-refundable.
@@ -145,12 +145,12 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
                   key={row.label}
                   className="flex items-baseline justify-between gap-4 border-b border-hairline py-6"
                 >
-                  <span className="text-[16px] leading-6 text-ink">{row.label}</span>
+                  <span className="font-[Arial,Helvetica,sans-serif] text-[21px] leading-[1.3] text-ink">{row.label}</span>
                   <span
                     className={
                       row.muted
-                        ? "text-[15px] text-ink-muted"
-                        : "text-[15px] font-medium text-ink"
+                        ? "font-[Arial,Helvetica,sans-serif] text-[19px] text-ink-muted"
+                        : "font-[Arial,Helvetica,sans-serif] text-[19px] font-bold text-ink"
                     }
                   >
                     {row.value}
@@ -164,10 +164,10 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
 
       <section className="page-container py-12 md:py-[72px]">
         <div className="mx-auto max-w-[1100px]">
-          <h2 className="section-heading text-ink">
+          <h2 className="font-[Arial,Helvetica,sans-serif] text-[30px] font-bold leading-[1.15] text-ink md:text-[42px]">
             Groups of three or more start at concierge plus
           </h2>
-          <p className="mt-6 body-copy text-ink-muted">
+          <p className="mt-6 max-w-[900px] font-[Arial,Helvetica,sans-serif] text-[18px] leading-[1.5] text-ink-muted md:text-[21px]">
             We love planning family and group trips, though they just take more work behind the
             scenes. Most booking systems are built for two people per room; add a third traveler or a
             child and the process goes manual, with direct back-and-forth on age policies and
@@ -189,8 +189,8 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
       <section className="border-t border-hairline py-12 md:py-16">
         <div className="page-container">
           <div className="mx-auto max-w-[1100px]">
-            <h2 className="section-heading text-ink">Changes to your trip</h2>
-            <p className="mt-6 body-copy text-ink-muted">
+            <h2 className="font-[Arial,Helvetica,sans-serif] text-[30px] font-bold leading-[1.15] text-ink md:text-[42px]">Changes to your trip</h2>
+            <p className="mt-6 max-w-[900px] font-[Arial,Helvetica,sans-serif] text-[18px] leading-[1.5] text-ink-muted md:text-[21px]">
               Plans change, and we get it. Your first minor change is on us. After that, changes carry
               a non-refundable fee, because every change means real work behind the scenes.
             </p>
@@ -202,10 +202,10 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
                 >
                   <span className="hidden h-10 w-1 bg-brand md:block" />
                   <div>
-                    <h3 className="mb-2 text-[20px] font-medium leading-7 text-ink">{row.title}</h3>
-                    <p className="max-w-[680px] body-copy text-ink-muted">{row.desc}</p>
+                    <h3 className="mb-2 font-[Arial,Helvetica,sans-serif] text-[24px] font-bold leading-[1.2] text-ink">{row.title}</h3>
+                    <p className="max-w-[700px] font-[Arial,Helvetica,sans-serif] text-[16px] leading-[1.5] text-ink-muted">{row.desc}</p>
                   </div>
-                  <p className="whitespace-nowrap text-[15px] font-medium text-ink md:text-right">
+                  <p className="whitespace-nowrap font-[Arial,Helvetica,sans-serif] text-[19px] font-bold text-ink md:text-right">
                     {row.price}
                   </p>
                 </div>
@@ -224,7 +224,7 @@ export function ConciergeHowScreen({ onNav }: { onNav: (s: Screen) => void }) {
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.35)_0%,rgba(0,0,0,0.45)_100%)]" />
         <div className="page-container relative">
-          <h2 className="section-heading mx-auto max-w-[820px] text-white">
+          <h2 className="mx-auto max-w-[900px] font-[Arial,Helvetica,sans-serif] text-[28px] font-bold leading-[1.2] text-white md:text-[33px]">
             Skip the guesswork. Let the Swank team build your trip.
           </h2>
           <div className="mt-8">
