@@ -409,38 +409,116 @@ textarea.field-control {
   border-radius: 8px;
 }
 
+/* Landing sections cancel the generic `section + section` top margin so the
+ * spec paddings are the single source of spacing. */
+.landing-section {
+  margin-top: 0;
+}
+
+/* Landing choice cards — consolidated single declaration (was duplicated in
+ * the pixel-perfect override block at the end of this file). */
 .choice-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
   align-items: stretch;
 }
-@media (max-width: 767px) {
-  .choice-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-  }
-}
-
 .choice-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  padding: 36px;
-  min-height: 360px;
-  transition:
-    border-color 180ms ease,
-    box-shadow 180ms ease,
-    transform 180ms ease;
+  padding: 0;
+  min-height: 0;
+  background: #ffffff;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
 }
-.choice-card:hover {
-  border-color: #bdbab2;
+.choice-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f5f4f0;
+}
+.choice-card__media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+.choice-card__recommended {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 10px 20px;
+  background: #ffffff;
+  color: #231f20;
+  font-size: 13px;
+  line-height: 18px;
+  white-space: nowrap;
+}
+.choice-card__content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding-top: 24px;
+}
+.choice-card__content h2 {
+  margin: 0 0 10px;
+  color: #231f20;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 500;
+}
+.choice-card__content > p {
+  margin: 0;
+  min-height: 48px;
+  color: #66645f;
+  font-size: 15px;
+  line-height: 24px;
+}
+.choice-card__details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 28px;
+  color: #66645f;
+  font-size: 15px;
+  line-height: 24px;
+}
+.choice-card__details button {
+  align-self: flex-start;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #66645f;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.choice-card__content > .btn-base {
+  align-self: flex-start;
+  margin-top: 28px;
+  min-width: 180px;
+  text-align: center;
+  padding: 14px 32px;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.choice-card__cta--dark {
+  background: #231f20;
+  color: #ffffff;
+}
+.choice-card__cta--dark:hover {
+  background: #231f20;
+  color: #ffffff;
   box-shadow: var(--shadow-subtle);
-  transform: translateY(-2px);
 }
-@media (max-width: 767px) {
-  .choice-card {
-    padding: 24px;
-    min-height: 0;
+@media (max-width: 640px) {
+  .choice-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -467,9 +545,9 @@ textarea.field-control {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.32) 0%,
-    rgba(0, 0, 0, 0.22) 45%,
-    rgba(0, 0, 0, 0.5) 100%
+    rgba(0, 0, 0, 0.08) 0%,
+    rgba(0, 0, 0, 0.05) 45%,
+    rgba(0, 0, 0, 0.25) 100%
   );
 }
 @media (max-width: 767px) {
@@ -605,7 +683,7 @@ textarea.field-control {
 }
 
 
-/* Testimonials ------------------------------------------------------------ */
+/* Testimonials (landing, tabbed layout) ------------------------------------ */
 
 .testimonials-section {
   overflow: hidden;
@@ -613,117 +691,73 @@ textarea.field-control {
   padding: 96px 0 88px;
 }
 
-.testimonials-title {
-  margin: 0;
-  text-align: center;
-  font-size: 40px;
-  line-height: 1.05;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  color: var(--color-text);
-}
-
-.testimonials-carousel {
-  display: grid;
-  grid-template-columns: 80px minmax(0, 1fr) 80px;
-  align-items: center;
-  width: 100%;
-  margin-top: 56px;
-}
-
-.testimonial-stage {
-  position: relative;
-  display: grid;
-  place-items: center;
-  min-height: 430px;
-  isolation: isolate;
-}
-
-.testimonial-mark {
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  color: var(--color-accent);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(420px, 48vw, 760px);
-  font-weight: 400;
-  line-height: 0.72;
-  opacity: 0.16;
-  transform: translate(-50%, -38%);
-  user-select: none;
-}
-
-.testimonial-copy {
-  max-width: 900px;
-  margin: 0;
-  padding: 32px 20px;
-  text-align: center;
-  animation: testimonial-swap 520ms cubic-bezier(0.2, 0, 0, 1) both;
-}
-
-.testimonial-copy p {
-  margin: 0;
-  font-size: clamp(24px, 2.25vw, 32px);
-  line-height: 1.32;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-  text-wrap: pretty;
-}
-
-.testimonial-copy footer {
-  margin-top: 48px;
-  font-size: 18px;
-  line-height: 1.5;
-  font-weight: 300;
-  color: var(--color-text);
-}
-
-.testimonial-arrow {
-  display: grid;
-  place-items: center;
-  width: 72px;
-  height: 52px;
-  border: 0;
-  background: transparent;
-  color: var(--color-text);
-  cursor: pointer;
-  font-size: 42px;
-  font-weight: 200;
-  line-height: 1;
-  transition: transform 180ms ease, opacity 180ms ease;
-}
-
-.testimonial-arrow:hover {
-  opacity: 0.6;
-  transform: translateX(-3px);
-}
-
-.testimonial-arrow:last-child:hover {
-  transform: translateX(3px);
-}
-
-.testimonial-dots {
+.testimonial-tabs {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  margin-top: 18px;
+  gap: 24px 40px;
+  margin-bottom: 64px;
 }
 
-.testimonial-dots button {
-  width: 7px;
-  height: 7px;
+.testimonial-tabs button {
   padding: 0;
   border: 0;
-  border-radius: 999px;
-  background: var(--color-border);
+  background: none;
+  color: #231f20;
+  font-size: 15px;
+  line-height: 1.3;
+  font-weight: 400;
+  text-decoration: none;
+  text-underline-offset: 4px;
   cursor: pointer;
-  transition: width 180ms ease, background-color 180ms ease;
 }
 
-.testimonial-dots button.is-active {
-  width: 24px;
-  background: var(--color-text);
+.testimonial-tabs button.is-active {
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.testimonial-panel {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  max-width: 1200px;
+  margin-inline: auto;
+  animation: testimonial-swap 420ms cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+.testimonial-photo {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f5f4f0;
+}
+
+.testimonial-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.testimonial-quote {
+  margin: 0;
+  color: #231f20;
+  font-size: clamp(19px, 1.9vw, 24px);
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.testimonial-quote p {
+  margin: 0;
+}
+
+.testimonial-author {
+  margin: 20px 0 0;
+  color: #66645f;
+  font-size: 14px;
+  line-height: 20px;
 }
 
 @keyframes testimonial-swap {
@@ -737,179 +771,415 @@ textarea.field-control {
   }
 }
 
-/* Every stay tested ------------------------------------------------------- */
+/* Landing shared photo placeholder slot ------------------------------------ */
 
-.tested-stays-section {
-  overflow: hidden;
-  background: #ffffff;
+.photo-slot {
+  display: block;
+  background: #f5f4f0;
 }
-
-.tested-stays-heading {
-  display: grid;
-  place-items: center;
-  padding: 120px 20px 52px;
-}
-
-.tested-stays-heading h2 {
-  margin: 0;
-  text-align: center;
-  font-size: clamp(40px, 4vw, 64px);
-  line-height: 1.08;
-  font-weight: 400;
-  letter-spacing: -0.035em;
-}
-
-.tested-stays-photo {
-  position: relative;
-  min-height: 650px;
-  overflow: hidden;
-  background: #173d44;
-}
-
-.tested-stays-photo > img {
-  position: absolute;
-  inset: 0;
+.photo-slot img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
-  transform: scale(1.035);
-  transition: transform 1400ms cubic-bezier(0.2, 0, 0, 1);
+  display: block;
 }
 
-.tested-stays-section.is-visible .tested-stays-photo > img {
-  transform: scale(1);
-}
-
-.tested-stays-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 0.02) 0%,
-    rgba(0, 0, 0, 0.05) 38%,
-    rgba(0, 0, 0, 0.46) 100%
-  );
-}
-
-.tested-stays-metrics {
-  position: absolute;
-  z-index: 1;
-  right: 0;
-  bottom: 58px;
-  left: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  color: #ffffff;
-  text-align: center;
-}
-
-.tested-stays-metric {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  opacity: 0;
-  transform: translateY(24px);
-  transition:
-    opacity 800ms cubic-bezier(0.2, 0, 0, 1),
-    transform 800ms cubic-bezier(0.2, 0, 0, 1);
-}
-
-.tested-stays-section.is-visible .tested-stays-metric {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.tested-stays-metric strong {
-  font-size: clamp(72px, 9vw, 142px);
-  line-height: 0.9;
-  font-weight: 300;
-  letter-spacing: -0.055em;
-}
-
-.tested-stays-metric span {
-  margin-top: 28px;
-  font-size: clamp(16px, 1.45vw, 22px);
-  line-height: 1.3;
+.landing-h2 {
+  margin: 0;
+  color: #231f20;
+  font-size: 28px;
+  line-height: 38px;
   font-weight: 400;
 }
 
-@media (max-width: 767px) {
+/* Landing: "Not sure which fits?" split ------------------------------------ */
+
+.decide-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 640px;
+  background: #ffffff;
+}
+.decide-split__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #ffffff;
+  padding: 64px;
+}
+.decide-split__left h2 {
+  margin: 0 0 32px;
+  max-width: 480px;
+  color: #231f20;
+  font-size: 28px;
+  line-height: 38px;
+  font-weight: 400;
+}
+.decide-toggle {
+  align-self: flex-start;
+  padding: 14px 32px;
+  border: 0;
+  border-radius: 24px;
+  background: #231f20;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.decide-quiz {
+  margin-top: 32px;
+  max-width: 480px;
+  overflow: hidden;
+}
+.decide-quiz__bars {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.decide-quiz__bars span {
+  height: 3px;
+  flex: 1;
+  background: #e0deda;
+}
+.decide-quiz__bars span.is-done {
+  background: #231f20;
+}
+.decide-quiz h3 {
+  margin: 0 0 16px;
+  color: #231f20;
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 500;
+}
+.decide-quiz__options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.decide-quiz__options button {
+  min-height: 48px;
+  border-radius: 8px;
+  border: 1px solid #d9d7d1;
+  background: #ffffff;
+  padding: 12px 16px;
+  text-align: left;
+  color: #231f20;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+}
+.decide-split__right {
+  position: relative;
+  overflow: hidden;
+  padding: 40px 40px 40px 0;
+}
+.decide-split__right .photo-slot {
+  width: 100%;
+  height: 100%;
+}
+
+/* Landing: Popular Destinations --------------------------------------------- */
+
+.popular-destinations {
+  background: #ffffff;
+  padding: 48px 0 24px;
+}
+.popular-destinations__header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 48px;
+  flex-wrap: wrap;
+}
+.popular-destinations__cta {
+  padding: 14px 32px;
+  border: 0;
+  border-radius: 24px;
+  background: #f4e30c;
+  color: #231f20;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.popular-destinations__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+}
+.popular-destinations__grid .photo-slot {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.popular-destinations__grid h3 {
+  margin: 20px 0 8px;
+  color: #231f20;
+  font-size: 18px;
+  font-weight: 500;
+}
+.popular-destinations__grid p {
+  margin: 0;
+  color: #66645f;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+/* Landing: "Why book with Swank" heading ------------------------------------ */
+
+.why-swank {
+  background: #ffffff;
+  padding: 24px 0 48px;
+}
+
+/* Landing: video / About us band -------------------------------------------- */
+
+.video-band {
+  background: #000000;
+}
+.video-band__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.video-band__frame > .photo-slot {
+  position: absolute;
+  inset: 0;
+}
+.video-band__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.22);
+  pointer-events: none;
+}
+.video-band__cta {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 40px;
+  border: 0;
+  border-radius: 28px;
+  background: #f4e30c;
+  color: #231f20;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* Landing: A smarter way to book --------------------------------------------- */
+
+.smarter-section {
+  background: #ffffff;
+  padding: 140px 0 40px;
+}
+.smarter-section__container {
+  max-width: 1920px;
+  margin-inline: auto;
+  padding-inline: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 100px;
+}
+.smarter-section h2 {
+  margin: 0 0 20px;
+  color: #231f20;
+  font-size: 32px;
+  line-height: 1.2;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.smarter-section__lead {
+  margin: 0 0 48px;
+  color: #231f20;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.smarter-section__actions {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 64px;
+}
+.smarter-cta {
+  padding: 18px 40px;
+  border: 0;
+  border-radius: 28px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.smarter-cta--dark {
+  background: #231f20;
+  color: #ffffff;
+}
+.smarter-cta--light {
+  background: #ffffff;
+  color: #231f20;
+  border: 1px solid #231f20;
+}
+.smarter-section__points {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.smarter-point {
+  display: flex;
+  gap: 18px;
+}
+.smarter-point__bar {
+  width: 4px;
+  height: 28px;
+  flex-shrink: 0;
+  background: #f4e30c;
+}
+.smarter-point h3 {
+  margin: 0 0 6px;
+  color: #231f20;
+  font-size: 19px;
+  line-height: 1.4;
+  font-weight: 500;
+}
+.smarter-point p {
+  margin: 0;
+  color: #66645f;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.landing-spacer {
+  height: 16px;
+  background: #ffffff;
+}
+
+/* Landing: stats split (Every stay tested) ----------------------------------- */
+
+.stats-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 640px;
+  background: #ffffff;
+}
+.stats-split__panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 40px;
+  background: #ffffff;
+  padding: 64px;
+}
+.stats-split__metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: -140px;
+}
+.stats-metric p {
+  margin: 0 0 8px;
+  color: #66645f;
+  font-size: 17px;
+}
+.stats-metric strong {
+  display: block;
+  color: #231f20;
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.stats-split__actions {
+  display: flex;
+  gap: 16px;
+}
+.stats-cta {
+  padding: 16px 36px;
+  border: 0;
+  border-radius: 24px;
+  font-size: 15px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.stats-cta--dark {
+  background: #231f20;
+  color: #ffffff;
+}
+.stats-cta--light {
+  background: #ffffff;
+  color: #231f20;
+  border: 1px solid #231f20;
+}
+.stats-split__photo {
+  position: relative;
+  overflow: hidden;
+}
+.stats-split__photo .photo-slot {
+  position: absolute;
+  inset: 0;
+}
+
+/* Landing responsive ---------------------------------------------------------- */
+
+@media (max-width: 1024px) {
+  .popular-destinations__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .smarter-section__container {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding-inline: 24px;
+  }
+}
+
+@media (max-width: 900px) {
+  .decide-split {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .decide-split__left {
+    padding: 48px 24px;
+  }
+  .decide-split__right {
+    min-height: 360px;
+    padding: 0 24px 48px;
+  }
+  .testimonial-tabs {
+    gap: 16px 24px;
+    margin-bottom: 40px;
+  }
+  .testimonial-panel {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .stats-split {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .stats-split__panel {
+    padding: 48px 24px;
+  }
+  .stats-split__metrics {
+    margin-top: 0;
+  }
+  .stats-split__photo {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 640px) {
   .testimonials-section {
     padding: 72px 0 64px;
   }
-
-  .testimonials-title {
-    font-size: 32px;
+  .smarter-section {
+    padding: 72px 0 32px;
   }
-
-  .testimonials-carousel {
-    grid-template-columns: 44px minmax(0, 1fr) 44px;
-    margin-top: 34px;
+  .smarter-section__actions,
+  .stats-split__actions {
+    flex-wrap: wrap;
   }
-
-  .testimonial-stage {
-    min-height: 390px;
-  }
-
-  .testimonial-mark {
-    font-size: 420px;
-    opacity: 0.13;
-  }
-
-  .testimonial-copy {
-    padding-inline: 8px;
-  }
-
-  .testimonial-copy p {
-    font-size: 22px;
-  }
-
-  .testimonial-copy footer {
-    margin-top: 32px;
-    font-size: 16px;
-  }
-
-  .testimonial-arrow {
-    width: 44px;
-    font-size: 32px;
-  }
-
-  .tested-stays-heading {
-    padding: 96px 20px 40px;
-  }
-
-  .tested-stays-heading h2 {
-    font-size: 40px;
-  }
-
-  .tested-stays-photo {
-    min-height: 760px;
-  }
-
-  .tested-stays-photo > img {
-    object-position: 48% center;
-  }
-
-  .tested-stays-overlay {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.58));
-  }
-
-  .tested-stays-metrics {
-    bottom: 50%;
+  .popular-destinations__grid {
     grid-template-columns: 1fr;
-    gap: 42px;
-    transform: translateY(50%);
-  }
-
-  .tested-stays-metric strong {
-    font-size: 76px;
-  }
-
-  .tested-stays-metric span {
-    margin-top: 12px;
-    font-size: 17px;
   }
 }
 

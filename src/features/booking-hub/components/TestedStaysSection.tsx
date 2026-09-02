@@ -1,61 +1,40 @@
-import { useEffect, useRef, useState } from "react";
-import amanPoolPhoto from "@/assets/aman-pool.webp";
+const METRICS = [
+  { label: "Countries visited", value: "60+" },
+  { label: "Hotels personally tested", value: "400+" },
+  { label: "Travel stories filmed on YouTube", value: "550+" },
+  { label: "Paid placements", value: "0" },
+] as const;
 
-export function TestedStaysSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 },
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
-
+export function TestedStaysSection({
+  onBookWithSwank,
+  onBookDirect,
+}: {
+  onBookWithSwank?: () => void;
+  onBookDirect?: () => void;
+}) {
   return (
-    <section
-      ref={sectionRef}
-      className={`tested-stays-section ${visible ? "is-visible" : ""}`}
-      aria-labelledby="tested-stays-title"
-    >
-      <div className="tested-stays-heading">
-        <h2 id="tested-stays-title">Every stay tested.</h2>
-      </div>
-
-      <div className="tested-stays-photo">
-        <img
-          src={amanPoolPhoto}
-          alt="Infinity pools overlooking the sea at a cliffside resort"
-          width={2048}
-          height={1024}
-          loading="lazy"
-        />
-        <div className="tested-stays-overlay" />
-        <div className="tested-stays-metrics page-container">
-          {[
-            ["60+", "Countries visited"],
-            ["400", "Hotels personally tested"],
-            ["0", "Paid placements"],
-          ].map(([number, label], metricIndex) => (
-            <div
-              key={label}
-              className="tested-stays-metric"
-              style={{ transitionDelay: `${metricIndex * 120}ms` }}
-            >
-              <strong>{number}</strong>
-              <span>{label}</span>
+    <section className="stats-split landing-section" aria-label="Swank in numbers">
+      <div className="stats-split__panel">
+        <div className="stats-split__metrics">
+          {METRICS.map((metric) => (
+            <div key={metric.label} className="stats-metric">
+              <p>{metric.label}</p>
+              <strong>{metric.value}</strong>
             </div>
           ))}
         </div>
+        <div className="stats-split__actions">
+          <button type="button" className="stats-cta stats-cta--dark" onClick={onBookWithSwank}>
+            Book with Swank
+          </button>
+          <button type="button" className="stats-cta stats-cta--light" onClick={onBookDirect}>
+            Book direct
+          </button>
+        </div>
+      </div>
+      <div className="stats-split__photo">
+        {/* PHOTO SLOT "stats-split-right": drop the real photo in here */}
+        <div className="photo-slot" data-photo-slot="stats-split-right" aria-hidden="true" />
       </div>
     </section>
   );
